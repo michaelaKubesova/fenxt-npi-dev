@@ -16,4 +16,4 @@ MODEL_DIR=${PROJECT}/model
 # GDC_PROJECT_ID identifies the GoodData working project. Transformed data will be uploaded into the datasets of the GoodData working project.
 #   The data model information necessary for transformation definition is also obtained from this project.
 # You can find the ID of a project in the project context menu in Server Explorer.
-GDC_PROJECT_ID=ga1o4qfh5lqy1yptwftjcoau5i48dmo3
+GDC_PROJECT_ID=d8m2gs31g5n6f0b5le53497zr3p9t7tv
