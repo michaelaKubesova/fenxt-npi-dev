@@ -1,0 +1,19 @@
+##Project path
+#Wed Sep 07 13:44:50 CEST 2016
+PROJECT=.
+
+
+#Wed Sep 07 13:44:50 CEST 2016
+ADS_INSTANCE=cd8c99dd0dc75c6e82a0eb55842060bf
+DATA_TMP_DIR=${PROJECT}/data/tmp
+ADS_PASSWORD=
+DATA_SOURCE_DIR=${PROJECT}/data/source
+DATA_DIR=${PROJECT}/data
+GRAPH_DIR=${PROJECT}/graph
+TRANS_DIR=${PROJECT}/trans
+MODEL_DIR=${PROJECT}/model
+GDC_PROJECT_ID=ncqslnssr10powkd2jfa3t6r8hahml85
+DATA_GOODDATA_DIR=${PROJECT}/data/gooddata
+DATA_TRANSFORM_DIR=${PROJECT}/data/transform
+ADS_USER=vaclav.rek+bb_fe_dev@gooddata.com
+META_DIR=${PROJECT}/meta
