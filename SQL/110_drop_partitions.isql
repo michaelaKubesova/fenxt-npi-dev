@@ -1,2 +1,0 @@
-/*ITERATION('partitions')*/
-select drop_partition('${anchor_table_name}',${partition_key});
