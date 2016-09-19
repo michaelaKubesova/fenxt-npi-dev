@@ -1,0 +1,299 @@
+entity	columnName	columnTitle	description	LdmType	DataType	SyncEnabled	InScope	referenceEntity	referenceColumnName	sortLabel	sortOrder	defaultLabelRef
+Accounts	AccountId	AccountId		pk	integer	yes	1					
+Accounts	AccountNumber	AccountNumber		attribute	string	yes	1					
+Accounts	AccountDescription	AccountDescription		attribute	string	yes	1					
+Accounts	AccountCategory	AccountCategory		attribute	integer	yes	1					
+Accounts	AccountCategoryTranslation	AccountCategoryTranslation		attribute	string	yes	1					
+Accounts	FundName	FundName		attribute	string	yes	1					
+Accounts	FundDescription	FundDescription		attribute	string	yes	1					
+Accounts	Class	Class		attribute	string	yes	1					
+Accounts	Status	Status		attribute	integer	yes	1					
+Accounts	StatusTranslation	StatusTranslation		attribute	string	yes	1					
+Accounts	AccountCode	AccountCode		attribute	string	yes	1					
+Accounts	AccountCodeDescription	AccountCodeDescription		attribute	string	yes	1					
+Accounts	AddedByUserId	AddedByUserId		attribute	integer	yes	1					
+Accounts	LastChangedByUserId	LastChangedByUserId		attribute	integer	yes	1					
+Accounts	DateAdded	DateAdded		attribute	date	yes	1					
+Accounts	DateChanged	DateChanged		attribute	date	yes	1					
+Projects	ProjectId	ProjectId		pk	integer	yes	1					
+Projects	UserId	UserId		attribute	string	yes	1					
+Projects	Description	Description		attribute	string	yes	1					
+Projects	Division	Division		attribute	string	yes	1					
+Projects	Location	Location		attribute	string	yes	1					
+Projects	Department	Department		attribute	string	yes	1					
+Projects	AddedByUserId	AddedByUserId		attribute	integer	yes	1					
+Projects	LastChangedByUserId	LastChangedByUserId		attribute	integer	yes	1					
+Projects	DateAdded	DateAdded		attribute	date	yes	1					
+Projects	DateChanged	DateChanged		attribute	date	yes	1					
+ProjectBudgets	ProjectBudgetId	ProjectBudgetId		pk	integer	yes	1					
+ProjectBudgets	AccountBudgetAttrId	AccountBudgetAttrId		fk	integer	yes	1	AccountBudgets_Attr	AccountBudgetAttrId			
+ProjectBudgets	ProjectId	ProjectId		fk	integer	yes	1	Projects	ProjectId			
+ProjectBudgets	AccountId	AccountId		fk	integer	yes	1	Accounts	AccountId			
+ProjectBudgets	ProjectBudgetAmount	ProjectBudgetAmount		fact	numeric	yes	1					
+ProjectBudgets	FiscalPeriodId	FiscalPeriodId		fk	integer	yes	1	FiscalPeriods	FiscalPeriodId			
+ProjectBudgets	PeriodAmount	PeriodAmount		fact	numeric	yes	1					
+AccountBudgets_Attr	AccountBudgetAttrId	AccountBudgetAttrId		pk	integer	yes	1					
+AccountBudgets_Attr	ScenarioId	ScenarioId		attribute	string	yes	1					
+AccountBudgets_Attr	AccountBudgetId	AccountBudgetId		attribute	string	yes	1					
+AccountBudgets_Fact	AccountId	AccountId		fk	integer	yes	1	Accounts	AccountId			
+AccountBudgets_Fact	FiscalPeriodId	FiscalPeriodId		fk	integer	yes	1	FiscalPeriods	FiscalPeriodId			
+AccountBudgets_Fact	AccountBudgetFactId	AccountBudgetFactId		pk	integer	yes	1					
+AccountBudgets_Fact	AccountBudgetAttrId	AccountBudgetAttrId		fk	integer	yes	1	AccountBudgets_Attr	AccountBudgetAttrId			
+AccountBudgets_Fact	AccountBudgetAmount	AccountBudgetAmount		fact	numeric	yes	1					
+FiscalPeriods	FiscalPeriodId	FiscalPeriodId		pk	integer	yes	1					
+FiscalPeriods	Sequence	Sequence		attribute	integer	yes	1					
+FiscalPeriods	FiscalPeriodStart	FiscalPeriodStart		attribute	string	yes	1					
+FiscalPeriods	FiscalPeriodStart_sort	FiscalPeriodStart_sort		attribute	string	Yes	1					
+FiscalPeriods	FiscalPeriodEnd	FiscalPeriodEnd		attribute	string	yes	1					
+FiscalPeriods	FiscalYearId	FiscalYearId		attribute	integer	yes	1					
+FiscalPeriods	FiscalYearName	FiscalYearName		attribute	string	yes	1					
+FiscalPeriods	NumberOfPeriods	NumberOfPeriods		attribute	integer	yes	1					
+FiscalPeriods	FiscalYearStart	FiscalYearStart		attribute	string	yes	1					
+FiscalPeriods	FiscalYearStart_sort	FiscalYearStart_sort		attribute	string	Yes	1					
+FiscalPeriods	FiscalYearEnd	FiscalYearEnd		attribute	string	yes	1					
+FiscalPeriods	FiscalDate	FiscalDate		attribute	date	yes	1					
+Grants	GrantId	GrantId		pk	integer	yes	1					
+Grants	UserId	UserId		attribute	string	yes	1					
+Grants	Description	Description		attribute	string	yes	1					
+Grants	GrantAmount	GrantAmount		fact	numeric	yes	1					
+Grants	AddedByUserId	AddedByUserId		attribute	integer	yes	1					
+Grants	LastChangedByUserId	LastChangedByUserId		attribute	integer	yes	1					
+Grants	DateAdded	DateAdded		attribute	date	yes	1					
+Grants	DateChanged	DateChanged		attribute	date	yes	1					
+Transactions_Attr	TransactionAttrDistributionId	TransactionAttrDistributionId		pk	integer	yes	1					
+Transactions_Attr	TransactionId	TransactionId		attribute	integer	yes	1					
+Transactions_Attr	TransactionNumber	TransactionNumber		attribute	string	yes	1					
+Transactions_Attr	PostStatus	PostStatus		attribute	integer	yes	1					
+Transactions_Attr	PostStatusTranslation	PostStatusTranslation		attribute	string	yes	1					
+Transactions_Attr	PostDate	PostDate		attribute	date	yes	1					
+Transactions_Attr	TransactionType	TransactionType		attribute	integer	yes	1					
+Transactions_Attr	TransactionTypeTranslation	TransactionTypeTranslation		attribute	string	yes	1					
+Transactions_Attr	Reference	Reference		attribute	string	yes	1					
+Transactions_Attr	EncumbranceStatus	EncumbranceStatus		attribute	integer	yes	1					
+Transactions_Attr	EncumbranceStatusTranslation	EncumbranceStatusTranslation		attribute	string	yes	1					
+Transactions_Attr	TransactionCode1	TransactionCode1		attribute	string	yes	1					
+Transactions_Attr	TransactionCode2	TransactionCode2		attribute	string	yes	1					
+Transactions_Attr	TransactionCode3	TransactionCode3		attribute	string	yes	1					
+Transactions_Attr	TransactionCode4	TransactionCode4		attribute	string	yes	1					
+Transactions_Attr	TransactionCode5	TransactionCode5		attribute	string	yes	1					
+Transactions_Attr	AddedByUserId	AddedByUserId		attribute	integer	yes	1					
+Transactions_Attr	LastChangedByUserId	LastChangedByUserId		attribute	integer	yes	1					
+Transactions_Attr	DateAdded	DateAdded		attribute	date	yes	1					
+Transactions_Attr	DateChanged	DateChanged		attribute	date	yes	1					
+Transactions_Fact	TransactionDistributionId	TransactionDistributionId		pk	integer	yes	1					
+Transactions_Fact	TransactionAttrDistributionId	TransactionAttrDistributionId		fk	integer	yes	1	Transactions_Attr	TransactionAttrDistributionId			
+Transactions_Fact	AccountId	AccountId		fk	integer	yes	1	Accounts	AccountId			
+Transactions_Fact	ProjectId	ProjectId		fk	integer	yes	1	Projects	ProjectId			
+Transactions_Fact	GrantId	GrantId		fk	integer	yes	1	Grants	GrantId			
+Transactions_Fact	FiscalPeriodId	FiscalPeriodId		fk	integer	yes	1	FiscalPeriods				
+Transactions_Fact	TransactionAmount	TransactionAmount		fact	numeric	yes	1					
+Vendors	VendorId	VendorId		pk	integer	yes	1					
+Vendors	VendorName	VendorName		attribute	string	yes	1					
+Vendors	Is1099	Is1099		attribute	integer	yes	1					
+Vendors	CustomerNumber	CustomerNumber		attribute	string	yes	1					
+Vendors	Status	Status		attribute	integer	yes	1					
+Vendors	StatusTranslation	StatusTranslation		attribute	string	yes	1					
+Vendors	AddedByUserId	AddedByUserId		attribute	integer	yes	1					
+Vendors	LastChangedByUserId	LastChangedByUserId		attribute	integer	yes	1					
+Vendors	DateAdded	DateAdded		attribute	date	yes	1					
+Vendors	DateChanged	DateChanged		attribute	date	yes	1					
+Banks	BankId	BankId		pk	integer	yes	1					
+Banks	Name	Name		attribute	string	yes	1					
+Banks	AccountNumber	AccountNumber		attribute	string	yes	1					
+Banks	AccountType	AccountType		attribute	integer	yes	1					
+Banks	AccountTypeTranslation	AccountTypeTranslation		attribute	string	yes	1					
+Banks	AddedByUserId	AddedByUserId		attribute	integer	yes	1					
+Banks	LastChangedByUserId	LastChangedByUserId		attribute	integer	yes	1					
+Banks	DateAdded	DateAdded		attribute	date	yes	1					
+Banks	DateChanged	DateChanged		attribute	date	yes	1					
+PurchaseOrders_Attr	PurchaseOrderAttrId	PurchaseOrderAttrId		pk	integer	yes	1					
+PurchaseOrders_Attr	OrderDate	OrderDate		attribute	date	yes	1					
+PurchaseOrders_Attr	Number	Number		attribute	numeric	yes	1					
+PurchaseOrders_Attr	Comment	Comment		attribute	string	yes	1					
+PurchaseOrders_Attr	AddedByUserId	AddedByUserId		attribute	integer	yes	1					
+PurchaseOrders_Attr	LastChangedByUserId	LastChangedByUserId		attribute	integer	yes	1					
+PurchaseOrders_Attr	DateAdded	DateAdded		attribute	date	yes	1					
+PurchaseOrders_Attr	DateChanged	DateChanged		attribute	date	yes	1					
+PurchaseOrders_Fact	PurchaseOrderFactId	PurchaseOrderFactId		pk	integer	yes	1					
+PurchaseOrders_Fact	VendorId	VendorId		fk	integer	yes	1	Vendors	VendorId			
+PurchaseOrders_Fact	PurchaseOrderTotalAmount	PurchaseOrderTotalAmount		fact	numeric	yes	1					
+PurchaseOrders_Fact	PurchaseOrderAttrId	PurchaseOrderAttrId		fk	integer	yes	1					
+Invoices_Attr	InvoiceAttrId	InvoiceAttrId		pk	integer	yes	1					
+Invoices_Attr	InvoiceNumber	InvoiceNumber		attribute	string	yes	1					
+Invoices_Attr	Description	Description		attribute	string	yes	1					
+Invoices_Attr	Date	Date		attribute	date	yes	1					
+Invoices_Attr	DueDate	DueDate		attribute	date	yes	1					
+Invoices_Attr	Status	Status		attribute	integer	yes	1					
+Invoices_Attr	StatusTranslation	StatusTranslation		attribute	string	yes	1					
+Invoices_Attr	PostDate	PostDate		attribute	date	yes	1					
+Invoices_Attr	PostStatus	PostStatus		attribute	integer	yes	1					
+Invoices_Attr	PostStatusTranslation	PostStatusTranslation		attribute	string	yes	1					
+Invoices_Attr	AddedByUserId	AddedByUserId		attribute	integer	yes	1					
+Invoices_Attr	LastChangedByUserId	LastChangedByUserId		attribute	integer	yes	1					
+Invoices_Attr	DateAdded	DateAdded		attribute	date	yes	1					
+Invoices_Attr	DateChanged	DateChanged		attribute	date	yes	1					
+Invoices_Fact	InvoiceFactId	InvoiceFactId		pk	integer	yes	1					
+Invoices_Fact	VendorId	VendorId		fk	integer	yes	1	Vendors	VendorId			
+Invoices_Fact	BankId	BankId		fk	integer	yes	1	Banks	BankId			
+Invoices_Fact	FiscalPeriodId	FiscalPeriodId		fk	integer	yes	1	FiscalPeriods	FiscalPeriodId			
+Invoices_Fact	InvoiceAttrId	InvoiceAttrId		fk	integer	yes	1	Invoices_Attr	InvoiceAttrId			
+Invoices_Fact	PurchaseOrderId	PurchaseOrderId		fk	integer	yes	1	PurchaseOrders_Attr	PurchaseOrderAttrId			
+Invoices_Fact	InvoiceAmount	InvoiceAmount		fact	numeric	yes	1					
+Invoices_Fact	InvoiceBalance	InvoiceBalance		fact	numeric	yes	1					
+Invoices_Fact	InvoiceTaxAmount	InvoiceTaxAmount		fact	numeric	yes	1					
+Invoices_Fact	InvoiceDiscountAmount	InvoiceDiscountAmount		fact	numeric	yes	1					
+InvoicePayments	PaymentId	PaymentId		pk	integer	yes	1					
+InvoicePayments	InvoiceAttrId	InvoiceAttrId		fk	integer	yes	1	Invoices_Attr	InvoiceAttrId			
+InvoicePayments	CheckDate	CheckDate		attribute	date	yes	1					
+InvoicePayments	Date	Date		attribute	date	yes	1					
+InvoicePayments	Status	Status		attribute	integer	yes	1					
+InvoicePayments	StatusTranslation	StatusTranslation		attribute	string	yes	1					
+InvoicePayments	PostDate	PostDate		attribute	date	yes	1					
+InvoicePayments	CheckVoidedDate	CheckVoidedDate		attribute	date	yes	1					
+InvoicePayments	InvoicePaymentAmount	InvoicePaymentAmount		fact	numeric	yes	1					
+InvoicePayments	InvoicePaymentDiscountAmount	InvoicePaymentDiscountAmount		fact	numeric	yes	1					
+InvoicePayments	BankId	BankId		fk	integer	yes	1	Banks	BankId			
+InvoicePayments	VendorId	VendorId		fk	integer	yes	1	Vendors	VendorId			
+InvoicePayments	PurchaseOrderAttrId	PurchaseOrderAttrId		fk	integer	yes	1	PurchaseOrders_Attr	PurchaseOrderAttrId			
+InvoiceCreditMemoApplication	CreditMemoApplicationId	CreditMemoApplicationId		pk	integer	yes	1					
+InvoiceCreditMemoApplication	InvoiceAttrId	InvoiceAttrId		fk	integer	yes	1	Invoices_Attr	InvoiceAttrId			
+InvoiceCreditMemoApplication	CheckVoided	CheckVoided		attribute	integer	yes	1					
+InvoiceCreditMemoApplication	Status	Status		attribute	integer	yes	1					
+InvoiceCreditMemoApplication	StatusTranslation	StatusTranslation		attribute	string	yes	1					
+InvoiceCreditMemoApplication	ICMAAmount	ICMAAmount		fact	numeric	yes	1					
+InvoiceCreditMemoApplication	PostDate	PostDate		attribute	date	yes	1					
+InvoiceCreditMemoApplication	Date	Date		attribute	date	yes	1					
+InvoiceCreditMemoApplication	BankId	BankId		fk	integer	yes	1	Banks	BankId			
+InvoiceCreditMemoApplication	VendorId	VendorId		fk	integer	yes	1	Vendors	VendorId			
+InvoiceCreditMemoApplication	PurchaseOrderAttrId	PurchaseOrderAttrId		fk	integer	yes	1	PurchaseOrders_Attr	PurchaseOrderAttrId			
+InvoiceCreditMemoApplication	CreditMemoAttrId	CreditMemoAttrId		fk	integer	yes	1	CreditMemos_Attr	CreditMemoAttrId			
+InvoiceCreditMemoApplication	AddedByUserId	AddedByUserId		attribute	integer	yes	1					
+InvoiceCreditMemoApplication	LastChangedByUserId	LastChangedByUserId		attribute	integer	yes	1					
+InvoiceCreditMemoApplication	DateAdded	DateAdded		attribute	date	yes	1					
+InvoiceCreditMemoApplication	DateChanged	DateChanged		attribute	date	yes	1					
+InvoiceAdjustments	AdjustmentId	AdjustmentId		pk	integer	yes	1					
+InvoiceAdjustments	InvoiceAttrId	InvoiceAttrId		fk	integer	yes	1	Invoices_Attr	InvoiceAttrId			
+InvoiceAdjustments	BankId	BankId		fk	integer	yes	1	Banks	BankId			
+InvoiceAdjustments	VendorId	VendorId		fk	integer	yes	1	Vendors	VendorId			
+InvoiceAdjustments	PurchaseOrderAttrId	PurchaseOrderAttrId		fk	integer	yes	1	PurchaseOrders_Attr	PurchaseOrderAttrId			
+InvoiceAdjustments	IAAmount	IAAmount		fact	numeric	yes	1					
+InvoiceAdjustments	IATaxAmount	IATaxAmount		fact	numeric	yes	1					
+InvoiceAdjustments	PostDate	PostDate		attribute	date	yes	1					
+InvoiceAdjustments	Date	Date		attribute	date	yes	1					
+InvoiceAdjustments	PostStatus	PostStatus		attribute	string	yes	1					
+InvoiceAdjustments	PostStatusTranslation	PostStatusTranslation		attribute	string	yes	1					
+InvoiceAdjustments	FiscalPeriodId	FiscalPeriodId		fk	integer	yes	1	FiscalPeriods	FiscalPeriodId			
+InvoiceAdjustments	AddedByUserId	AddedByUserId		attribute	integer	yes	1					
+InvoiceAdjustments	LastChangedByUserId	LastChangedByUserId		attribute	integer	yes	1					
+InvoiceAdjustments	DateAdded	DateAdded		attribute	date	yes	1					
+InvoiceAdjustments	DateChanged	DateChanged		attribute	date	yes	1					
+InvoiceDebitDistributions	InvoiceTranDebitDistributionId	InvoiceTranDebitDistributionId		pk	integer	yes	1					
+InvoiceDebitDistributions	InvoiceDebitDistributionId	InvoiceDebitDistributionId		attribute	integer	yes	1					
+InvoiceDebitDistributions	InvoiceAttrId	InvoiceAttrId		fk	integer	yes	1	Invoices_Attr	InvoiceAttrId			
+InvoiceDebitDistributions	AccountId	AccountId		fk	integer	yes	1	Accounts	AccountId			
+InvoiceDebitDistributions	TransactionDistributionAmount	TransactionDistributionAmount		fact	numeric	yes	1					
+InvoiceDebitDistributions	ProjectId	ProjectId		fk	integer	yes	1	Projects	ProjectId			
+InvoiceDebitDistributions	TransactionAttrDistributionId	TransactionAttrDistributionId		fk	integer	yes	1	Transactions_Attr	TransactionAttrDistributionId			
+InvoiceDebitDistributions	GrantId	GrantId		fk	integer	yes	1	Grants	GrantId			
+InvoiceDebitDistributions	FiscalPeriodId	FiscalPeriodId		fk	integer	yes	1	FiscalPeriods	FiscalPeriodId			
+InvoiceDebitDistributions	InvoiceAttrId	InvoiceAttrId		fk	integer	yes	1	Invoices_Attr	InvoiceAttrId			
+InvoiceDebitDistributions	BankId	BankId		fk	integer	yes	1	Banks	BankId			
+InvoiceDebitDistributions	VendorId	VendorId		fk	integer	yes	1	Vendors	VendorId			
+InvoiceDebitDistributions	PurchaseOrderAttrId	PurchaseOrderAttrId		fk	integer	yes	1	PurchaseOrders_Attr	PurchaseOrderAttrId			
+ARClients	ClientId	ClientId		pk	integer	yes	1					
+ARClients	RecordType	RecordType		attribute	integer	yes	1					
+ARClients	RecordTypeTranslation	RecordTypeTranslation		attribute	string	yes	1					
+ARClients	Name	Name		attribute	string	yes	1					
+ARClients	UserId	UserId		fk	integer	yes	1	Users	UserId			
+ARClients	AddedByUserId	AddedByUserId		attribute	integer	yes	1					
+ARClients	LastChangedByUserId	LastChangedByUserId		attribute	integer	yes	1					
+ARClients	DateAdded	DateAdded		attribute	date	yes	1					
+ARClients	DateChanged	DateChanged		attribute	date	yes	1					
+ARCharges	ChargeId	ChargeId		pk	integer	yes	1					
+ARCharges	ClientId	ClientId		fk	integer	yes	1	ARClients	ClientId			
+ARCharges	FiscalPeriodId	FiscalPeriodId		fk	integer	yes	1	FiscalPeriods	FiscalPeriodId			
+ARCharges	PayerClientId	PayerClientId		attribute	integer	yes	1					
+ARCharges	Date	Date		attribute	date	yes	1					
+ARCharges	DueDate	DueDate		attribute	date	yes	1					
+ARCharges	ARChargeBalance	ARChargeBalance		fact	numeric	yes	1					
+ARCharges	ARChargeAmount	ARChargeAmount		fact	numeric	yes	1					
+ARCharges	ARChargeQuantity	ARChargeQuantity		fact	integer	yes	1					
+ARCharges	ARChargeUnitPrice	ARChargeUnitPrice		fact	numeric	yes	1					
+ARCharges	ARChargeSaleTaxAmount	ARChargeSaleTaxAmount		fact	numeric	yes	1					
+ARCharges	TransactionType	TransactionType		attribute	integer	yes	1					
+ARCharges	TransactionTypeTranslation	TransactionTypeTranslation		attribute	string	yes	1					
+ARCharges	TransactionUserId	TransactionUserId		attribute	integer	yes	1					
+ARCharges	InvoiceUserId	InvoiceUserId		attribute	integer	yes	1					
+ARCharges	OriginalTransactionAmount	OriginalTransactionAmount		fact	numeric	yes	1					
+ARCharges	PostDate	PostDate		attribute	date	yes	1					
+ARCharges	PostStatus	PostStatus		attribute	integer	yes	1					
+ARCharges	PostStatusTranslation	PostStatusTranslation		attribute	string	yes	1					
+ARCharges	AddedByUserId	AddedByUserId		attribute	integer	yes	1					
+ARCharges	LastChangedByUserId	LastChangedByUserId		attribute	integer	yes	1					
+ARCharges	DateAdded	DateAdded		attribute	date	yes	1					
+ARCharges	DateChanged	DateChanged		attribute	date	yes	1					
+ARPaymentDistribution	PaymentDistributionId	PaymentDistributionId		pk	integer	yes	1					
+ARPaymentDistribution	PaymentId	PaymentAttrId		fk	integer	yes	1	ARPayments_Attr	PaymentAttrId			
+ARPaymentDistribution	ClientId	ClientId		fk	integer	yes	1	ARClients	ClientId			
+ARPaymentDistribution	OwnerClientId	OwnerClientId		attribute	integer	yes	1					
+ARPaymentDistribution	ARPDAmount	ARPDAmount		fact	numeric	yes	1					
+ARPaymentDistribution	ARPDPaymentBalance	ARPDPaymentBalance		fact	numeric	yes	1					
+ARPayments_Attr	PaymentAttrId	PaymentAttrId		pk	integer	yes	1					
+ARPayments_Attr	PaymentHeaderId	PaymentHeaderId		attribute	integer	yes	1					
+ARPayments_Attr	Date	Date		attribute	date	yes	1					
+ARPayments_Attr	PaymentUserId	PaymentUserId		attribute	integer	yes	1					
+ARPayments_Attr	PostDate	PostDate		attribute	date	yes	1					
+ARPayments_Attr	PostStatus	PostStatus		attribute	integer	yes	1					
+ARPayments_Attr	PostStatusTranslation	PostStatusTranslation		attribute	string	yes	1					
+ARPayments_Attr	AddedByUserId	AddedByUserId		attribute	integer	yes	1					
+ARPayments_Attr	LastChangedByUserId	LastChangedByUserId		attribute	integer	yes	1					
+ARPayments_Attr	DateAdded	DateAdded		attribute	date	yes	1					
+ARPayments_Attr	DateChanged	DateChanged		attribute	date	yes	1					
+ARPayments_Fact	PaymentId	PaymentId		pk	integer	yes	1					
+ARPayments_Fact	FiscalPeriodId	FiscalPeriodId		fk	integer	yes	1					
+ARPayments_Fact	ClientId	ClientId		fk	integer	yes	1	ARClients	ClientId			
+ARPayments_Fact	PaymentAttrId	PaymentAttrId		fk	integer	yes	1	ARPayments_Attr	PaymentAttrId			
+ARPayments_Fact	ARPaymentAmount	ARPaymentAmount		fact	numeric	yes	1					
+ARCredits	CreditId	CreditId		pk	integer	yes	1					
+ARCredits	ClientId	ClientId		fk	integer	yes	1	ARClients	ClientId			
+ARCredits	FiscalPeriodId	FiscalPeriodId		fk	integer	yes	1	FiscalPeriods	FiscalPeriodId			
+ARCredits	PostDate	PostDate		attribute	date	yes	1					
+ARCredits	CreditUserId	CreditUserId		attribute	integer	yes	1					
+ARCredits	CreditAmount	CreditAmount		fact	numeric	yes	1					
+ARCredits	TransactionType	TransactionType		attribute	integer	yes	1					
+ARCredits	TransactionTypeTranslation	TransactionTypeTranslation		attribute	string	yes	1					
+ARCredits	Date	Date		attribute	date	yes	1					
+ARCredits	PostStatus	PostStatus		attribute	integer	yes	1					
+ARCredits	PostStatusTranslation	PostStatusTranslation		attribute	string	yes	1					
+Users	UserId	UserId		pk	integer	yes	1					
+Users	UserName	UserName		attribute	string	yes	1					
+Users	Description	Description		attribute	string	yes	1					
+ARDistributions	ARTransactionDistributionId	ARTransactionDistributionId		pk	string	yes	1					
+ARDistributions	TransactionDistributionId	TransactionDistributionId		attribute	integer	yes	1					
+ARDistributions	ParentId	ParentId		attribute	integer	yes	1					
+ARDistributions	ParentType	ParentType		attribute	integer	yes	1					
+ARDistributions	AccountId	AccountId		fk	integer	yes	1	Accounts	AccountId			
+ARDistributions	ARTransactionDistributionAmount	ARTransactionDistributionAmount		fact	numeric	yes	1					
+ARDistributions	ProjectId	ProjectId		fk	integer	yes	1	Projects	ProjectId			
+ARDistributions	GrantId	GrantId		fk	integer	yes	1	Grants	GrantId			
+ARDistributions	TransactionType	TransactionType		attribute	integer	yes	1					
+ARDistributions	TransactionTypeTranslation	TransactionTypeTranslation		attribute	string	yes	1					
+CreditMemos_Attr	CreditMemoAttrId	CreditMemoAttrId		pk	integer	yes	1					
+CreditMemos_Attr	CreditMemoNumber	CreditMemoNumber		attribute	string	yes	1					
+CreditMemos_Attr	Status	Status		attribute	string	yes	1					
+CreditMemos_Attr	StatusTranslation	StatusTranslation		attribute	string	yes	1					
+CreditMemos_Attr	Date	Date		attribute	date	yes	1					
+CreditMemos_Attr	PostStatus	PostStatus		attribute	string	yes	1					
+CreditMemos_Attr	PostStatusTranslation	PostStatusTranslation		attribute	string	yes	1					
+CreditMemos_Attr	PostDate	PostDate		attribute	date	yes	1					
+CreditMemos_Attr	Description	Description		attribute	string	yes	1					
+CreditMemos_Attr	AddedByUserId	AddedByUserId		attribute	integer	yes	1					
+CreditMemos_Attr	LastChangedByUserId	LastChangedByUserId		attribute	integer	yes	1					
+CreditMemos_Attr	DateAdded	DateAdded		attribute	date	yes	1					
+CreditMemos_Attr	DateChanged	DateChanged		attribute	date	yes	1					
+CreditMemos_Fact	CreditMemoFactId	CreditMemoFactId		pk	integer	yes	1					
+CreditMemos_Fact	CreditMemoAttrId	CreditMemoAttrId		fk	integer	yes	1	CreditMemos_Attr				
+CreditMemos_Fact	VendorId	VendorId		fk	integer	yes	1	Vendors				
+CreditMemos_Fact	FiscalPeriodId	FiscalPeriodId		fk	integer	yes	1	FiscalPeriods				
+CreditMemos_Fact	CreditMemoAmount	CreditMemoAmount		fact	numeric	yes	1					
+CreditMemos_Fact	CreditMemoBalance	CreditMemoBalance		fact	numeric	yes	1					
