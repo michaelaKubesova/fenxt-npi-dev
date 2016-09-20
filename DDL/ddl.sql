@@ -1,4 +1,3 @@
--- system table
 drop TABLE if exists _sys_transform_id;
 CREATE TABLE _sys_transform_id
 (
@@ -104,7 +103,8 @@ CREATE TABLE dm_Invoices_attr
     StatusTranslation varchar(255),
     AddedByUserName varchar(255),
     AddedByUserNameLabel varchar(255),
-    InvoiceHyperlink varchar(255)
+    InvoiceHyperlink varchar(255),
+    InvoiceAttributeId varchar(255)
 )  ORDER BY TenantId,
           _sys_transform_id
 SEGMENTED BY hash(TenantId) ALL NODES
@@ -140,7 +140,9 @@ CREATE TABLE dm_FiscalPeriods
     FiscalYearStart varchar(255),
     FiscalYearStart_sort varchar(255),
     FiscalYearEnd varchar(255),
-    FiscalDate varchar(255)
+    FiscalDate varchar(255),
+    FiscalYearStartDate varchar(255),
+    FiscalYearEndDate varchar(255)
 )  ORDER BY TenantId,
           _sys_transform_id
 SEGMENTED BY hash(TenantId) ALL NODES
@@ -165,6 +167,7 @@ CREATE TABLE dm_Projects
     AddedByUserNameLabel varchar(255),
     ProjectType varchar(255),
     ProjectDateId varchar(255),
+    ProjectStatus varchar(255),
     Dummy varchar(255)
 )  ORDER BY TenantId,
           _sys_transform_id
@@ -217,7 +220,7 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop if exists TABLE dm_Banks;
+drop table if exists dm_Banks;
 CREATE TABLE dm_Banks
 (
     _sys_transform_id int NOT NULL encoding rle,
@@ -292,10 +295,15 @@ CREATE TABLE dm_Transactions_attr
     TransactionTypeTranslation varchar(255),
     EncumbranceStatusTranslation varchar(255),
     TransactionCode1 varchar(255),
+    TransactionCode1IsActive varchar(10),
     TransactionCode2 varchar(255),
+    TransactionCode2IsActive varchar(10),
     TransactionCode3 varchar(255),
+    TransactionCode3IsActive varchar(10),
     TransactionCode4 varchar(255),
+    TransactionCode4IsActive varchar(10),
     TransactionCode5 varchar(255),
+    TransactionCode5IsActive varchar(10),
     DateAdded varchar(255),
     DateChanged varchar(255),
     TransactionAttrDistributionId varchar(255),
@@ -303,7 +311,8 @@ CREATE TABLE dm_Transactions_attr
     AddedByUserNameId varchar(255),
     AddedByUserName varchar(255),
     LastChangedByUserName varchar(255),
-    Class varchar(255)
+    Class varchar(255),
+    TransactionAttributeId varchar(255)
 )  ORDER BY TenantId,
           _sys_transform_id
 SEGMENTED BY hash(TenantId) ALL NODES
@@ -457,7 +466,7 @@ CREATE TABLE dm_ProjectUserSecurity
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
-    ProjecttUserSecurityId varchar(255),
+    ProjectUserSecurityId varchar(255),
     UserId varchar(255),
     ProjectId varchar(255)
 )  ORDER BY TenantId,
@@ -579,6 +588,7 @@ CREATE TABLE dm_Tenants
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
+    Tenant varchar(255),
     TransactionCode1Name varchar(255),
     TransactionCode2Name varchar(255),
     TransactionCode3Name varchar(255),

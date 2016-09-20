@@ -11,3 +11,14 @@ select
 from dm_ClientTranslation
 where TenantId = '${TenantId}'
 and _sys_transform_id = ${DM_CLIENTTRANSLATION_TRANSFORM_ID}
+union all
+select
+ 	'TransactionCode1' TransactionCode1Name
+	,'TransactionCode2' TransactionCode2Name
+	,'TransactionCode3' TransactionCode3Name
+	,'TransactionCode4' TransactionCode4Name
+	,'TransactionCode5' TransactionCode5Name
+	,'AccountSegment1' AccountSegment1Name
+	,'Project' ProjectName
+	,'Fund' FundName
+	,'Grant' GrantName

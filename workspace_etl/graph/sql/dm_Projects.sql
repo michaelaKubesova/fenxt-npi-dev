@@ -11,6 +11,7 @@ select
  "AddedByUserNameLabel",
  "ProjectType",
  "ProjectDateId",
+ "ProjectStatus",
  "Dummy"
 from dm_Projects
 where TenantId = '${TenantId}'
@@ -29,6 +30,7 @@ GoodData_Attr('') as "AddedByUserName",
 GoodData_Attr('') as "AddedByUserNameLabel",
 GoodData_Attr('No Type') as "ProjectType",
 GoodData_Attr(0) as "ProjectDateId",
+GoodData_Attr('Active') as "ProjectStatus",
 GoodData_Attr(1) as "Dummy"
 union all
 select	
@@ -44,5 +46,6 @@ GoodData_Attr('') as "AddedByUserName",
 GoodData_Attr('') as "AddedByUserNameLabel",
 GoodData_Attr('') as "ProjectType",
 GoodData_Attr(0) as "ProjectDateId",
+GoodData_Attr('Active') as "ProjectStatus",
 GoodData_Attr(1) as "Dummy"
 ;
