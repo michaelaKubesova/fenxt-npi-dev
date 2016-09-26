@@ -116,7 +116,12 @@ CREATE TABLE dm_Users
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
     UserId varchar(255),
-    UserName varchar(255)
+	IsSupervisor varchar(255),
+	Name varchar(255),
+	Description varchar(255),
+	Inactive varchar(255),
+	HasSupervisorRights varchar(255),
+	ViewOnly varchar(255)
 )
  ORDER BY TenantId,
           _sys_transform_id
@@ -594,7 +599,6 @@ CREATE TABLE dm_Tenants
     TransactionCode3Name varchar(255),
     TransactionCode4Name varchar(255),
     TransactionCode5Name varchar(255),
-    AccountSegment1Name varchar(255),
     ProjectName varchar(255),
     FundName varchar(255),
     GrantName varchar(255),
