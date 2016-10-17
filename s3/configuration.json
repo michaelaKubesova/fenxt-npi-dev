@@ -1,0 +1,564 @@
+{
+    "entities":{
+      "Account":{
+          "global":{
+            "custom":{
+                "hub":[
+                  "AccountId",
+				  "TenantId"
+                ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "Fund":{
+          "global":{
+            "custom":{
+                "hub":[
+                  "FundId",
+				  "TenantId"
+                ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "TableEntry":{
+          "global":{
+            "custom":{
+                "hub":[
+                  "TableEntryId",
+				  "TenantId"
+                ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "AccountRatioConfiguration":{
+          "global":{
+            "custom":{
+                "hub":[
+                  "RatioConfigurationId",
+				  "TenantId"
+                ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "AccountCode":{
+          "global":{
+            "custom":{
+                "hub":[
+                  "AccountCodeId",
+				  "TenantId"
+                ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "Project":{
+          "global":{
+            "custom":{
+                "hub":[
+                  "ProjectId",
+				  "TenantId"
+                ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "ProjectBudget":{
+          "global":{
+            "custom":{
+                "hub":[
+                  "ProjectBudgetId",
+				  "TenantId"
+                ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "ProjectBudgetDetail":{
+          "global":{
+            "custom":{
+                "hub":[
+                  "ProjectBudgetDetailId",
+				  "TenantId"
+                ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "FiscalYear":{
+          "global":{
+            "custom":{
+                "hub":[
+                  "FiscalYearId",
+				  "TenantId"
+                ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "FiscalPeriod":{
+          "global":{
+            "custom":{
+                "hub":[
+                  "FiscalPeriodId",
+				  "TenantId"
+                ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "AccountBudget":{
+          "global":{
+            "custom":{
+                "hub":[
+                  "AccountBudgetId",
+				  "TenantId"
+                ],"is_deleted":"deleted"
+            }
+          }
+      },
+	  "BudgetScenario":{
+          "global":{
+            "custom":{
+                "hub":[
+                  "BudgetScenarioId",
+				  "TenantId"
+                ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "AccountBudgetDetail":{
+          "global":{
+            "custom":{
+                "hub":[
+                  "AccountBudgetDetailId",
+                  "TenantId"
+                ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "Grant": {
+        "global": {
+          "custom": {
+            "hub": [
+              "GrantId",
+              "TenantId"
+            ],"is_deleted":"deleted"
+          }
+        }
+      },
+      "Transaction":{
+          "global":{
+            "custom":{
+                "hub":[
+                  "TransactionId",
+                  "TenantId"
+                ],"is_deleted":"deleted"
+            }
+          }
+      },
+	  "TransactionDistribution":{
+          "global":{
+            "custom":{
+                "hub":[
+                  "TranDistributionId",
+				  "TenantId"
+                ],"is_deleted":"deleted"
+            }
+          }
+      },
+	  "GLBatch":{
+          "global":{
+            "custom":{
+                "hub":[
+				  "BatchId",
+				  "TenantId"
+                ],"is_deleted":"deleted"
+            }
+          }
+      },
+	  "9902015":{
+          "global":{
+            "custom":{
+                "hub":[
+				  "EIN",
+				  "tax_prd"
+                ],"is_deleted":"deleted"
+            }
+          }
+      },
+	  "990PF2015":{
+          "global":{
+            "custom":{
+                "hub":[
+				  "EIN",
+				  "TAX_PRD"
+                ],"is_deleted":"deleted"
+            }
+          }
+      },
+    "990EZ2015": {
+      "global": {
+        "custom": {
+          "hub": [
+            "EIN",
+            "a_tax_prd"
+          ],"is_deleted":"deleted"
+        }
+      }
+    },
+    "Vendor": {
+      "global": {
+        "custom": {
+          "hub": [
+            "VendorId",
+            "TenantId"
+          ],"is_deleted":"deleted"
+        }
+      }
+    },
+    "Bank": {
+      "global": {
+        "custom": {
+          "hub": [
+            "BankId",
+            "TenantId"
+          ],"is_deleted":"deleted"
+        }
+      }
+    },
+    "Invoice":{
+          "global":{
+            "custom":{
+              "hub": [
+                "InvoiceId",
+                "TenantId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "990NTEE": {
+        "global": {
+          "custom": {
+            "hub": [
+              "EIN"
+            ],"is_deleted":"deleted"
+          }
+        }
+      },
+      "CreditMemo":{
+          "global":{
+            "custom":{
+              "hub": [
+                "CreditMemoId",
+                "TenantId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+	  "User":{
+          "global":{
+            "custom":{
+              "hub": [
+                "UserId",
+                "TenantId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "VendorHistory":{
+          "global":{
+            "custom":{
+              "hub": [
+                "VendorHistoryId",
+                "TenantId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "AccountHistory":{
+          "global":{
+            "custom":{
+              "hub": [
+                "AccountHistoryId",
+                "TenantId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "ProjectHistory":{
+          "global":{
+            "custom":{
+              "hub": [
+                "ProjectHistoryId",
+                "TenantId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "BankReconciliationHistory":{
+          "global":{
+            "custom":{
+              "hub": [
+                "BankReconciliationId",
+                "TenantId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "AccountAttribute":{
+          "global":{
+            "custom":{
+              "hub": [
+                "AccountAttributeId",
+                "TenantId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "GLAttributeType":{
+          "global":{
+            "custom":{
+              "hub": [
+                "GLAttributeTypeId",
+                "TenantId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "TransactionAttribute":{
+          "global":{
+            "custom":{
+              "hub": [
+                "TransactionAttributeId",
+                "TenantId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "ProjectAttribute":{
+          "global":{
+            "custom":{
+              "hub": [
+                "ProjectAttributeId",
+                "TenantId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "GrantAttribute":{
+          "global":{
+            "custom":{
+              "hub": [
+                "GrantAttributeId",
+                "TenantId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "VendorAttribute":{
+          "global":{
+            "custom":{
+              "hub": [
+                "VendorAttributeId",
+                "TenantId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "InvoiceAttribute":{
+          "global":{
+            "custom":{
+              "hub": [
+                "InvoiceAttributeId",
+                "TenantId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "APAttributeType":{
+          "global":{
+            "custom":{
+              "hub": [
+                "APAttributeTypeId",
+                "TenantId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "BBDistribution":{
+          "global":{
+            "custom":{
+              "hub": [
+                "DistributionId",
+                "TenantId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "BBTransactionDistribution":{
+          "global":{
+            "custom":{
+              "hub": [
+                "TransactionDistributionId",
+                "TenantId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "Tenant":{
+          "global":{
+            "custom":{
+              "hub": [
+                "TenantId"
+              ]
+            }
+          }
+      },
+      "AccountSegmentValue":{
+          "global":{
+            "custom":{
+              "hub": [
+                "AccountId",
+                "TenantId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "AccountUserSecurity":{
+          "global":{
+            "custom":{
+              "hub": [
+                "TenantId",
+                "UsersId",
+				"AccountId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "BankUserSecurity":{
+          "global":{
+            "custom":{
+              "hub": [
+                "TenantId",
+                "UsersId",
+				"BankId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+      "ProjectUserSecurity":{
+          "global":{
+            "custom":{
+              "hub": [
+                "TenantId",
+                "UsersId",
+				"ProjectId"
+              ],"is_deleted":"deleted"
+            }
+          }
+      },
+	  "SummarizedTransaction":{
+          "global":{
+            "custom":{
+              "hub": [
+                "TenantId",
+				"SummaryId"
+              ]
+            }
+          }
+      }
+    },
+    "downloaders":{
+      "csv_downloader_1":{
+          "type":"csv",
+          "entities":[
+            "Account",
+            "Fund",
+			"TableEntry",
+			"AccountRatioConfiguration",
+			"AccountCode",
+			"Project",
+			"ProjectBudget",
+			"ProjectBudgetDetail",
+			"FiscalYear",
+			"FiscalPeriod",
+			"AccountBudget",
+			"BudgetScenario",
+			"AccountBudgetDetail",
+			"Grant",
+			"Transaction",
+			"TransactionDistribution",
+			"GLBatch",
+			"9902015",
+			"990PF2015",
+			"990EZ2015",
+			"Vendor",
+			"Bank",
+			"Invoice",
+			"990NTEE",
+			"CreditMemo",
+			"User",
+			"VendorHistory",
+			"AccountHistory",
+			"ProjectHistory",
+			"BankReconciliationHistory",
+			"AccountAttribute",
+			"GLAttributeType",
+			"TransactionAttribute",
+			"ProjectAttribute",
+			"GrantAttribute",
+			"VendorAttribute",
+			"InvoiceAttribute",
+			"APAttributeType",
+			"BBDistribution",
+			"BBTransactionDistribution",
+			"Tenant",
+			"AccountSegmentValue",
+			"AccountUserSecurity",
+			"BankUserSecurity",
+			"ProjectUserSecurity",
+			"SummarizedTransaction"
+          ]
+      }
+    },
+    "integrators":{
+      "ads_integrator_1":{
+          "type":"ads_storage",
+          "batches":["csv_downloader_1"]
+      }
+    },
+    "ads_storage":{
+      "instance_id":"cd8c99dd0dc75c6e82a0eb55842060bf",
+      "username":"gooddata.fenxt.dev@blackbaud.com",
+      "server:":"secure.gooddata.com",
+      "options":{
+          "default_strategy":"merge",
+          "abort_on_error":false,
+          "remove_deleted_records":true,
+          "number_of_batches_in_one_run": 50,
+          "number_of_paraller_queries": 10,
+          "number_of_parallel_integrations": 10,
+          "number_of_parallel_entities_integrations": 10,          
+          "remote": {
+          "type": "s3",
+          "access_key": "AKIAJMDBPRRAOIRRVWGQ",
+          "bucket": "gdc-ms-cust"
+          }
+      }
+    },
+    "csv":{
+      "type":"s3",
+      "options":{
+          "bucket":"gdc-ms-cust",
+          "folder":"AIDAIRUCDLLCMX7VPX5LM_gdc-ms-cust_BlackBaudFE_dev/manifests/",
+          "data_structure_info":"AIDAIRUCDLLCMX7VPX5LM_gdc-ms-cust_BlackBaudFE_dev/feedfile.txt",
+          "access_key":"AKIAJMDBPRRAOIRRVWGQ",
+          "manifest":"manifest.{time(%Y%m%d%H%M%S)}",
+          "use_link_file": true,
+          "number_of_manifest_in_one_run": 15,
+          "number_of_threads": 12,
+          "files_structure":{
+            "skip_rows":"1",
+            "column_separator":",",
+            "enclosed_by":"\"",
+            "escape_as": "\\",
+            "db_parser":"vertica_default",
+            "file_format":"gzip"
+          }
+      }
+    }
+}
