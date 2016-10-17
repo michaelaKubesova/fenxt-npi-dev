@@ -14,7 +14,7 @@ union
 select
 	'0' as "PeriodAmount",
 	GoodData_Attr(p.ProjectId || '#' || FP.Id || '#<No budget>') as "ProjectBudgetId",
-	GoodData_Attr(null) as "AccountBudgetAttrId",
+	GoodData_Attr(0) as "AccountBudgetAttrId",
 	GoodData_Attr(p.ProjectId)  as "ProjectId",
 	GoodData_Attr(null)  as "AccountId",
 	'0' as "ProjectBudgetAmount",

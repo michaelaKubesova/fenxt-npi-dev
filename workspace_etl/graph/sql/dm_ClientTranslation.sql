@@ -4,7 +4,6 @@ select
  "TransactionCode3Name",
  "TransactionCode4Name",
  "TransactionCode5Name",
- "AccountSegment1Name",
  "ProjectName",
  "FundName",
  "GrantName"
@@ -18,7 +17,6 @@ select
 	,'TransactionCode3' TransactionCode3Name
 	,'TransactionCode4' TransactionCode4Name
 	,'TransactionCode5' TransactionCode5Name
-	,'AccountSegment1' AccountSegment1Name
 	,'Project' ProjectName
 	,'Fund' FundName
 	,'Grant' GrantName
