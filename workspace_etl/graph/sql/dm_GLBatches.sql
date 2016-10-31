@@ -6,6 +6,7 @@ select
  "DateApproved",
  "BatchId",
  "BatchNumber",
+ GoodData_Attr('{"state":"ledger.journalentry.detail","id":'||BatchId||'}') "BatchNumberHyperlink",
  "StatusTranslation",
  "AddedByUserName",
  "AddedByUserNameLabel",

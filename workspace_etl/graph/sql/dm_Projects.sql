@@ -1,6 +1,7 @@
 select
  "ProjectId",
  "UserId",
+ GoodData_Attr('{"state":"ledger.project.detail","id":'||ProjectId||'}') as "UserIdHyperlink",
  "Description",
  "Division",
  "Location",
@@ -20,7 +21,8 @@ union all
 select  
 GoodData_Attr(-1) as "ProjectId" ,
 GoodData_Attr('<No Project>') as "UserId" ,
-GoodData_Attr('<No Project>') as "Description" ,
+GoodData_Attr('{"state":"","id":0}') as "UserIdHyperlink",
+GoodData_Attr('<No Project>') as "Description",
 GoodData_Attr('No Division') as "Division" ,
 GoodData_Attr('No Location') as "Location" ,
 GoodData_Attr('No Department') as "Department",
@@ -36,6 +38,7 @@ union all
 select	
 GoodData_Attr(-2) as "ProjectId" ,
 GoodData_Attr('') as "UserId" ,
+GoodData_Attr('') as "UserIdHyperlink",
 GoodData_Attr('') as "Description" ,
 GoodData_Attr('') as "Division" ,
 GoodData_Attr('') as "Location" ,

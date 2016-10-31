@@ -5,7 +5,6 @@ select
  "StatusTranslation",
  "AddedByUserName",
  "AddedByUserNameLabel",
- "InvoiceHyperlink",
  "InvoiceAttributeId"
 from dm_Invoices_attr
 where TenantId = '${TenantId}'
