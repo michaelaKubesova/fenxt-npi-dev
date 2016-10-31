@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><Graph author="tomas" created="Mon Aug 08 14:13:48 CEST 2016" guiVersion="3.4.4.P" id="1470919378512" licenseType="Commercial" modified="Fri Aug 12 11:02:04 CEST 2016" modifiedBy="tomas" name="main" revision="1.5" showComponentDetails="true">
+<?xml version="1.0" encoding="UTF-8"?><Graph author="tomas" created="Mon Aug 08 14:13:48 CEST 2016" guiVersion="3.4.4.P" id="1470919378512" licenseType="Commercial" modified="Tue Sep 20 12:41:34 EDT 2016" modifiedBy="alex.shchetkov" name="main" revision="1.18" showComponentDetails="true">
 <Global>
 <Metadata id="Metadata36" previewAttachmentCharset="ISO-8859-1">
 <Record fieldDelimiter="," name="GD_dataset_user" previewAttachmentCharset="ISO-8859-1" recordDelimiter="\n\\|\r\n" recordSize="-1" type="delimited">
 <Field eofAsDelimiter="false" name="param" nullable="true" shift="0" size="0" type="string"/>
 </Record>
 </Metadata>
-<Connection database="DSS" dbURL="jdbc:gdc:datawarehouse://secure.gooddata.com/gdc/datawarehouse/instances/${ADS_INSTANCE}" id="JDBC0" jdbcSpecific="DSS" name="BBFE" password="${ADS_PASSWORD}" type="JDBC" user="${ADS_USER}"/>
-<Property fileURL="sql_params.prm" id="GraphParameter0"/>
-<Property fileURL="workspace.prm" id="GraphParameter1"/>
+<Connection database="DSS" dbURL="jdbc:gdc:datawarehouse://secure.gooddata.com/gdc/datawarehouse/instances/${ADS_INSTANCE}" id="JDBC0" jdbcSpecific="DSS" name="BBFE" password="PTL@dm1n" type="JDBC" user="${ADS_USER}"/>
+<Property fileURL="workspace.prm" id="GraphParameter0"/>
 <Dictionary/>
 </Global>
 <Phase number="1">
@@ -19,6 +18,6 @@
 <Edge debugMode="true" fromNode="TRANSFORM_ID_PARAMS:0" guiBendpoints="" guiRouter="Manhattan" id="Edge3" inPort="Port 0 (in)" metadata="Metadata36" outPort="Port 0 (out)" toNode="CSV_WRITER:0"/>
 </Phase>
 <Phase number="10">
-<Node enabled="enabled" graphName="${GRAPH_DIR}/DATAMARTS_LOAD.grf" guiName="Full Load" guiX="-57" guiY="291" id="FULL_LOAD" paramsToPass="ADS_INSTANCE;ADS_PASSWORD;ADS_USER;TenantId" type="RUN_GRAPH"/>
+<Node enabled="enabled" graphName="${GRAPH_DIR}/DATAMARTS_LOAD.grf" guiName="Full Load" guiX="0" guiY="433" id="FULL_LOAD" paramsToPass="ADS_INSTANCE;ADS_PASSWORD;ADS_USER;TenantId" type="RUN_GRAPH"/>
 </Phase>
 </Graph>

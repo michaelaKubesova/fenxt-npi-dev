@@ -1,6 +1,6 @@
 ##Project path
 #Wed Sep 07 13:44:50 CEST 2016
-PROJECT=.
+PROJECT=./workspace_etl
 
 
 #Wed Sep 07 13:44:50 CEST 2016
@@ -12,8 +12,8 @@ DATA_DIR=${PROJECT}/data
 GRAPH_DIR=${PROJECT}/graph
 TRANS_DIR=${PROJECT}/trans
 MODEL_DIR=${PROJECT}/model
-GDC_PROJECT_ID=ncqslnssr10powkd2jfa3t6r8hahml85
 DATA_GOODDATA_DIR=${PROJECT}/data/gooddata
 DATA_TRANSFORM_DIR=${PROJECT}/data/transform
 ADS_USER=vaclav.rek+bb_fe_dev@gooddata.com
 META_DIR=${PROJECT}/meta
+GDC_PROJECT_ID=d8m2gs31g5n6f0b5le53497zr3p9t7tv

@@ -15,7 +15,7 @@ select
 	GoodData_Attr(FP.Id) as "FiscalPeriodId",
 	GoodData_Attr(a.AccountId || '#' || FP.ID || '#<No budget>') as "AccountBudgetFactId",
 	GoodData_Attr(a.AccountId || '#' || FP.ID || '#<No budget>') as "AccountBudgetAttrId" 
-from stg_csv_accounts_merge a
-cross join (select min(FiscalPeriodId) as "Id" from stg_csv_FiscalPeriods_merge  where TenantId = '${TenantId}') FP
+from stg_csv_account_merge a
+cross join (select min(FiscalPeriodId) as "Id" from stg_csv_FiscalPeriod_merge  where TenantId = '${TenantId}') FP
 where TenantId = '${TenantId}'
 ;
