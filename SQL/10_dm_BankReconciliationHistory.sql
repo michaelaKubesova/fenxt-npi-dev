@@ -8,10 +8,13 @@ select
 	,GoodData_Date(b.ReconciliationDate) as "ReconciliationDate"
 	,cast(b.ReconciliationBalance as decimal(15, 2)) as "ReconciliationBalance"
 	,GoodData_Attr(b.AddedByUserId) as "AddedByUserId"
-	,GoodData_Attr(u.UserName) as "AddedByUserName"
+	,GoodData_Attr(u.Name) as "AddedByUserName"
 from stg_csv_BankReconciliationHistory_merge b
-left join stg_csv_Users_merge u on
-	b.addedByUserId = u.UsersId and b.TenantId = u.TenantId and u._sys_is_deleted = false
+left join stg_csv_User_merge u on
+	b.addedByUserId = u.UserId and b.TenantId = u.TenantId and u._sys_is_deleted = false
+where b._sys_is_deleted = false
+	and u.Deleted = false
+	and b.Deleted = false
 ;
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_BankReconciliationHistory',null,now());
 select analyze_statistics('dm_BankReconciliationHistory')

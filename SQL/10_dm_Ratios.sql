@@ -4,7 +4,6 @@ insert /*+ direct */ into dm_Ratios
 select
     ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
 	T.TenantId as "TenantId",
-	
 	cast(SUM(
 		CASE 
 			WHEN A.CurrentAssets = true and T.TransactionType = 1 and A.AccountCategory in (1, 5, 9)
@@ -75,18 +74,36 @@ select
 	,GoodData_attr(T.EncumbranceStatus) as "EncumbranceStatus"
 	,GoodData_attr(T.EncumbranceStatusTranslation) as "EncumbranceStatusTranslation"
 	,GoodData_attr(T.FiscalPeriodId) as "FiscalPeriodId" 
-from stg_csv_Transactions_merge T
-inner join stg_csv_Accounts_merge A on T.AccountId = A.AccountId and T.TenantId = A.TenantId
+from stg_csv_Transaction_merge T
+inner join (
+	select
+		 a.TenantId
+		,a.AccountId
+		,a.AccountCategory
+		,cast(MAX(CASE WHEN r.RatioConfigurationId is not null and r.RatioType = 1 THEN 1 ELSE 0 END) as boolean) as "QuickRatio"
+		,cast(MAX(CASE WHEN r.RatioConfigurationId is not null and r.RatioType = 2 and wc.StaticEntryId = 2 THEN 1 ELSE 0 END) as boolean) as "CashCoverageCurrentAssets"
+		,cast(MAX(CASE WHEN r.RatioConfigurationId is not null and r.RatioType = 2 and a.AccountCategory = 5 THEN 1 ELSE 0 END) as boolean) as "CashCoverageExpense"
+		,cast(MAX(CASE WHEN wc.StaticEntryId = 2 THEN 1 ELSE 0 END) as boolean) as "CurrentAssets"
+		,cast(MAX(CASE WHEN wc.StaticEntryId = 3 THEN 1 ELSE 0 END) as boolean) as "CurrentLiability"
+	from stg_csv_Account_merge a
+	left join stg_csv_AccountRatioConfiguration_merge r
+		on a.AccountId = r.AccountId and a.TenantId = r.TenantId and r._sys_is_deleted = false and r.Deleted = false
+	left join stg_csv_TableEntry_merge wc
+		on a.WorkingCapitalId = wc.TableEntryId and a.TenantId = wc.TenantId and wc._sys_is_deleted = false and wc.Deleted = false
+	where a.Deleted = false
+		and a._sys_is_deleted = false
+
+	group by a.AccountId, a.AccountCategory, a.TenantId) a on a.AccountId = T.AccountId and A.TenantId = T.TenantId
 where
 	T._sys_is_deleted = false
-	and A._sys_is_deleted = false
+	and T.Deleted = false
 group by 
-	T.TenantId
-	,T.PostStatus
+	 T.PostStatus
 	,T.PostStatusTranslation
 	,T.EncumbranceStatus
 	,T.EncumbranceStatusTranslation
 	,T.FiscalPeriodId
+	,T.TenantId
 ;
 
 

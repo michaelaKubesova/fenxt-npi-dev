@@ -1,24 +1,25 @@
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Vendors',now(),null);
 insert /*+ direct */ into dm_Vendors
-	select   
+	select
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
-	t.TenantId as "TenantId",
-	GoodData_date(DateAdded)  as "DateAdded",
-	GoodData_date(DateChanged)  as "DateChanged",
-	GoodData_Attr(VendorId) as "VendorId",
-	GoodData_Attr(VendorName) as "VendorName",
-	GoodData_Attr(UserDefinedId) as "VendorUserID",
-	GoodData_Attr(ifnull(CustomerNumber,' ')) as "CustomerNumber",
-	GoodData_Attr(StatusTranslation) as "StatusTranslation",
-	GoodData_Attr(AddedByUserId) as "AddedByUserName",
-	GoodData_Attr(au.UserName) as "AddedByUserNameLabel",
-	GoodData_Attr(VendorId) as "VendorDateId",
-	GoodData_Attr(1) as "Dummy"
-	from stg_csv_Vendors_merge t
-	join stg_csv_Users_merge au
-	  on t.AddedByUserId = au.UsersId and t.TenantId = au.TenantId
-	join stg_csv_Users_merge eu
-	  on t.LastChangedByUserId = eu.UsersId and t.TenantId = eu.TenantId
+	v.TenantId as "TenantId",
+	 GoodData_date(v.DateAdded)  as "DateAdded"
+	,GoodData_date(v.DateChanged)  as "DateChanged"
+	,GoodData_Attr(v.VendorId) "VendorId"
+	,GoodData_Attr(v.VendorNameForDisplay) "VendorName"
+	,GoodData_Attr(v.UserDefinedId) as "VendorUserID"
+	,GoodData_Attr(ifnull(v.CustomerNumber,' ')) as "CustomerNumber"
+	,GoodData_Attr(v.StatusTranslation) as "StatusTranslation"
+	,GoodData_Attr(v.AddedById) as "AddedByUserName"
+	,GoodData_Attr(au.Name) as "AddedByUserNameLabel"
+	,GoodData_Attr(v.VendorId) as "VendorDateId"
+	,GoodData_Attr(1) as "Dummy"
+from stg_csv_vendor_merge v
+join stg_csv_User_merge au
+	on v.AddedById = au.UserId and v.TenantId = au.TenantId
+where v.Deleted = false
+	and v._sys_is_deleted = false
+	and au._sys_is_deleted = false
 ;
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Vendors',null,now());
 select analyze_statistics('dm_Vendors')

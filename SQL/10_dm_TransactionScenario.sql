@@ -3,16 +3,58 @@ insert /*+ direct */ into dm_TransactionScenario
 select 
 ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
 ab.TenantId as "TenantId",
-GoodData_Attr(t.TransactionDistributionId||'#'||ab.ScenarioId) as "TransactionScenarioId",
-GoodData_Attr(t.TransactionDistributionId) as "TransactionDistributionId",
-GoodData_Attr(ab.ScenarioId) as "ScenarioId",
-GoodData_Attr(t.FiscalPeriodId) as "FiscalPeriodId",
-GoodData_Attr(t.AccountId) as "AccountId"
-from stg_csv_AccountBudgets_merge ab
-join stg_csv_Transactions_merge t
-on 		t.AccountId = ab.AccountId
-and t.TenantId = ab.TenantId
-group by ab.scenarioId, ab.TenantId, t.TransactionDistributionId, t.FiscalPeriodId, t.AccountId
+	 GoodData_Attr(td.TranDistributionId||'#'||te.Description) as "TransactionScenarioId"
+	,GoodData_Attr(td.TranDistributionId) as "TransactionDistributionId"
+	,GoodData_Attr(te.Description) as "ScenarioId"
+	,GoodData_Attr(t.FiscalPeriodId) as "FiscalPeriodId"
+	,GoodData_Attr(t.AccountId) as "AccountId"
+from stg_csv_AccountBudget_merge ab
+join stg_csv_budgetscenario_merge bs
+	on bs.BudgetScenarioId = ab.BudgetScenarioId and bs.TenantId = ab.TenantId and bs.Deleted = false and bs._sys_is_deleted = false
+join stg_csv_tableentry_merge te
+	on bs.ScenarioId = te.TableEntryId and te.CodeTableId = 124 and te.TenantId = ab.TenantId and te.Deleted = false and te._sys_is_deleted = false
+join stg_csv_Transaction_merge t
+	on t.AccountId = ab.AccountId and t.TenantId = ab.TenantId and t._sys_is_deleted = false and t.Deleted = false
+join stg_csv_TransactionDistribution_merge td
+	on td.TransactionId = t.TransactionId and td.TenantId = ab.TenantId  and td._sys_is_deleted = false and td.Deleted = false
+where ab._sys_is_deleted = false
+	and ab.Deleted = false
+group by te.Description, td.TranDistributionId, t.FiscalPeriodId, t.AccountId, ab.TenantId
+
+union all
+
+select 
+	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
+	ab.TenantId as "TenantId",
+	 GoodData_Attr((1000000000000 + t.SummaryId)||'#'||te.Description) as "TransactionScenarioId"
+	,GoodData_Attr((1000000000000 + t.SummaryId)) as "TransactionDistributionId"
+	,GoodData_Attr(te.Description) as "ScenarioId"
+	,GoodData_Attr(t.FiscalPeriodId) as "FiscalPeriodId"
+	,GoodData_Attr(t.AccountId) as "AccountId"
+from stg_csv_AccountBudget_merge ab
+join stg_csv_budgetscenario_merge bs
+	on bs.BudgetScenarioId = ab.BudgetScenarioId and bs.TenantId = ab.TenantId and bs.Deleted = false and bs._sys_is_deleted = false
+join stg_csv_tableentry_merge te
+	on bs.ScenarioId = te.TableEntryId and te.CodeTableId = 124 and te.TenantId = ab.TenantId and te.Deleted = false and te._sys_is_deleted = false
+join stg_csv_SummarizedTransaction_merge t
+	on t.AccountId = ab.AccountId and t.TenantId = ab.TenantId and t._sys_is_deleted = false
+where ab._sys_is_deleted = false
+	and ab.Deleted = false
+group by te.Description, t.SummaryId, t.FiscalPeriodId, t.AccountId, ab.TenantId
+
+union all
+
+select 
+	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
+	t.TenantId as "TenantId",
+	 GoodData_Attr((1000000000000 + t.SummaryId)||'#<No budget>') as "TransactionScenarioId"
+	,GoodData_Attr((1000000000000 + t.SummaryId)) as "TransactionDistributionId"
+	,GoodData_Attr('<No budget>') as "ScenarioId"
+	,GoodData_Attr(t.FiscalPeriodId) as "FiscalPeriodId"
+	,GoodData_Attr(t.AccountId) as "AccountId"
+from stg_csv_SummarizedTransaction_merge t
+where  t._sys_is_deleted = false
+group by t.SummaryId, t.FiscalPeriodId, t.AccountId, t.TenantId
 ;
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_TransactionScenario',null,now());
 select analyze_statistics('dm_TransactionScenario')
