@@ -8,7 +8,7 @@ select
 from dm_AccountBudgets_fact
 where TenantId = '${TenantId}'
 and _sys_transform_id = ${DM_ACCOUNTBUDGETS_FACT_TRANSFORM_ID}
-union
+union all
 select
 	'0' as "AccountBudgetAmount",
 	GoodData_Attr(a.AccountId)  as "AccountId",

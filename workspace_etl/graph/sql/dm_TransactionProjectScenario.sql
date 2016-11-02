@@ -21,7 +21,5 @@ select
 	,GoodData_Attr(t.AccountId) as "AccountId"
 from stg_csv_Transaction_merge t
 join stg_csv_TransactionDistribution_merge td
-	on td.TransactionId = t.TransactionId and td.TenantId = t.TenantId  and td._sys_is_deleted = false and td.Deleted = false
-where t.Deleted = false
-	and t._sys_is_deleted = false
-	and t.TenantId = '${TenantId}'
+	on td.TransactionId = t.TransactionId and td.TenantId = t.TenantId
+where  t.TenantId = '${TenantId}'
