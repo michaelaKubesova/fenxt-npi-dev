@@ -13,9 +13,6 @@ insert /*+ direct */ into dm_Invoices_attr
 from stg_csv_invoice_merge i
 join stg_csv_user_merge au
 	on i.AddedById = au.UserId and i.TenantId = au.TenantId
-where i.Deleted = false
-	and i._sys_is_deleted = false
-	and au._sys_is_deleted = false
 ;
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Invoices_attr',null,now());
 select analyze_statistics('dm_Invoices_attr')

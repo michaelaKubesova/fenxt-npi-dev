@@ -87,16 +87,10 @@ inner join (
 		,cast(MAX(CASE WHEN wc.StaticEntryId = 3 THEN 1 ELSE 0 END) as boolean) as "CurrentLiability"
 	from stg_csv_Account_merge a
 	left join stg_csv_AccountRatioConfiguration_merge r
-		on a.AccountId = r.AccountId and a.TenantId = r.TenantId and r._sys_is_deleted = false and r.Deleted = false
+		on a.AccountId = r.AccountId and a.TenantId = r.TenantId
 	left join stg_csv_TableEntry_merge wc
-		on a.WorkingCapitalId = wc.TableEntryId and a.TenantId = wc.TenantId and wc._sys_is_deleted = false and wc.Deleted = false
-	where a.Deleted = false
-		and a._sys_is_deleted = false
-
+		on a.WorkingCapitalId = wc.TableEntryId and a.TenantId = wc.TenantId
 	group by a.AccountId, a.AccountCategory, a.TenantId) a on a.AccountId = T.AccountId and A.TenantId = T.TenantId
-where
-	T._sys_is_deleted = false
-	and T.Deleted = false
 group by 
 	 T.PostStatus
 	,T.PostStatusTranslation

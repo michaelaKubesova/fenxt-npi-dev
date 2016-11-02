@@ -16,11 +16,10 @@ cm.TenantId as "TenantId",
 	,GoodData_Attr('cm-'||cm.CreditMemoId) as "PostStatusId"
 from stg_csv_creditmemo_merge cm
 left join stg_csv_fiscalperiod_merge fp
-	on cm.PostDate >= fp.StartDate and cm.PostDate <= fp.EndDate and fp.Deleted = false
+	on cm.PostDate >= fp.StartDate and cm.PostDate <= fp.EndDate
 	and cm.TenantId = fp.TenantId
-where  cm.Deleted = false
-	and cm._sys_is_deleted = false
 ;
+
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_CreditMemos_fact',null,now());
 select analyze_statistics('dm_CreditMemos_fact')
 ;

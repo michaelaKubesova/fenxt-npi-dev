@@ -7,9 +7,7 @@ select distinct
 	,GoodData_Attr(t.UsersId)  as "UserId"
 	,GoodData_Attr(t.BankId) as "BankId"
 from stg_csv_BankUserSecurity_merge t
-where t._sys_is_deleted = false
-	and t.Deleted = false
-	and t.BankId is not null
+where t.BankId is not null
 
 union all
 
@@ -20,9 +18,8 @@ select
 	,GoodData_Attr(UserId)  as "UserId"
 	,GoodData_Attr(-1) as "BankId"
 from stg_csv_User_merge u
-where u._sys_is_deleted = false
-	and u.Deleted = false
 ;
+
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_BankUserSecurity',null,now());
 select analyze_statistics('dm_BankUserSecurity')
 ;

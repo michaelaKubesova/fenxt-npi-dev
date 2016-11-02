@@ -14,7 +14,6 @@ TenantId as "TenantId",
 	,case when length(GrantName) = 0 then 'Grant' else nvl(GrantName,'Grant') end GrantName
 	,cast(DataUpdated as datetime) + Interval ' 1 second' * DATEDIFF(second, GETDATE(), GETUTCDATE()) DataUpdated
 from stg_csv_Tenant_merge
-where _sys_is_deleted = false
 ;
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Tenants',null,now());
 select analyze_statistics('dm_Tenants')
