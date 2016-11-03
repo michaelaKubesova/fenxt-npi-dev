@@ -16,6 +16,19 @@ join stg_csv_budgetscenario_merge bs
 	on bs.BudgetScenarioId = ab.BudgetScenarioId and bs.TenantId = abd.TenantId
 join stg_csv_tableentry_merge te
 	on bs.ScenarioId = te.TableEntryId and te.CodeTableId = 124 and te.TenantId = abd.TenantId
+union all
+select
+    ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
+     a.tenantId  as "TenantId",
+	'0' as "AccountBudgetAmount",
+	GoodData_Attr(a.AccountId)  as "AccountId",
+	GoodData_Attr(FP.Id) as "FiscalPeriodId",
+	GoodData_Attr(a.AccountId || '#' || FP.ID || '#<No budget>') as "AccountBudgetFactId",
+	GoodData_Attr(a.AccountId || '#' || FP.ID || '#<No budget>') as "AccountBudgetAttrId" 
+	,GoodData_Attr(null) as "ScenarioId"
+from stg_csv_account_merge a
+join (select min(FiscalPeriodId) as "Id", TenantId from stg_csv_FiscalPeriod_merge group by TenantId) FP
+on a.TenantId=fp.TenantId
 ;
 
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_AccountBudgets_fact',null,now());

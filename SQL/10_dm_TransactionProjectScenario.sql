@@ -71,6 +71,21 @@ select
 	,GoodData_Attr(t.AccountId) as "AccountId"
 from  stg_csv_SummarizedTransaction_merge t
 
+union all
+
+select 
+     ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
+     t.TenantId as "TenantId",
+	 GoodData_Attr(td.TranDistributionId||'#<No budget>') as "TransactionScenarioId"
+	,GoodData_Attr(NVL(td.ProjectId,-1)) as "ProjectId"
+	,GoodData_Attr(td.TranDistributionId) as "TransactionAttrDistributionId"
+	,GoodData_Attr('<No budget>') as "ScenarioId"
+	,GoodData_Attr(t.FiscalPeriodId) as "FiscalPeriodId"
+	,GoodData_Attr(t.AccountId) as "AccountId"
+from stg_csv_Transaction_merge t
+join stg_csv_TransactionDistribution_merge td
+	on td.TransactionId = t.TransactionId and td.TenantId = t.TenantId
+
 ;
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_TransactionProjectScenario',null,now());
 select analyze_statistics('dm_TransactionProjectScenario')
