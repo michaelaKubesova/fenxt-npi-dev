@@ -20,7 +20,7 @@ select
     ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
     a.tenantId  as "TenantId",
 	GoodData_Attr(a.AccountId || '#' || FP.ID || '#<No budget>') as "AccountBudgetAttrId" ,
-	GoodData_Attr('<No budget>') as "IncorrectScenarioId"
+	GoodData_Attr('<No budget>') as "IncorrectScenarioId",
 	GoodData_Attr('<No budget>') as "ScenarioId" ,
 	GoodData_Attr(a.AccountId || '#' || FP.ID || '#<No budget>') as "AccountBudgetId"
 from stg_csv_account_merge a
