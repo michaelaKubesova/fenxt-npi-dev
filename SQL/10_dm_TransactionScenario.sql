@@ -64,7 +64,6 @@ select
 from stg_csv_Transaction_merge t
 join stg_csv_TransactionDistribution_merge td
 	on td.TransactionId = t.TransactionId and td.TenantId = t.TenantId
-where  t.TenantId = '${TenantId}'
 group by td.TranDistributionId, t.FiscalPeriodId, t.AccountId, t.TenantId
 ;
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_TransactionScenario',null,now());
