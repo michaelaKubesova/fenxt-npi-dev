@@ -26,12 +26,12 @@ union all
 select
     ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
     p.TenantId as "TenantId",
-	'0' as "PeriodAmount",
+	GoodData_Attr(0) as "PeriodAmount",
 	GoodData_Attr(p.ProjectId || '#' || FP.Id || '#<No budget>') as "ProjectBudgetId",
 	GoodData_Attr(0) as "AccountBudgetAttrId",
 	GoodData_Attr(p.ProjectId)  as "ProjectId",
 	GoodData_Attr(null)  as "AccountId",
-	'0' as "ProjectBudgetAmount",
+	GoodData_Attr(0) as "ProjectBudgetAmount",
 	GoodData_Attr(FP.Id)  as "FiscalPeriodId",
 	null as "ScenarioId"
 from stg_csv_project_merge p
