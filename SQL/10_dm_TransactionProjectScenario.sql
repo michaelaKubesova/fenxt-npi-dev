@@ -26,7 +26,7 @@ join (
 	join stg_csv_ProjectBudgetDetail_merge pbd
 		on pbd.ProjectBudgetId = pb.ProjectBudgetId and pbd.TenantId = ab.TenantId
 	where pbd.FiscalPeriodId = abd.FiscalPeriodId
-	group by pb.projectid, ab.AccountId, te.Description, abd.FiscalPeriodId, pb.TenantId) pb on pb.projectid = td.projectid and pb.AccountId = t.AccountId
+	group by pb.projectid, ab.AccountId, te.Description, abd.FiscalPeriodId, pb.TenantId) pb on pb.projectid = td.projectid and pb.AccountId = t.AccountId and pb.TenantId = t.TenantId
 where t.FiscalPeriodId = pb.FiscalPeriodId
 
 union all
@@ -55,7 +55,7 @@ join (
 	join stg_csv_ProjectBudgetDetail_merge pbd
 		on pbd.ProjectBudgetId = pb.ProjectBudgetId and pbd.TenantId = ab.TenantId
 	where  pbd.FiscalPeriodId = abd.FiscalPeriodId
-	group by pb.projectid, ab.AccountId, te.Description, abd.FiscalPeriodId, pb.TenantId) pb on pb.projectid = t.projectid and t.AccountId = t.AccountId
+	group by pb.projectid, ab.AccountId, te.Description, abd.FiscalPeriodId, pb.TenantId) pb on pb.projectid = t.projectid and pb.AccountId = t.AccountId and pb.TenantId = t.TenantId
 
 
 union all
