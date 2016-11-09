@@ -20,7 +20,7 @@ union all
 select
     ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
      a.tenantId  as "TenantId",
-	'0' as "AccountBudgetAmount",
+	cast(0 as decimal(15,2)) as "AccountBudgetAmount",
 	GoodData_Attr(a.AccountId)  as "AccountId",
 	GoodData_Attr(FP.Id) as "FiscalPeriodId",
 	GoodData_Attr(a.AccountId || '#' || FP.ID || '#<No budget>') as "AccountBudgetFactId",
