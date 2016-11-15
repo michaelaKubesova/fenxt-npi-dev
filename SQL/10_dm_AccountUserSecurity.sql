@@ -7,6 +7,7 @@ select
 	,GoodData_Attr(UsersId)  as "UserId"
 	,GoodData_Attr(AccountId) as "AccountId"
 from stg_csv_AccountUserSecurity_merge t
+where Deleted = false
 union all
 
 select

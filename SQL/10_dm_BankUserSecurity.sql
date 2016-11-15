@@ -8,6 +8,7 @@ select distinct
 	,GoodData_Attr(t.BankId) as "BankId"
 from stg_csv_BankUserSecurity_merge t
 where t.BankId is not null
+and Deleted = false
 
 union all
 
