@@ -7,7 +7,7 @@ select
 	GoodData_Attr(UsersId)  as "UserId",
 	GoodData_Attr(ProjectId) as "ProjectId"
 from stg_csv_ProjectUserSecurity_merge t
-where Deleted = false;
+where Deleted = false
 
 union all
 
