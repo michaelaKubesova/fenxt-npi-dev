@@ -1,11 +1,14 @@
 select
  "CheckHistoryId",
- "CheckId",
+ "CheckNumber",
+ "VendorName",
  "FieldChanged",
  "FieldChangedTranslation",
  "OldValue",
  "NewValue",
  "DateChanged",
+ "PostStatus",
+ "BankId",
  "ChangedByUserName"
 from dm_CheckHistory
 where TenantId = '${TenantId}'
