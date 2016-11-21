@@ -4,8 +4,8 @@ select
 ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
 ch.TenantId as "TenantId",
 	 GoodData_Attr(CheckHistoryId) as CheckHistoryId
-	,GoodData_Attr(ch.VendorName) as VendorName
 	,GoodData_Attr(ch.CheckNumber) as CheckNumber
+	,GoodData_Attr(ch.VendorName) as VendorName
 	,GoodData_Attr(ch.FieldChanged) as FieldChanged
 	,GoodData_Attr(ch.FieldChangedTranslation) as FieldChangedTranslation
 	,GoodData_Attr(ch.OldValue) as OldValue
