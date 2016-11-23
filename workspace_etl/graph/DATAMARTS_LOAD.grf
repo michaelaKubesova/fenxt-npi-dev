@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><Graph author="vasek" created="Sat Feb 06 18:03:46 CET 2016" guiVersion="3.4.4.P" id="1456868507661" licenseType="Commercial" modified="Fri Nov 18 15:52:36 EST 2016" modifiedBy="alex.shchetkov" name="DATAMARTS_LOAD_template" revision="1.531" showComponentDetails="true">
+<?xml version="1.0" encoding="UTF-8"?><Graph author="vasek" created="Sat Feb 06 18:03:46 CET 2016" guiVersion="3.4.4.P" id="1456868507661" licenseType="Commercial" modified="Tue Nov 22 09:45:16 EST 2016" modifiedBy="alex.shchetkov" name="DATAMARTS_LOAD_template" revision="1.532" showComponentDetails="true">
 <Global>
 <Metadata id="23" previewAttachmentCharset="ISO-8859-1">
 <Record fieldDelimiter=";" name="AccountBudgets_Attr" previewAttachmentCharset="ISO-8859-1" recordDelimiter="\n" recordSize="-1" type="delimited">
@@ -204,8 +204,8 @@
 <Field name="VendorName" type="string"/>
 <Field eofAsDelimiter="false" name="FieldChanged" nullable="true" shift="0" size="0" type="string"/>
 <Field eofAsDelimiter="false" name="FieldChangedTranslation" nullable="true" shift="0" size="0" type="string"/>
-<Field eofAsDelimiter="false" name="NewValue" nullable="true" shift="0" size="0" type="string"/>
 <Field eofAsDelimiter="false" name="OldValue" nullable="true" shift="0" size="0" type="string"/>
+<Field eofAsDelimiter="false" name="NewValue" nullable="true" shift="0" size="0" type="string"/>
 <Field eofAsDelimiter="false" format="yyyy-MM-dd" name="DateChanged" nullable="true" shift="0" size="0" type="date"/>
 <Field name="PostStatus" type="string"/>
 <Field name="BankId" type="string"/>
