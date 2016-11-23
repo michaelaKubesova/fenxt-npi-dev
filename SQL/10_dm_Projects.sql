@@ -21,18 +21,15 @@ from stg_csv_project_merge p
 join stg_csv_user_merge au
 	on p.AddedById = au.UserId and p.TenantId = au.TenantId
 left join stg_csv_tableentry_merge div
-	on p.DivisionId = div.TableEntryId and p.TenantId = div.TenantId and div.Deleted = false
+	on p.DivisionId = div.TableEntryId and p.TenantId = div.TenantId
 left join stg_csv_tableentry_merge loc
-	on p.LocationId = loc.TableEntryId and p.TenantId = loc.TenantId and loc.Deleted = false
+	on p.LocationId = loc.TableEntryId and p.TenantId = loc.TenantId
 left join stg_csv_tableentry_merge dep
-	on p.DepartmentId = dep.TableEntryId and p.TenantId = dep.TenantId and dep.Deleted = false
+	on p.DepartmentId = dep.TableEntryId and p.TenantId = dep.TenantId
 left join stg_csv_tableentry_merge typ
-	on p.TypeId = typ.TableEntryId and p.TenantId = typ.TenantId and typ.Deleted = false
-where p.Deleted = false
-	and au.Deleted = false
-	and p._sys_is_deleted = false
-	and au._sys_is_deleted = false
+	on p.TypeId = typ.TableEntryId and p.TenantId = typ.TenantId
 ;
+
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Projects',null,now());
 select analyze_statistics('dm_Projects')
 ;

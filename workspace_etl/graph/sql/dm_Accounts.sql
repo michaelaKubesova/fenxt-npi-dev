@@ -3,6 +3,7 @@ select
  "AccountId",
  "AccountNumber",
  GoodData_Attr('{"state":"ledger.account.detail","id":'||AccountId||'}') "AccountNumberHyperlink",
+ AccountDescription "AccountNumberDescriptionLabel",
  "AccountDescription",
  "AccountCategory",
  "AccountCategoryTranslation",

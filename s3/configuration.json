@@ -451,13 +451,23 @@
             }
           }
       },
-	  "SummarizedTransaction":{
+      "SummarizedTransaction": {
+        "global": {
+          "custom": {
+            "hub": [
+              "TenantId",
+              "SummaryId"
+            ]
+          }
+        }
+      },
+      	  "CheckHistory":{
           "global":{
             "custom":{
               "hub": [
                 "TenantId",
-				"SummaryId"
-              ]
+				"CheckHistoryId"
+              ], "is_deleted":  "deleted"
             }
           }
       }
@@ -511,7 +521,8 @@
 			"AccountUserSecurity",
 			"BankUserSecurity",
 			"ProjectUserSecurity",
-			"SummarizedTransaction"
+            "SummarizedTransaction",
+            "CheckHistory"
           ]
       }
     },

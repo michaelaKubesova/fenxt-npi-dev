@@ -33,19 +33,8 @@ join stg_csv_tableentry_merge class
 	on a.ClassId = class.TableEntryId and a.TenantId = class.TenantId
 join stg_csv_accountcode_merge ac
 	on a.AccountCodeId = ac.AccountCodeId and a.TenantId = ac.TenantId
-where a._sys_is_deleted = false
-	and au._sys_is_deleted = false
-	and eu._sys_is_deleted = false
-	and f._sys_is_deleted = false
-	and ac._sys_is_deleted = false
-	and class._sys_is_deleted = false
-	and a.Deleted = false
-	and au.Deleted = false
-	and eu.Deleted = false
-	and f.Deleted = false
-	and ac.Deleted = false
-	and class.Deleted = false
 ;
+
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Accounts',null,now());
 select analyze_statistics('dm_Accounts')
 ;

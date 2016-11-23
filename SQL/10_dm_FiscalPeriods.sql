@@ -24,15 +24,11 @@ join (select
 		,MIN(StartDate) as "StartDate"
 		,MAX(EndDate) as "EndDate"
 	 from stg_csv_fiscalperiod_merge
-	 where Deleted = false
 	 group by FiscalYearId, TenantId) summary on summary.FiscalYearId = fp.FiscalYearId and summary.TenantId = fp.TenantId
 join stg_csv_fiscalyear_merge fy
 	on fp.FiscalYearId = fy.FiscalYearId and fp.TenantId = fy.TenantId
-where fp.Deleted = false
-	and fy.Deleted = false
-	and fp._sys_is_deleted = false
-	and fy._sys_is_deleted = false
 ;
+
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_FiscalPeriods',null,now());
 select analyze_statistics('dm_FiscalPeriods')
 ;

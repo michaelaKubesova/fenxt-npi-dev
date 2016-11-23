@@ -29,15 +29,9 @@ join stg_csv_user_merge au
 join stg_csv_user_merge eu
 	on b.LastChangedById = eu.UserId and b.TenantId = eu.TenantId
 left join stg_csv_user_merge lu
-	on b.LastReconciledById = lu.UserId and b.TenantId = lu.TenantId and lu._sys_is_deleted = false and lu.Deleted = false
-where b.Deleted = false
-	and au.Deleted = false
-	and eu.Deleted = false
-	and b._sys_is_deleted = false
-	and au._sys_is_deleted = false
-	and eu._sys_is_deleted = false
-
+	on b.LastReconciledById = lu.UserId and b.TenantId = lu.TenantId 
 ;
+
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Banks',null,now());
 select analyze_statistics('dm_Banks')
 ;

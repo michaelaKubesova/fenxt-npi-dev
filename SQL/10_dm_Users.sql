@@ -11,8 +11,6 @@ insert /*+ direct */ into dm_Users
 	,au.HasSupervisorRights as "HasSupervisorRights"
 	,au.ViewOnly as "ViewOnly"
 from stg_csv_User_merge au
-where au.Deleted = false
-	and au._sys_is_deleted = false
 ;
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Users',null,now());
 select analyze_statistics('dm_Users')

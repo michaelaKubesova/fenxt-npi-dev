@@ -12,11 +12,9 @@ TenantId as "TenantId",
 	,case when length(ProjectName) = 0 then 'Project' else nvl(ProjectName,'Project') end ProjectName
 	,case when length(FundName) = 0 then 'Fund' else nvl(FundName,'Fund') end FundName
 	,case when length(GrantName) = 0 then 'Grant' else nvl(GrantName,'Grant') end GrantName
-from stg_csv_Tenant_merge 
-where _sys_is_deleted = false
-
-  
+from stg_csv_Tenant_merge   
 ;
+
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_ClientTranslation',null,now());
 select analyze_statistics('dm_ClientTranslation')
 ;

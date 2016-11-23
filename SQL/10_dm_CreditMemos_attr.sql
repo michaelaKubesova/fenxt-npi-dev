@@ -16,12 +16,11 @@ cm.TenantId as "TenantId",
 	,GoodData_Attr(eu.Name) as "ChangedByUserNameLabel"
 from stg_csv_CreditMemo_merge cm
 join stg_csv_User_merge au
-	on cm.AddedById = au.UserId and cm.TenantId = au.TenantId and au._sys_is_deleted = false and au.Deleted = false
+	on cm.AddedById = au.UserId and cm.TenantId = au.TenantId
 join stg_csv_User_merge eu
-	on cm.LastChangedById = eu.UserId and cm.TenantId = eu.TenantId and eu._sys_is_deleted = false and eu.Deleted = false
-where cm._sys_is_deleted = false
-	and cm.Deleted = false
+	on cm.LastChangedById = eu.UserId and cm.TenantId = eu.TenantId
 ;
+
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_CreditMemos_attr',null,now());
 select analyze_statistics('dm_CreditMemos_attr')
 ;

@@ -16,10 +16,6 @@ select
 from stg_csv_transaction_merge t
 join stg_csv_transactiondistribution_merge td
 	on t.TransactionId = td.TransactionId and t.TenantId = td.TenantId
-where t.Deleted = false
-	and td.Deleted = false
-	and t._sys_is_deleted = false
-	and td._sys_is_deleted = false
 
 union all
 
@@ -37,7 +33,6 @@ select
 	,GoodData_Date(null) as "DateAdded"
 	,GoodData_Date(null) as "DateChanged"
 from stg_csv_summarizedtransaction_merge st
-where st._sys_is_deleted = false
 ;
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Transactions_fact',null,now());
 select analyze_statistics('dm_Transactions_fact')

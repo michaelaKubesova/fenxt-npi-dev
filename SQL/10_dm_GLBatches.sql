@@ -19,16 +19,14 @@ select
  	,GoodData_Attr('batch/'||b.BatchId||'?tenantid='||'{$TenantId}') as "BatchHyperlink"
 from stg_csv_GLBatch_merge b
 join stg_csv_User_merge au
-  on b.AddedById = au.UserId and b.TenantId = au.TenantId and au._sys_is_deleted = false and au.Deleted = false
+  on b.AddedById = au.UserId and b.TenantId = au.TenantId
 join stg_csv_User_merge eu
-  on b.LastChangedById = eu.UserId and b.TenantId = eu.TenantId and eu._sys_is_deleted = false and eu.Deleted = false
+  on b.LastChangedById = eu.UserId and b.TenantId = eu.TenantId
 left join stg_csv_User_merge du
-  on b.DeletedById = du.UserId and b.TenantId = du.TenantId and du._sys_is_deleted = false and du.Deleted = false
+  on b.DeletedById = du.UserId and b.TenantId = du.TenantId
 left join stg_csv_User_merge apu
-  on b.ApprovedById = apu.UserId and b.TenantId = apu.TenantId and apu._sys_is_deleted = false and apu.Deleted = false
-where b._sys_is_deleted = false
-	and b.Deleted = false
-	and b.StatusTranslation != 'System Batch'
+  on b.ApprovedById = apu.UserId and b.TenantId = apu.TenantId
+where b.StatusTranslation != 'System Batch'
 ;
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_GLBatches',null,now());
 select analyze_statistics('dm_GLBatches')

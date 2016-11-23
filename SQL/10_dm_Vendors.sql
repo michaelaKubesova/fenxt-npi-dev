@@ -17,9 +17,6 @@ insert /*+ direct */ into dm_Vendors
 from stg_csv_vendor_merge v
 join stg_csv_User_merge au
 	on v.AddedById = au.UserId and v.TenantId = au.TenantId
-where v.Deleted = false
-	and v._sys_is_deleted = false
-	and au._sys_is_deleted = false
 ;
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Vendors',null,now());
 select analyze_statistics('dm_Vendors')

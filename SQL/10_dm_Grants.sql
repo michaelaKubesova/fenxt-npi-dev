@@ -21,14 +21,8 @@ join stg_csv_user_merge au
 	on g.AddedById = au.UserId and g.TenantId = au.TenantId
 join stg_csv_user_merge eu
 	on g.LastChangedById = eu.UserId and g.TenantId = eu.TenantId
-where g._sys_is_deleted = false
-	and g.Deleted = false
-	and au._sys_is_deleted = false
-	and eu._sys_is_deleted = false
-	and au.Deleted = false
-	and eu.Deleted = false
-
 ;
+
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Grants',null,now());
 select analyze_statistics('dm_Grants')
 ;

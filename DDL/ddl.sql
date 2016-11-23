@@ -702,3 +702,51 @@ CREATE TABLE dm_BankReconciliationHistory
           _sys_transform_id
 SEGMENTED BY hash(TenantId) ALL NODES
 PARTITION BY (_sys_transform_id);
+
+
+
+drop table if exists wk_Transactions_TransactionDistribution_Join;
+CREATE TABLE wk_Transactions_TransactionDistribution_Join
+(
+    TenantId varchar(255) encoding rle,
+	TransactionTypeTranslation varchar(255),
+	TAmount varchar(255),
+	Reference varchar(255),
+	JournalId varchar(255),
+	EncumbranceStatus varchar(255),
+	EncumbranceStatusTranslation varchar(255),
+	ReverseDate varchar(255),
+	ReversedTransactionId varchar(255),
+	TransactionNumber varchar(255),
+	SourceRecordId varchar(255),
+	TTransactionId varchar(255),
+	SourceNumber varchar(255),
+	SourceType varchar(255),
+	SourceSystemMask varchar(255),
+	AddedById varchar(255),
+	DateAdded varchar(255),
+	LastChangedById varchar(255),
+	DateChanged varchar(255),
+	TDeleted varchar(255),
+	BatchId varchar(255),
+	PostStatus varchar(255),
+	PostStatusTranslation varchar(255),
+	AccountId varchar(255),
+	PostDate varchar(255),
+	FiscalPeriodId varchar(255),
+	TransactionType varchar(255),
+	TransactionCode3Id varchar(255),
+	TransactionCode4Id varchar(255),
+	TransactionCode5Id varchar(255),
+	GrantId varchar(255),
+	TDDeleted varchar(255),
+	TranDistributionId varchar(255),
+	TDTransactionId varchar(255),
+	Projectid varchar(255),
+	ClassId varchar(255),
+	TDAmount varchar(255),
+	Comment varchar(255),
+	TransactionCode1Id varchar(255),
+	TransactionCode2Id varchar(255)
+)  ORDER BY TenantId
+SEGMENTED BY hash(TenantId) ALL NODES

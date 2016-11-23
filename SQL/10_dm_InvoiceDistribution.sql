@@ -9,11 +9,8 @@ insert /*+ direct */ into dm_InvoiceDistribution
 	,GoodData_attr(nvl(TD.ProjectId, -2)) as "ProjectId"
 from stg_csv_BBDistribution_merge D
 join stg_csv_BBTransactionDistribution_merge TD
-	on D.DistributionId = TD.DistributionId and D.TenantId = TD.TenantId and TD._sys_is_deleted = false and TD.Deleted = false
-where
-	D._sys_is_deleted = false
-	and D.Deleted = false
-	and D.ParentObjectType = 268
+	on D.DistributionId = TD.DistributionId and D.TenantId = TD.TenantId
+where D.ParentObjectType = 268
 	and D.SystemMask = 4
 
 union all
@@ -26,11 +23,8 @@ select
 	,GoodData_attr(nvl(TD.ProjectId, -1)) as "ProjectId"
 from stg_csv_BBDistribution_merge D
 join stg_csv_BBTransactionDistribution_merge TD
-	on D.DistributionId = TD.DistributionId and D.TenantId = TD.TenantId and TD._sys_is_deleted = false and TD.Deleted = false
-where
-	D._sys_is_deleted = false
-	and D.Deleted = false
-	and D.ParentObjectType = 268
+	on D.DistributionId = TD.DistributionId and D.TenantId = TD.TenantId
+where D.ParentObjectType = 268
 	and D.SystemMask = 4
 	and TD.ProjectId is NULL
 ;
