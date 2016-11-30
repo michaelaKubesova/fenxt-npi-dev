@@ -10,8 +10,8 @@ select
  "ProjectName",
  "FundName",
  "GrantName",
- "DataUpdated",
- ' ' as "AccountSegment1Name"
+ "DataUpdated"
+
 from dm_Tenants
 where TenantId = '${TenantId}'
 and _sys_transform_id = ${DM_TENANTS_TRANSFORM_ID}

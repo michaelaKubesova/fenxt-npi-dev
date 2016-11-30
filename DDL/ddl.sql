@@ -373,6 +373,14 @@ CREATE TABLE dm_Accounts
     ChangedByUserName varchar(255),
     ChangedByUserNameLabel varchar(255),
     AccountDateId varchar(255),
+	AccountSegment1 varchar(255),
+	AccountSegment2 varchar(255),
+	AccountSegment3 varchar(255),
+	AccountSegment4 varchar(255),
+	AccountSegment5 varchar(255),
+	AccountSegment6 varchar(255),
+	AccountSegment7 varchar(255),
+	AccountSegment8 varchar(255),
     Dummy varchar(255)
 )  ORDER BY TenantId,
           _sys_transform_id
@@ -578,6 +586,13 @@ CREATE TABLE dm_ClientTranslation
     TransactionCode4Name varchar(255),
     TransactionCode5Name varchar(255),
     AccountSegment1Name varchar(255),
+	AccountSegment2Name varchar(255),
+	AccountSegment3Name varchar(255),
+	AccountSegment4Name varchar(255),
+	AccountSegment5Name varchar(255),
+	AccountSegment6Name varchar(255),
+	AccountSegment7Name varchar(255),
+	AccountSegment8Name varchar(255),
     ProjectName varchar(255),
     FundName varchar(255),
     GrantName varchar(255)
@@ -602,7 +617,15 @@ CREATE TABLE dm_Tenants
     ProjectName varchar(255),
     FundName varchar(255),
     GrantName varchar(255),
-    DataUpdated varchar(255)
+    DataUpdated varchar(255),
+	AccountSegment1Name varchar(255),
+	AccountSegment2Name varchar(255),
+	AccountSegment3Name varchar(255),
+	AccountSegment4Name varchar(255),
+	AccountSegment5Name varchar(255),
+	AccountSegment6Name varchar(255),
+	AccountSegment7Name varchar(255),
+	AccountSegment8Name varchar(255)
 )
  ORDER BY TenantId,
           _sys_transform_id
