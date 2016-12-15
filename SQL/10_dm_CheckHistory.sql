@@ -17,8 +17,6 @@ ch.TenantId as "TenantId",
 from stg_csv_CheckHistory_merge ch
 join stg_csv_User_merge au
 	on ch.ChangedByUserId = au.UserId and ch.TenantId = au.TenantId
-where  ch._sys_is_deleted = false
-	and au._sys_is_deleted = false
 ;
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_CheckHistory',null,now());
 select analyze_statistics('dm_CheckHistory')
