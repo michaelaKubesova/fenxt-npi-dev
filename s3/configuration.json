@@ -413,6 +413,7 @@
             "custom":{
               "hub": [
                 "AccountId",
+                "SegmentId",
                 "TenantId"
               ],"is_deleted":"deleted"
             }
