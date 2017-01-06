@@ -26,6 +26,7 @@ ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
 	,GoodData_Attr(eu.Name) as "LastChangedByUserName"
 	,GoodData_Attr((select class.Description from stg_csv_tableentry_merge class where td.ClassId = class.TableEntryId and t.TenantId = class.TenantId)) as "Class"
 	,GoodData_Attr(t.TransactionId) as "TransactionAttributeId"
+	,GoodData_Attr('false') as "IsBeginningBalance"
 from stg_csv_transaction_merge t
 join stg_csv_transactiondistribution_merge td
 	on td.TransactionId = t.TransactionId and t.TenantId = td.TenantId
@@ -62,6 +63,7 @@ select
 	,GoodData_Attr(null) as "LastChangedByUserName"
 	,GoodData_Attr(t.Class) as "Class"
 	,GoodData_Attr((1000000000000 + t.SummaryId)) as "TransactionAttributeId"
+	,GoodData_Attr('true') as "IsBeginningBalance"
 from stg_csv_summarizedtransaction_merge t
 ;
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Transactions_attr',null,now());
