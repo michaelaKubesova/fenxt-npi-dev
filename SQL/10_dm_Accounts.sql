@@ -21,14 +21,6 @@ a.TenantId as "TenantId",
 	,GoodData_Attr(a.LastChangedByUserId) as "ChangedByUserName"
 	,GoodData_Attr(eu.Name) as "ChangedByUserNameLabel"
 	,GoodData_Attr(a.AccountId) as "AccountDateId"
-	,GoodData_Attr(as.Segment1Value) as "AccountSegment1"
-	,GoodData_Attr(as.Segment2Value) as "AccountSegment2"
-	,GoodData_Attr(as.Segment3Value) as "AccountSegment3"
-	,GoodData_Attr(as.Segment4Value) as "AccountSegment4"
-	,GoodData_Attr(as.Segment5Value) as "AccountSegment5"
-	,GoodData_Attr(as.Segment6Value) as "AccountSegment6"
-	,GoodData_Attr(as.Segment7Value) as "AccountSegment7"
-	,GoodData_Attr(as.Segment8Value) as "AccountSegment8"
 	,GoodData_Attr(1) as "Dummy"
 from stg_csv_account_merge a
 join stg_csv_user_merge au
@@ -41,7 +33,6 @@ join stg_csv_tableentry_merge class
 	on a.ClassId = class.TableEntryId and a.TenantId = class.TenantId
 join stg_csv_accountcode_merge ac
 	on a.AccountCodeId = ac.AccountCodeId and a.TenantId = ac.TenantId
-join stg_csv_AccountSegmentValue_merge as  and a.TenantId = as.TenantId
 ;
 
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Accounts',null,now());
