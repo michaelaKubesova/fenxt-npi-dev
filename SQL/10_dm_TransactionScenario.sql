@@ -9,14 +9,16 @@ ab.TenantId as "TenantId",
 	,GoodData_Attr(t.FiscalPeriodId) as "FiscalPeriodId"
 	,GoodData_Attr(t.AccountId) as "AccountId"
 from stg_csv_AccountBudget_merge ab
-join stg_csv_AccountBudgetDetail_merge abd
-	on ab.AccountBudgetId = abd.AccountBudgetId
+--join stg_csv_AccountBudgetDetail_merge abd
+--	on ab.AccountBudgetId = abd.AccountBudgetId and ab.TenantId = abd.TenantId
 join stg_csv_budgetscenario_merge bs
 	on bs.BudgetScenarioId = ab.BudgetScenarioId and bs.TenantId = ab.TenantId
 join stg_csv_tableentry_merge te
 	on bs.ScenarioId = te.TableEntryId and te.CodeTableId = 124 and te.TenantId = ab.TenantId
 join stg_csv_Transaction_merge t
-	on t.AccountId = ab.AccountId and t.FiscalPeriodId = abd.FiscalPeriodId and t.TenantId = ab.TenantId
+	on t.AccountId = ab.AccountId 
+	--and t.FiscalPeriodId = abd.FiscalPeriodId 
+	and t.TenantId = ab.TenantId
 join stg_csv_TransactionDistribution_merge td
 	on td.TransactionId = t.TransactionId and td.TenantId = ab.TenantId
 group by te.Description, td.TranDistributionId, t.FiscalPeriodId, t.AccountId, ab.TenantId
@@ -32,14 +34,16 @@ select
 	,GoodData_Attr(t.FiscalPeriodId) as "FiscalPeriodId"
 	,GoodData_Attr(t.AccountId) as "AccountId"
 from stg_csv_AccountBudget_merge ab
-join stg_csv_AccountBudgetDetail_merge abd
-	on ab.AccountBudgetId = abd.AccountBudgetId
+--join stg_csv_AccountBudgetDetail_merge abd
+--	on ab.AccountBudgetId = abd.AccountBudgetId and ab.TenantId = abd.TenantId
 join stg_csv_budgetscenario_merge bs
 	on bs.BudgetScenarioId = ab.BudgetScenarioId and bs.TenantId = ab.TenantId
 join stg_csv_tableentry_merge te
 	on bs.ScenarioId = te.TableEntryId and te.CodeTableId = 124 and te.TenantId = ab.TenantId
 join stg_csv_SummarizedTransaction_merge t
-	on t.AccountId = ab.AccountId and t.FiscalPeriodId = abd.FiscalPeriodId and t.TenantId = ab.TenantId
+	on t.AccountId = ab.AccountId 
+	--and t.FiscalPeriodId = abd.FiscalPeriodId 
+	and t.TenantId = ab.TenantId
 group by te.Description, t.SummaryId, t.FiscalPeriodId, t.AccountId, ab.TenantId
 
 union all
