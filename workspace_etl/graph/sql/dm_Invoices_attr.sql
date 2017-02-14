@@ -1,7 +1,8 @@
 select
  "InvoiceId",
  "InvoiceNumber",
- "Description",
+ InvoiceId as "DescriptionLabel",
+ Description as "DescriptionLabel",
  "StatusTranslation",
  "AddedByUserName",
  "AddedByUserNameLabel",

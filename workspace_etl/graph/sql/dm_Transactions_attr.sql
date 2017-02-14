@@ -22,7 +22,8 @@ select
  "AddedByUserName",
  "LastChangedByUserName",
  "Class",
- "TransactionAttributeId"
+ "TransactionAttributeId",
+ "IsBeginningBalance"
 from dm_Transactions_attr
 where TenantId = '${TenantId}'
 and _sys_transform_id = ${DM_TRANSACTIONS_ATTR_TRANSFORM_ID}
