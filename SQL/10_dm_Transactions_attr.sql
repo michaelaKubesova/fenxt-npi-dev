@@ -4,32 +4,30 @@ select
 ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
 	t.TenantId as "TenantId",
 	 GoodData_Attr(t.PostStatusTranslation) as "PostStatusTranslation"
-	,GoodData_date(t.PostDate)  as "PostDate"
+	,t.PostDate  as "PostDate"
 	,GoodData_Attr(t.TransactionTypeTranslation) as "TransactionTypeTranslation"
 	,GoodData_Attr(t.EncumbranceStatusTranslation) as "EncumbranceStatusTranslation"
-	,GoodData_Attr((select tc1.Description from stg_csv_tableentry_merge tc1 where td.TransactionCode1Id = tc1.TableEntryId and t.TenantId = tc1.TenantId)) as "TransactionCode1"
-	,case when (select tc1.IsActive from stg_csv_tableentry_merge tc1 where td.TransactionCode1Id = tc1.TableEntryId and t.TenantId = tc1.TenantId ) then 'Active' else 'Inactive' end as "TransactionCode1IsActive"
-	,GoodData_Attr((select tc2.Description from stg_csv_tableentry_merge tc2 where td.TransactionCode2Id = tc2.TableEntryId and t.TenantId = tc2.TenantId )) as "TransactionCode2"
-	,case when (select tc2.IsActive from stg_csv_tableentry_merge tc2 where td.TransactionCode2Id = tc2.TableEntryId and t.TenantId = tc2.TenantId ) then 'Active' else 'Inactive' end as "TransactionCode2IsActive"
-	,GoodData_Attr((select tc3.Description from stg_csv_tableentry_merge tc3 where td.TransactionCode3Id = tc3.TableEntryId and t.TenantId = tc3.TenantId )) as "TransactionCode3"
-	,case when (select tc3.IsActive from stg_csv_tableentry_merge tc3 where td.TransactionCode3Id = tc3.TableEntryId and t.TenantId = tc3.TenantId ) then 'Active' else 'Inactive' end as "TransactionCode3IsActive"
-	,GoodData_Attr((select tc4.Description from stg_csv_tableentry_merge tc4 where td.TransactionCode4Id = tc4.TableEntryId and t.TenantId = tc4.TenantId )) as "TransactionCode4"
-	,case when (select tc4.IsActive from stg_csv_tableentry_merge tc4 where td.TransactionCode4Id = tc4.TableEntryId and t.TenantId = tc4.TenantId ) then 'Active' else 'Inactive' end as "TransactionCode4IsActive"
-	,GoodData_Attr((select tc5.Description from stg_csv_tableentry_merge tc5 where td.TransactionCode5Id = tc5.TableEntryId and t.TenantId = tc5.TenantId )) as "TransactionCode5"
-	,case when (select tc5.IsActive from stg_csv_tableentry_merge tc5 where td.TransactionCode5Id = tc5.TableEntryId and t.TenantId = tc5.TenantId ) then 'Active' else 'Inactive' end as "TransactionCode5IsActive"
-	,GoodData_date(t.DateAdded)  as "DateAdded"
-	,GoodData_date(t.DateChanged)  as "DateChanged"
-	,GoodData_Attr(td.TranDistributionId) as "TransactionAttrDistributionId"
-	,GoodData_Attr(t.TransactionId) as "TransactionId"
+	,t.TransactionCode1Id as "TransactionCode1"
+	,t.TransactionCode1IsActive as "TransactionCode1IsActive"
+	,t.TransactionCode2Id as "TransactionCode2"
+	,t.TransactionCode2IsActive as "TransactionCode2IsActive"
+	,t.TransactionCode3Id as "TransactionCode3"
+	,t.TransactionCode3IsActive as "TransactionCode3IsActive"
+	,t.TransactionCode4Id as "TransactionCode4"
+	,t.TransactionCode4IsActive as "TransactionCode4IsActive"
+	,t.TransactionCode5Id as "TransactionCode5"
+	,t.TransactionCode5IsActive as "TransactionCode5IsActive"
+	,t.DateAdded  as "DateAdded"
+	,t.DateChanged  as "DateChanged"
+	,GoodData_Attr(t.TranDistributionId) as "TransactionAttrDistributionId"
+	,GoodData_Attr(t.TTransactionId) as "TransactionId"
 	,GoodData_Attr(t.AddedById) as "AddedByUserNameId"
 	,GoodData_Attr(au.Name) as "AddedByUserName"
 	,GoodData_Attr(eu.Name) as "LastChangedByUserName"
-	,GoodData_Attr((select class.Description from stg_csv_tableentry_merge class where td.ClassId = class.TableEntryId and t.TenantId = class.TenantId)) as "Class"
-	,GoodData_Attr(t.TransactionId) as "TransactionAttributeId"
+	,GoodData_Attr((select class.Description from stg_csv_tableentry_merge class where t.ClassId = class.TableEntryId and t.TenantId = class.TenantId)) as "Class"
+	,GoodData_Attr(t.TTransactionId) as "TransactionAttributeId"
 	,GoodData_Attr('false') as "IsBeginningBalance"
-from stg_csv_transaction_merge t
-join stg_csv_transactiondistribution_merge td
-	on td.TransactionId = t.TransactionId and t.TenantId = td.TenantId
+from wk_Transactions_TransactionDistribution_join t
 join stg_csv_user_merge au
 	on t.AddedById = au.UserId and t.TenantId = au.TenantId 
 join stg_csv_user_merge eu
@@ -41,7 +39,7 @@ select
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
 	t.TenantId as "TenantId",
 	 GoodData_Attr(t.PostStatusTranslation) as "PostStatusTranslation"
-	,GoodData_date(t.PostDate)  as "PostDate"
+	,cast(t.PostDate as varchar(255))  as "PostDate"
 	,GoodData_Attr(t.TransactionTypeTranslation) as "TransactionTypeTranslation"
 	,GoodData_Attr(t.EncumbranceStatusTranslation) as "EncumbranceStatusTranslation"
 ,GoodData_Attr((select tc1.Description from stg_csv_tableentry_merge tc1 where t.TransactionCode1 = cast(tc1.TableEntryId as varchar) and t.TenantId = tc1.TenantId )) as "TransactionCode1"
@@ -54,8 +52,8 @@ select
 	,case when (select tc4.IsActive from stg_csv_tableentry_merge tc4 where t.TransactionCode4 = cast(tc4.TableEntryId as varchar) and t.TenantId = tc4.TenantId ) then 'Active' else 'Inactive' end as "TransactionCode4IsActive"
 	,GoodData_Attr((select tc5.Description from stg_csv_tableentry_merge tc5 where t.TransactionCode5 = cast(tc5.TableEntryId as varchar) and t.TenantId = tc5.TenantId )) as "TransactionCode5"
 	,case when (select tc5.IsActive from stg_csv_tableentry_merge tc5 where t.TransactionCode5 = cast(tc5.TableEntryId as varchar) and t.TenantId = tc5.TenantId ) then 'Active' else 'Inactive' end as "TransactionCode5IsActive"
-	,GoodData_date(null)  as "DateAdded"
-	,GoodData_date(null)  as "DateChanged"
+	,cast(null as varchar(255))  as "DateAdded"
+	,cast(null as varchar(255))  as "DateChanged"
 	,GoodData_Attr((1000000000000 + t.SummaryId)) as "TransactionAttrDistributionId"
 	,GoodData_Attr((1000000000000 + t.SummaryId)) as "TransactionId"
 	,GoodData_Attr(null) as "AddedByUserNameId"
