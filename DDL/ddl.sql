@@ -772,4 +772,20 @@ CREATE TABLE wk_Transactions_TransactionDistribution_Join
 	TransactionCode1Id varchar(255),
 	TransactionCode2Id varchar(255)
 )  ORDER BY TenantId
-SEGMENTED BY hash(TenantId) ALL NODES
+SEGMENTED BY hash(TenantId) ALL NODES;
+
+drop table if exists wk_PB_PBD_AB_ABD_BS_TE_join;
+CREATE TABLE "wk_PB_PBD_AB_ABD_BS_TE_join"
+(
+   TenantId varchar(255),
+   PeriodAmount varchar(255),
+   ProjectBudgetId varchar(255),
+   AccountBudgetAttrId varchar(255),
+   ProjectId varchar(255),
+   AccountId varchar(255),
+   ProjectBudgetAmount varchar(255),
+   FiscalPeriodId varchar(255),
+   ScenarioId varchar(255)
+) ORDER BY TenantId          
+SEGMENTED BY hash(TenantId) ALL NODES;
+
