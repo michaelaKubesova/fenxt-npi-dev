@@ -1,5 +1,3 @@
---delete from wk_FiscalPeriod_Scenario_Join;
-truncate table wk_FiscalPeriod_Scenario_Join;
 insert /*+ direct */ into wk_FiscalPeriod_Scenario_Join
 select pb.TenantId, 
 pb.projectid, 
