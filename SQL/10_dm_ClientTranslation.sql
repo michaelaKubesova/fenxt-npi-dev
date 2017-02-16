@@ -8,7 +8,6 @@ TenantId as "TenantId",
 	,case when length(TransactionCode3Name) = 0 then 'TransactionCode3' else nvl(TransactionCode3Name,'TransactionCode3') end TransactionCode3Name
 	,case when length(TransactionCode4Name) = 0 then 'TransactionCode4' else nvl(TransactionCode4Name,'TransactionCode4') end TransactionCode4Name
 	,case when length(TransactionCode5Name) = 0 then 'TransactionCode5' else nvl(TransactionCode5Name,'TransactionCode5') end TransactionCode5Name
-	,case when length(AccountSegment1Name) = 0 then 'AccountSegment1' else nvl(AccountSegment1Name,'AccountSegment1') end AccountSegment1Name
 	,case when length(ProjectName) = 0 then 'Project' else nvl(ProjectName,'Project') end ProjectName
 	,case when length(FundName) = 0 then 'Fund' else nvl(FundName,'Fund') end FundName
 	,case when length(GrantName) = 0 then 'Grant' else nvl(GrantName,'Grant') end GrantName
