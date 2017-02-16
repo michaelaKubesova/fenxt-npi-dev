@@ -4,14 +4,6 @@ select
  "TransactionCode3Name",
  "TransactionCode4Name",
  "TransactionCode5Name",
- "AccountSegment1Name",
- "AccountSegment2Name",
- "AccountSegment3Name",
- "AccountSegment4Name",
- "AccountSegment5Name",
- "AccountSegment6Name",
- "AccountSegment7Name",
- "AccountSegment8Name",
  "ProjectName",
  "FundName",
  "GrantName"
@@ -25,14 +17,6 @@ select
 	,'TransactionCode3' TransactionCode3Name
 	,'TransactionCode4' TransactionCode4Name
 	,'TransactionCode5' TransactionCode5Name
-	,'AccountSegment1Name' "AccountSegment1Name",
-	 'AccountSegment2Name' "AccountSegment2Name",
-	 'AccountSegment3Name' "AccountSegment3Name",
-	 'AccountSegment4Name' "AccountSegment4Name",
-	 'AccountSegment5Name' "AccountSegment5Name",
-	 'AccountSegment6Name' "AccountSegment6Name",
-	 'AccountSegment7Name' "AccountSegment7Name",
-	 'AccountSegment8Name' "AccountSegment8Name"
 	,'Project' ProjectName
 	,'Fund' FundName
 	,'Grant' GrantName
