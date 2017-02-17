@@ -21,7 +21,8 @@ select
  "ChangedByUserName",
  "ChangedByUserNameLabel",
  "AccountDateId",
- "Dummy"
+ "Dummy",
+ AccountDescription as "AccountDescriptionUniqueLabel"
 from dm_Accounts
 where TenantId = '${TenantId}'
 and _sys_transform_id = ${DM_ACCOUNTS_TRANSFORM_ID}

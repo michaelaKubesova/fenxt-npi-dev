@@ -17,7 +17,7 @@ union all
 select
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
 	D.TenantId as "TenantId",
-	 GoodData_attr(TD.TransactionDistributionId||0) as "InvoiceDistributionId"
+	 GoodData_attr(TD.TransactionDistributionId||'#'||0) as "InvoiceDistributionId"
 	,GoodData_attr(D.ParentId) as "InvoiceId"
 	,GoodData_attr(D.AccountsId) as "AccountId"
 	,GoodData_attr(nvl(TD.ProjectId, -1)) as "ProjectId"
