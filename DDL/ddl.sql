@@ -317,7 +317,8 @@ CREATE TABLE dm_Transactions_attr
     AddedByUserName varchar(255),
     LastChangedByUserName varchar(255),
     Class varchar(255),
-    TransactionAttributeId varchar(255)
+    TransactionAttributeId varchar(255),
+	IsBeginningBalance varchar(10)
 )  ORDER BY TenantId,
           _sys_transform_id
 SEGMENTED BY hash(TenantId) ALL NODES
