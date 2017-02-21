@@ -1,3 +1,4 @@
+truncate table wk_PB_PBD_AB_ABD_BS_TE_join;
 insert /*+ direct */ into wk_PB_PBD_AB_ABD_BS_TE_join
 select 
 pb.TenantId as "TenantId",

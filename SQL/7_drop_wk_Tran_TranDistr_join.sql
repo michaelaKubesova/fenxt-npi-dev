@@ -1,3 +1,0 @@
-truncate table wk_Transactions_TransactionDistribution_Join;
-truncate table wk_PB_PBD_AB_ABD_BS_TE_join;
-truncate table wk_FiscalPeriod_Scenario_Join;

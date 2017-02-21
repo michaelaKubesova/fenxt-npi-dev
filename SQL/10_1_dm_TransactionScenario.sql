@@ -2,7 +2,7 @@ INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID
 insert /*+ direct */ into dm_TransactionScenario
 select 
 ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
-ab.TenantId as "TenantId",
+t.TenantId as "TenantId",
 	 GoodData_Attr(t.TranDistributionId||'#'||te.Description) as "TransactionScenarioId"
 	,GoodData_Attr(t.TranDistributionId) as "TransactionDistributionId"
 	,GoodData_Attr(te.Description) as "ScenarioId"
@@ -15,13 +15,13 @@ join stg_csv_tableentry_merge te
 	on bs.ScenarioId = te.TableEntryId and te.CodeTableId = 124 and te.TenantId = ab.TenantId
 join wk_Transactions_TransactionDistribution_join t
 	on t.AccountId = ab.AccountId and t.TenantId = ab.TenantId
-group by te.Description, t.TranDistributionId, t.FiscalPeriodId, t.AccountId, ab.TenantId
+group by te.Description, t.TranDistributionId, t.FiscalPeriodId, t.AccountId, t.TenantId
 
 union all
 
 select 
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
-	ab.TenantId as "TenantId",
+	t.TenantId as "TenantId",
 	 GoodData_Attr((1000000000000 + t.SummaryId)||'#'||te.Description) as "TransactionScenarioId"
 	,GoodData_Attr((1000000000000 + t.SummaryId)) as "TransactionDistributionId"
 	,GoodData_Attr(te.Description) as "ScenarioId"
@@ -34,7 +34,7 @@ join stg_csv_tableentry_merge te
 	on bs.ScenarioId = te.TableEntryId and te.CodeTableId = 124 and te.TenantId = ab.TenantId
 join stg_csv_SummarizedTransaction_merge t
 	on t.AccountId = ab.AccountId and t.TenantId = ab.TenantId
-group by te.Description, t.SummaryId, t.FiscalPeriodId, t.AccountId, ab.TenantId
+group by te.Description, t.SummaryId, t.FiscalPeriodId, t.AccountId, t.TenantId
 
 union all
 
