@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><Graph author="vasek" created="Sat Feb 06 18:03:46 CET 2016" guiVersion="3.4.4.P" id="1456868507661" licenseType="Commercial" modified="Thu Feb 16 14:51:55 EST 2017" modifiedBy="alex.shchetkov" name="DATAMARTS_LOAD_template" revision="1.570" showComponentDetails="true">
+<?xml version="1.0" encoding="UTF-8"?><Graph author="vasek" created="Sat Feb 06 18:03:46 CET 2016" guiVersion="3.4.4.P" id="1456868507661" licenseType="Commercial" modified="Fri Feb 24 13:13:54 EST 2017" modifiedBy="alex.shchetkov" name="DATAMARTS_LOAD_template" revision="1.571" showComponentDetails="true">
 <Global>
 <Metadata id="23" previewAttachmentCharset="ISO-8859-1">
 <Record fieldDelimiter=";" name="AccountBudgets_Attr" previewAttachmentCharset="ISO-8859-1" recordDelimiter="\n" recordSize="-1" type="delimited">
@@ -793,15 +793,15 @@ $out.0.maql=''+
 'ALTER ATTRIBUTE {attr.transactions_attr.transactions3isactive} VISUAL(TITLE "'+$in.0.TransactionCode3Name+' status", DESCRIPTION "");'+
 'ALTER ATTRIBUTE {attr.transactions_attr.transactions4isactive} VISUAL(TITLE "'+$in.0.TransactionCode4Name+' status", DESCRIPTION "");'+
 'ALTER ATTRIBUTE {attr.transactions_attr.transactions5isactive} VISUAL(TITLE "'+$in.0.TransactionCode5Name+' status", DESCRIPTION "");'+
-'ALTER ATTRIBUTE {attr.projects.description} VISUAL(TITLE "'+$in.0.ProjectName+' : Description", DESCRIPTION "");'+
+'ALTER ATTRIBUTE {attr.projects.description} VISUAL(TITLE "'+$in.0.ProjectName+' description", DESCRIPTION "");'+
 'ALTER ATTRIBUTE {attr.project_date.projectdateid} VISUAL(TITLE "'+$in.0.ProjectName+' Date : ID", DESCRIPTION "");'+
-'ALTER ATTRIBUTE {attr.projects.projecttype} VISUAL(TITLE "'+$in.0.ProjectName+' : Type", DESCRIPTION "");'+
-'ALTER ATTRIBUTE {attr.projects.addedbyusername} VISUAL(TITLE "'+$in.0.ProjectName+' : Added by username", DESCRIPTION "");'+
-'ALTER ATTRIBUTE {attr.projects.department} VISUAL(TITLE "'+$in.0.ProjectName+' : Department", DESCRIPTION "");'+
-'ALTER ATTRIBUTE {attr.projects.division} VISUAL(TITLE "'+$in.0.ProjectName+' : Division", DESCRIPTION "");'+
+'ALTER ATTRIBUTE {attr.projects.projecttype} VISUAL(TITLE "'+$in.0.ProjectName+' type", DESCRIPTION "");'+
+'ALTER ATTRIBUTE {attr.projects.addedbyusername} VISUAL(TITLE "'+$in.0.ProjectName+' added by username", DESCRIPTION "");'+
+'ALTER ATTRIBUTE {attr.projects.department} VISUAL(TITLE "'+$in.0.ProjectName+' department", DESCRIPTION "");'+
+'ALTER ATTRIBUTE {attr.projects.division} VISUAL(TITLE "'+$in.0.ProjectName+' division", DESCRIPTION "");'+
 'ALTER ATTRIBUTE {attr.projects.projectid} VISUAL(TITLE "'+$in.0.ProjectName+' : DB ID", DESCRIPTION "");'+
-'ALTER ATTRIBUTE {attr.projects.location} VISUAL(TITLE "'+$in.0.ProjectName+' : Location", DESCRIPTION "");'+
-'ALTER ATTRIBUTE {attr.projects.projectuserid} VISUAL(TITLE "'+$in.0.ProjectName+' : ID", DESCRIPTION "");'+
+'ALTER ATTRIBUTE {attr.projects.location} VISUAL(TITLE "'+$in.0.ProjectName+' location", DESCRIPTION "");'+
+'ALTER ATTRIBUTE {attr.projects.projectuserid} VISUAL(TITLE "'+$in.0.ProjectName+' ID", DESCRIPTION "");'+
 'ALTER ATTRIBUTE {attr.projects.projectstatus} VISUAL(TITLE "'+$in.0.ProjectName+' status", DESCRIPTION "");'+
 'ALTER ATTRIBUTE {attr.accounts.funddescription} VISUAL(TITLE "'+$in.0.FundName+'", DESCRIPTION "");'+
 'ALTER ATTRIBUTE {attr.grants.grantid} VISUAL(TITLE "'+$in.0.GrantName+' : ID", DESCRIPTION "");'+
