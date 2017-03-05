@@ -319,7 +319,6 @@ CREATE TABLE dm_Transactions_attr
     Class varchar(255),
     TransactionAttributeId varchar(255),
 	IsBeginningBalance varchar(10)
-
 )  ORDER BY TenantId,
           _sys_transform_id
 SEGMENTED BY hash(TenantId) ALL NODES
@@ -375,14 +374,6 @@ CREATE TABLE dm_Accounts
     ChangedByUserName varchar(255),
     ChangedByUserNameLabel varchar(255),
     AccountDateId varchar(255),
-	AccountSegment1 varchar(255),
-	AccountSegment2 varchar(255),
-	AccountSegment3 varchar(255),
-	AccountSegment4 varchar(255),
-	AccountSegment5 varchar(255),
-	AccountSegment6 varchar(255),
-	AccountSegment7 varchar(255),
-	AccountSegment8 varchar(255),
     Dummy varchar(255)
 )  ORDER BY TenantId,
           _sys_transform_id
