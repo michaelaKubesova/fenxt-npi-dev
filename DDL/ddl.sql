@@ -722,7 +722,7 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop table if exists wk_Transactions_TransactionDistribution_Join;
+drop table if exists wk_Transactions_TransactionDistribution_Join cascade;
 CREATE TABLE wk_Transactions_TransactionDistribution_Join
 (
     TenantId varchar(255) encoding rle,
@@ -748,12 +748,75 @@ CREATE TABLE wk_Transactions_TransactionDistribution_Join
     TransactionCode3Id int,
     TransactionCode4Id int,
     TransactionCode5Id int
-) order by TenantId,AccountId,FiscalPeriodId,TranDistributionId,Projectid
-segmented by hash(TenantId,AccountId,FiscalPeriodId,TranDistributionId) all nodes;
+)  ORDER BY TenantId,
+          AccountId,
+          Projectid,
+          FiscalPeriodId
+SEGMENTED BY hash(TenantId) ALL NODES;
+
+CREATE PROJECTION wk_Transactions_TransactionDistribution_Join_agg
+(
+ TenantId ENCODING RLE,
+ AccountId ENCODING RLE,
+ FiscalPeriodId ENCODING RLE,
+ TranDistributionId
+)
+AS
+ SELECT TenantId,
+        AccountId,
+        FiscalPeriodId,
+        TranDistributionId
+ FROM wk_Transactions_TransactionDistribution_Join
+ ORDER BY TenantId, AccountId, FiscalPeriodId, TranDistributionId
+SEGMENTED BY hash(TenantId, AccountId, FiscalPeriodId, TranDistributionId) ALL NODES;
+
+CREATE PROJECTION wk_Transactions_TransactionDistribution_Join_attr
+(
+ TenantId ENCODING RLE,
+ TransactionTypeTranslation,
+ EncumbranceStatusTranslation,
+ AddedById,
+ DateAdded,
+ LastChangedById,
+ DateChanged,
+ PostStatusTranslation,
+ PostDate,
+ TransactionId,
+ TranDistributionId,
+ ClassId,
+ TransactionCode1Id,
+ TransactionCode2Id,
+ TransactionCode3Id,
+ TransactionCode4Id,
+ TransactionCode5Id
+)
+AS
+ SELECT TenantId,
+        TransactionTypeTranslation,
+        EncumbranceStatusTranslation,
+        AddedById,
+        DateAdded,
+        LastChangedById,
+        DateChanged,
+        PostStatusTranslation,
+        PostDate,
+        TransactionId,
+        TranDistributionId,
+        ClassId,
+        TransactionCode1Id,
+        TransactionCode2Id,
+        TransactionCode3Id,
+        TransactionCode4Id,
+        TransactionCode5Id
+ FROM wk_Transactions_TransactionDistribution_Join
+ ORDER BY TenantId,AddedById,LastChangedById,
+          TransactionCode1Id,TransactionCode2Id,TransactionCode3Id,TransactionCode4Id,TransactionCode5Id,ClassId
+SEGMENTED BY hash(TenantId) ALL NODES;
 
 
 drop table if exists wk_PB_PBD_AB_ABD_BS_TE_join;
-CREATE TABLE "wk_PB_PBD_AB_ABD_BS_TE_join"
+/*
+CREATE TABLE wk_PB_PBD_AB_ABD_BS_TE_join
 (
    TenantId varchar(255),
    PeriodAmount varchar(255),
@@ -766,4 +829,49 @@ CREATE TABLE "wk_PB_PBD_AB_ABD_BS_TE_join"
    ScenarioId varchar(255)
 ) ORDER BY TenantId          
 SEGMENTED BY hash(TenantId) ALL NODES;
+*/
+
+drop TABLE if exists wk_FiscalPeriod_Scenario_Join;
+CREATE TABLE wk_FiscalPeriod_Scenario_Join
+(
+    TenantId varchar(255) encoding rle,
+    ProjectId int,
+    AccountId int,
+    ScenarioId varchar(255),
+    FiscalPeriodId int
+) order by TenantId,AccountId,ProjectId,FiscalPeriodId
+SEGMENTED BY hash(TenantId) ALL NODES;
+
+
+drop TABLE if exists wk_AccountBudgetScenario cascade;
+CREATE TABLE wk_AccountBudgetScenario
+(
+    TenantId varchar(255) encoding rle,
+    AccountId int,
+    AccountBudgetId int,
+    CodeTableId int,
+    ScenarioId varchar(255)
+) ORDER BY TenantId,
+           AccountBudgetId,
+           AccountId
+UNSEGMENTED ALL NODES;
+
+CREATE PROJECTION wk_AccountBudgetScenario_account
+(
+ TenantId encoding rle,
+ AccountId,
+ AccountBudgetId,
+ CodeTableId,
+ ScenarioId
+)
+AS
+ SELECT TenantId,
+        AccountId,
+        AccountBudgetId,
+        CodeTableId,
+        ScenarioId
+ FROM wk_AccountBudgetScenario
+ ORDER BY TenantId,
+          AccountId
+UNSEGMENTED ALL NODES;
 

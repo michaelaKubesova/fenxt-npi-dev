@@ -27,3 +27,4 @@ select
 from stg_csv_transaction_merge t
 join stg_csv_transactiondistribution_merge td
 	on td.TransactionId = t.TransactionId and t.TenantId = td.TenantId;
+select analyze_statistics('wk_Transactions_TransactionDistribution_Join');
