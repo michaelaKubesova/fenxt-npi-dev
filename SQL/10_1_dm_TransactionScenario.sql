@@ -12,9 +12,8 @@ from wk_AccountBudgetScenario abs
 join wk_Transactions_TransactionDistribution_join t
 	on t.AccountId = abs.AccountId and t.TenantId = abs.TenantId and abs.CodeTableId = 124
 group by abs.ScenarioId, t.TranDistributionId, t.FiscalPeriodId, t.AccountId, t.TenantId
-
-union all
-
+;
+insert /*+ direct */ into dm_TransactionScenario
 select 
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id
 	,t.TenantId as "TenantId"
@@ -27,9 +26,8 @@ from wk_AccountBudgetScenario abs
 join stg_csv_SummarizedTransaction_merge t
 	on t.AccountId = abs.AccountId and t.TenantId = abs.TenantId and  abs.CodeTableId = 124
 group by abs.ScenarioId, t.SummaryId, t.FiscalPeriodId, t.AccountId, t.TenantId
-
-union all
-
+;
+insert /*+ direct */ into dm_TransactionScenario
 select 
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
 	t.TenantId as "TenantId",
@@ -40,9 +38,8 @@ select
 	,GoodData_Attr(t.AccountId) as "AccountId"
 from stg_csv_SummarizedTransaction_merge t
 group by t.SummaryId, t.FiscalPeriodId, t.AccountId, t.TenantId
-
-union all
-
+;
+insert /*+ direct */ into dm_TransactionScenario
 select 
      ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
      t.TenantId as "TenantId",

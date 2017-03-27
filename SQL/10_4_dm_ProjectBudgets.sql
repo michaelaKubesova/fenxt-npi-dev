@@ -1,6 +1,6 @@
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_ProjectBudgets',now(),null);
 insert /*+ direct */ into dm_ProjectBudgets
-select distinct 
+select --distinct 
      ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id
     ,pb.TenantId as "TenantId"
 	,cast(pbd.Amount as decimal(15,2)) as "PeriodAmount"
@@ -18,7 +18,8 @@ join wk_AccountBudgetScenario abs
 	on pb.AccountBudgetId = abs.AccountBudgetId and pb.TenantId = abs.TenantId
 join stg_csv_ProjectBudgetDetail_merge pbd
 	on pb.ProjectBudgetId = pbd.ProjectBudgetId and pb.TenantId = pbd.TenantId
-union all
+;
+insert /*+ direct */ into dm_ProjectBudgets
 select
     ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
     p.TenantId as "TenantId",
