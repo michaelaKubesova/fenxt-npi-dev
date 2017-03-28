@@ -12,7 +12,10 @@ SELECT
     "FiscalYearStart_sort",
     "FiscalYearEnd",
     "FiscalYearEnd" AS FiscalYearEnd_Datedim,
-    "FiscalDate"
+    "FiscalDate",
+	'' as FiscalPeriodStartString,
+	'' as FiscalPeriodEndString
+
 FROM
     dm_FiscalPeriods
 WHERE
@@ -33,4 +36,6 @@ SELECT
     GoodData_Attr('')  AS "FiscalYearStart_sort" ,
     GoodData_Attr('')  AS "FiscalYearEnd" ,
     GoodData_Attr('')  AS "FiscalYearEnd_Datedim" ,
-    NULL               AS "FiscalDate"
+    NULL               AS "FiscalDate",
+	GoodData_Attr('')  as FiscalPeriodStartString,
+	GoodData_Attr('')  as FiscalPeriodEndString
