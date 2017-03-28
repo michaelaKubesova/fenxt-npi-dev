@@ -766,20 +766,20 @@ CREATE PROJECTION wk_Transactions_TransactionDistribution_Join_attr
  TenantId ENCODING RLE,
  TransactionTypeTranslation,
  EncumbranceStatusTranslation,
- AddedById,
+ AddedById ENCODING RLE,
  DateAdded,
- LastChangedById,
+ LastChangedById ENCODING RLE,
  DateChanged,
  PostStatusTranslation,
  PostDate,
  TransactionId,
  TranDistributionId,
- ClassId,
- TransactionCode1Id,
- TransactionCode2Id,
- TransactionCode3Id,
- TransactionCode4Id,
- TransactionCode5Id
+ ClassId ENCODING RLE,
+ TransactionCode1Id ENCODING RLE,
+ TransactionCode2Id ENCODING RLE,
+ TransactionCode3Id ENCODING RLE,
+ TransactionCode4Id ENCODING RLE,
+ TransactionCode5Id ENCODING RLE
 )
 AS
  SELECT TenantId,
@@ -805,22 +805,6 @@ AS
 SEGMENTED BY hash(TenantId) ALL NODES;
 
 
-drop table if exists wk_PB_PBD_AB_ABD_BS_TE_join;
-/*
-CREATE TABLE wk_PB_PBD_AB_ABD_BS_TE_join
-(
-   TenantId varchar(255),
-   PeriodAmount varchar(255),
-   ProjectBudgetId varchar(255),
-   AccountBudgetAttrId varchar(255),
-   ProjectId varchar(255),
-   AccountId varchar(255),
-   ProjectBudgetAmount varchar(255),
-   FiscalPeriodId varchar(255),
-   ScenarioId varchar(255)
-) ORDER BY TenantId          
-SEGMENTED BY hash(TenantId) ALL NODES;
-*/
 
 drop TABLE if exists wk_FiscalPeriod_Scenario_Join;
 CREATE TABLE wk_FiscalPeriod_Scenario_Join

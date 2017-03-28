@@ -38,9 +38,9 @@ left join stg_csv_tableentry_merge tc3 on t.TransactionCode3Id = tc3.TableEntryI
 left join stg_csv_tableentry_merge tc4 on t.TransactionCode4Id = tc4.TableEntryId and t.TenantId = tc4.TenantId
 left join stg_csv_tableentry_merge tc5 on t.TransactionCode5Id = tc5.TableEntryId and t.TenantId = tc5.TenantId
 left join stg_csv_tableentry_merge c on t.ClassId = c.TableEntryId and t.TenantId = c.TenantId
-
-union all
-
+;
+--union all
+insert /*+ direct */ into dm_Transactions_attr
 select
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
 	t.TenantId as "TenantId",
