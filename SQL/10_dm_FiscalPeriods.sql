@@ -5,9 +5,9 @@ ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
 fp.TenantId as "TenantId",
 	 GoodData_Attr(fp.FiscalPeriodId) as "FiscalPeriodId"
 	,GoodData_Attr(fp.Sequence) as "Sequence"
-	,GoodData_Attr(to_char(fp.StartDate,'yyyy-mm-dd')) as "FiscalPeriodStart"
+	,GoodData_Date(fp.StartDate) as "FiscalPeriodStart"
 	,GoodData_Attr(fp.Sequence) as "FiscalPeriodStart_sort"
-	,GoodData_Attr(to_char(fp.EndDate,'yyyy-mm-dd')) as "FiscalPeriodEnd"
+	,GoodData_Date(fp.EndDate) as "FiscalPeriodEnd"
 	,GoodData_Attr(fy.FiscalYearId) as "FiscalYearId"
 	,GoodData_Attr(fy.YearId) as "FiscalYearName"
 	,GoodData_Attr(fy.FiscalPeriods) as "NumberOfPeriods"

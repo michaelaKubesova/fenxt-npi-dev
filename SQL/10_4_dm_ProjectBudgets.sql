@@ -1,18 +1,25 @@
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_ProjectBudgets',now(),null);
 insert /*+ direct */ into dm_ProjectBudgets
 select distinct 
-${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
-TenantId as "TenantId",
-	 cast(PeriodAmount as decimal(15,2)) as "PeriodAmount"
-	,GoodData_Attr(ProjectBudgetId||'-'||FiscalPeriodId) as "ProjectBudgetId"
-	,GoodData_Attr(AccountBudgetAttrId) as "AccountBudgetAttrId"
-	,GoodData_Attr(ProjectId)  as "ProjectId"
-	,GoodData_Attr(AccountId)  as "AccountId"
-	,cast(ProjectBudgetAmount as decimal(15,2)) as "ProjectBudgetAmount"
-	,GoodData_Attr(FiscalPeriodId)  as "FiscalPeriodId"
-	,GoodData_Attr(ScenarioId) as "ScenarioId"
-from wk_PB_PBD_AB_ABD_BS_TE_join
-union all
+     ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id
+    ,pb.TenantId as "TenantId"
+	,cast(pbd.Amount as decimal(15,2)) as "PeriodAmount"
+	,GoodData_Attr(pb.ProjectBudgetId||'-'||pbd.FiscalPeriodId) as "ProjectBudgetId"
+	,GoodData_Attr(abd.AccountBudgetDetailId) as "AccountBudgetAttrId"
+	,GoodData_Attr(pb.ProjectId)  as "ProjectId"
+	,GoodData_Attr(pb.AccountId)  as "AccountId"
+	,cast(pb.Amount as decimal(15,2)) as "ProjectBudgetAmount"
+	,GoodData_Attr(pbd.FiscalPeriodId)  as "FiscalPeriodId"
+	,GoodData_Attr(abs.ScenarioId) as "ScenarioId"
+from stg_csv_ProjectBudget_merge pb
+join stg_csv_AccountBudgetDetail_merge abd
+	on pb.AccountBudgetId = abd.AccountBudgetId and pb.TenantId = abd.TenantId
+join wk_AccountBudgetScenario abs
+	on pb.AccountBudgetId = abs.AccountBudgetId and pb.TenantId = abs.TenantId
+join stg_csv_ProjectBudgetDetail_merge pbd
+	on pb.ProjectBudgetId = pbd.ProjectBudgetId and pb.TenantId = pbd.TenantId
+;
+insert /*+ direct */ into dm_ProjectBudgets
 select
     ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
     p.TenantId as "TenantId",

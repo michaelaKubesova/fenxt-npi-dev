@@ -12,9 +12,9 @@ insert /*+ direct */ into dm_TransactionProjectScenario
 from wk_Transactions_TransactionDistribution_join t
 join wk_FiscalPeriod_Scenario_Join pb on pb.projectid = t.projectid and pb.AccountId = t.AccountId and pb.TenantId = t.TenantId
 where t.FiscalPeriodId = pb.FiscalPeriodId
+;
 
-union all
-
+insert /*+ direct */ into dm_TransactionProjectScenario
 select 
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
 	t.TenantId as "TenantId",
@@ -26,10 +26,9 @@ select
 	,GoodData_Attr(t.AccountId) as "AccountId"
 from  stg_csv_SummarizedTransaction_merge t
 join wk_FiscalPeriod_Scenario_Join pb on pb.projectid = t.projectid and pb.AccountId = t.AccountId and pb.TenantId = t.TenantId
+;
 
-
-union all
-
+insert /*+ direct */ into dm_TransactionProjectScenario
 select 
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
 	t.TenantId as "TenantId",
@@ -40,9 +39,9 @@ select
 	,GoodData_Attr(t.FiscalPeriodId) as "FiscalPeriodId"
 	,GoodData_Attr(t.AccountId) as "AccountId"
 from  stg_csv_SummarizedTransaction_merge t
+;
 
-union all
-
+insert /*+ direct */ into dm_TransactionProjectScenario
 select 
      ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
      t.TenantId as "TenantId",

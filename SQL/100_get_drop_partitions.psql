@@ -6,7 +6,7 @@ with partitions ( tab_name, part_key) as
         JOIN    projections pr
           ON    p.projection_name=pr.projection_name
          and p.table_schema = pr.projection_schema 
-       WHERE    pr.anchor_table_name in ('dm_Ratios','dm_InvoiceDistribution','dm_Invoices_fact','dm_Vendors','dm_Invoices_attr','dm_FiscalPeriods','dm_Projects','dm_CreditMemos_fact','dm_Transactions_fact','dm_Banks','dm_AccountBudgets_fact','dm_AccountBudgets_attr','dm_Transactions_attr','dm_Grants','dm_Accounts','dm_ProjectBudgets','dm_CreditMemos_attr','dm_GLBatches','dm_AccountUserSecurity','dm_ProjectUserSecurity','dm_GLBatches_fact','dm_BudgetScenario','dm_TransactionScenario','dm_PostStatus','dm_TransactionProjectScenario','dm_ClientTranslation','dm_Tenants','dm_ProjectHistory','dm_VendorHistory','dm_AccountHistory','dm_BankUserSecurity','dm_BankReconciliationHistory')  
+       WHERE    pr.anchor_table_name in ('dm_Ratios','dm_InvoiceDistribution','dm_Invoices_fact','dm_Vendors','dm_Invoices_attr','dm_FiscalPeriods','dm_Projects','dm_CreditMemos_fact','dm_Transactions_fact','dm_Banks','dm_AccountBudgets_fact','dm_AccountBudgets_attr','dm_Transactions_attr','dm_Grants','dm_Accounts','dm_ProjectBudgets','dm_CreditMemos_attr','dm_GLBatches','dm_AccountUserSecurity','dm_ProjectUserSecurity','dm_GLBatches_fact','dm_BudgetScenario','dm_TransactionScenario','dm_PostStatus','dm_TransactionProjectScenario','dm_ClientTranslation','dm_Tenants','dm_ProjectHistory','dm_VendorHistory','dm_AccountHistory','dm_BankUserSecurity','dm_BankReconciliationHistory','dm_Users','dm_CheckHistory')  
          and p.table_schema = '${ADS_PARAM}'
 )
 select  p1.tab_name||p1.part_key as key

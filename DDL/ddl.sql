@@ -712,65 +712,227 @@ SEGMENTED BY hash(TenantId) ALL NODES
 PARTITION BY (_sys_transform_id);
 
 
+drop table if exists dm_ProjectBalance;
+CREATE TABLE dm_ProjectBalance
+(
+	_sys_transform_id int NOT NULL encoding rle,
+	TenantId varchar(255) encoding rle,
+	ProjectBalanceId varchar(255),
+	 "FiscalPeriodId" int,
+	 "ProjectId" int,
+	 "Balance" numeric,
+	 "AddBalance" numeric,
+	 "EncumberanceType" varchar(255),
+	 "AccountId" int,
+	 "PostStatus" varchar(255)
+) order by TenantId, 
+			_sys_transform_id
+SEGMENTED BY hash(TenantId) ALL NODES
+PARTITION BY (_sys_transform_id);
 
-drop table if exists wk_Transactions_TransactionDistribution_Join;
+
+
+drop table if exists wk_Transactions_TransactionDistribution_Join cascade;
 CREATE TABLE wk_Transactions_TransactionDistribution_Join
 (
     TenantId varchar(255) encoding rle,
-	TransactionTypeTranslation varchar(255),
-	TAmount varchar(255),
-	Reference varchar(255),
-	JournalId varchar(255),
-	EncumbranceStatus varchar(255),
-	EncumbranceStatusTranslation varchar(255),
-	ReverseDate varchar(255),
-	ReversedTransactionId varchar(255),
-	TransactionNumber varchar(255),
-	SourceRecordId varchar(255),
-	TTransactionId varchar(255),
-	SourceNumber varchar(255),
-	SourceType varchar(255),
-	SourceSystemMask varchar(255),
-	AddedById varchar(255),
-	DateAdded varchar(255),
-	LastChangedById varchar(255),
-	DateChanged varchar(255),
-	TDeleted varchar(255),
-	BatchId varchar(255),
-	PostStatus varchar(255),
-	PostStatusTranslation varchar(255),
-	AccountId varchar(255),
-	PostDate varchar(255),
-	FiscalPeriodId varchar(255),
-	TransactionType varchar(255),
-	TransactionCode3Id varchar(255),
-	TransactionCode4Id varchar(255),
-	TransactionCode5Id varchar(255),
-	GrantId varchar(255),
-	TDDeleted varchar(255),
-	TranDistributionId varchar(255),
-	TDTransactionId varchar(255),
-	Projectid varchar(255),
-	ClassId varchar(255),
-	TDAmount varchar(255),
-	Comment varchar(255),
-	TransactionCode1Id varchar(255),
-	TransactionCode2Id varchar(255)
-)  ORDER BY TenantId
+    TransactionTypeTranslation varchar(255),
+    EncumbranceStatusTranslation varchar(255),
+    AddedById int,
+    DateAdded varchar(255),
+    LastChangedById int,
+    DateChanged varchar(255),
+    BatchId int,
+    PostStatusTranslation varchar(255),
+    AccountId int  encoding rle,
+    PostDate varchar(255),
+    FiscalPeriodId int encoding rle,
+    GrantId int,
+    TranDistributionId int,
+    TransactionId int encoding rle,
+    Projectid int  encoding rle,
+    ClassId int,
+    TDAmount numeric,
+    TransactionCode1Id int,
+    TransactionCode2Id int,
+    TransactionCode3Id int,
+    TransactionCode4Id int,
+    TransactionCode5Id int
+)  ORDER BY TenantId,
+          AccountId,
+          Projectid,
+          FiscalPeriodId
 SEGMENTED BY hash(TenantId) ALL NODES;
 
-drop table if exists wk_PB_PBD_AB_ABD_BS_TE_join;
-CREATE TABLE "wk_PB_PBD_AB_ABD_BS_TE_join"
+CREATE PROJECTION wk_Transactions_TransactionDistribution_Join_agg
 (
-   TenantId varchar(255),
-   PeriodAmount varchar(255),
-   ProjectBudgetId varchar(255),
-   AccountBudgetAttrId varchar(255),
-   ProjectId varchar(255),
-   AccountId varchar(255),
-   ProjectBudgetAmount varchar(255),
-   FiscalPeriodId varchar(255),
-   ScenarioId varchar(255)
-) ORDER BY TenantId          
+ TenantId ENCODING RLE,
+ AccountId ENCODING RLE,
+ FiscalPeriodId ENCODING RLE,
+ TranDistributionId
+)
+AS
+ SELECT TenantId,
+        AccountId,
+        FiscalPeriodId,
+        TranDistributionId
+ FROM wk_Transactions_TransactionDistribution_Join
+ ORDER BY TenantId, AccountId, FiscalPeriodId, TranDistributionId
+SEGMENTED BY hash(TenantId, AccountId, FiscalPeriodId, TranDistributionId) ALL NODES;
+
+CREATE PROJECTION wk_Transactions_TransactionDistribution_Join_attr
+(
+ TenantId ENCODING RLE,
+ TransactionTypeTranslation,
+ EncumbranceStatusTranslation,
+ AddedById ENCODING RLE,
+ DateAdded,
+ LastChangedById ENCODING RLE,
+ DateChanged,
+ PostStatusTranslation,
+ PostDate,
+ TransactionId,
+ TranDistributionId,
+ ClassId ENCODING RLE,
+ TransactionCode1Id ENCODING RLE,
+ TransactionCode2Id ENCODING RLE,
+ TransactionCode3Id ENCODING RLE,
+ TransactionCode4Id ENCODING RLE,
+ TransactionCode5Id ENCODING RLE
+)
+AS
+ SELECT TenantId,
+        TransactionTypeTranslation,
+        EncumbranceStatusTranslation,
+        AddedById,
+        DateAdded,
+        LastChangedById,
+        DateChanged,
+        PostStatusTranslation,
+        PostDate,
+        TransactionId,
+        TranDistributionId,
+        ClassId,
+        TransactionCode1Id,
+        TransactionCode2Id,
+        TransactionCode3Id,
+        TransactionCode4Id,
+        TransactionCode5Id
+ FROM wk_Transactions_TransactionDistribution_Join
+ ORDER BY TenantId,AddedById,LastChangedById,
+          TransactionCode1Id,TransactionCode2Id,TransactionCode3Id,TransactionCode4Id,TransactionCode5Id,ClassId
 SEGMENTED BY hash(TenantId) ALL NODES;
+
+
+
+drop TABLE if exists wk_FiscalPeriod_Scenario_Join;
+CREATE TABLE wk_FiscalPeriod_Scenario_Join
+(
+    TenantId varchar(255) encoding rle,
+    ProjectId int,
+    AccountId int,
+    ScenarioId varchar(255),
+    FiscalPeriodId int
+) order by TenantId,AccountId,ProjectId,FiscalPeriodId
+SEGMENTED BY hash(TenantId) ALL NODES;
+
+
+drop TABLE if exists wk_AccountBudgetScenario cascade;
+CREATE TABLE wk_AccountBudgetScenario
+(
+    TenantId varchar(255) encoding rle,
+    AccountId int,
+    AccountBudgetId int,
+    CodeTableId int,
+    ScenarioId varchar(255)
+) ORDER BY TenantId,
+           AccountBudgetId,
+           AccountId
+UNSEGMENTED ALL NODES;
+
+CREATE PROJECTION wk_AccountBudgetScenario_account
+(
+ TenantId encoding rle,
+ AccountId,
+ AccountBudgetId,
+ CodeTableId,
+ ScenarioId
+)
+AS
+ SELECT TenantId,
+        AccountId,
+        AccountBudgetId,
+        CodeTableId,
+        ScenarioId
+ FROM wk_AccountBudgetScenario
+ ORDER BY TenantId,
+          AccountId
+UNSEGMENTED ALL NODES;
+
+
+drop table if exists dm_ARClients;
+CREATE TABLE dm_ARClients
+(
+	_sys_transform_id int NOT NULL encoding rle,
+	TenantId varchar(255) encoding rle,
+	ARClientId varchar(255),
+	 ARClientType varchar(255),
+	 ARClientDisplayName varchar(255),
+	 ARClientCFDANumber varchar(255),
+	 AddedByUserId int,
+	 dateadded varchar(255),
+	 datechanged varchar(255),
+	 Amount numeric
+) order by TenantId, 
+			_sys_transform_id
+SEGMENTED BY hash(TenantId) ALL NODES
+PARTITION BY (_sys_transform_id);
+
+
+drop table if exists dm_ARCharges;
+CREATE TABLE dm_ARCharges
+(
+	_sys_transform_id int NOT NULL encoding rle,
+	TenantId varchar(255) encoding rle,
+	ARChargeId int,
+	ARChargeType varchar(255),
+	ARChargeInvoiceId int,
+	ARChargeLineItemSequence int,
+	ARChargePostStatus varchar(255),
+	ARChargePaymentStatus varchar(255),
+	ARChargeItemDescription varchar(255),
+	ARChargeAmount numeric,
+	ARChargeBalance numeric, 
+	ARClientId int,
+	datechanged varchar(255),
+	dateadded varchar(255),
+	postdate varchar(255),
+	duedate varchar(255)
+) order by TenantId, 
+			_sys_transform_id
+SEGMENTED BY hash(TenantId) ALL NODES
+PARTITION BY (_sys_transform_id);
+
+drop table if exists dm_CheckHistory;
+CREATE TABLE dm_CheckHistory
+(
+   _sys_transform_id integer NOT NULL encoding rle,
+   TenantId varchar(255) encoding rle,
+   CheckHistoryId varchar(255),
+   CheckNumber varchar(255),
+   VendorName varchar(255),
+   FieldChanged varchar(255),
+   FieldChangedTranslation varchar(255),
+   OldValue varchar(255),
+   NewValue varchar(255),
+   DateChanged varchar(255),
+   PostStatus varchar(255),
+   BankId varchar(255),
+   ChangedByUserName varchar(255),
+   DrillInId varchar(255)
+) order by TenantId,
+			_sys_transform_id
+SEGMENTED BY hash(TenantId) ALL nodes
+PARTITION BY (_sys_transform_id)
+;
 
