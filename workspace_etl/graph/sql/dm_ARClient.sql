@@ -4,10 +4,11 @@ select
  "ARClientType",
  "ARClientDisplayName",
  "ARClientCFDANumber",
- "AddedByUserId",
+ au.Name,
  "dateadded",
- "datechanged"
-from stg_csv_ARClient_merge ar
+ "datechanged",
+ "Amount"
+from dm_ARClients ar
 join stg_csv_user_merge au
 	on ar.AddedByUserId = au.UserId and ar.TenantId = au.TenantId
 where ar.TenantId = '${TenantId}'

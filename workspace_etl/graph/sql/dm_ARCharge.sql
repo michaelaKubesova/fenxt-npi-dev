@@ -13,8 +13,8 @@ select
  "datechanged",
  "dateadded",
  "postdate",
- case when duedate < '1900/01/01' then '1900/01/01'
+ case when cast(duedate as datetime) < '1900/01/01' then '1900-01-01 00:00:00'
  else duedate
  end
-from stg_csv_ARCharge_merge
+from dm_ARCharges
 where TenantId = '${TenantId}'

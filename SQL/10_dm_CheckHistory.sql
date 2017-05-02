@@ -14,6 +14,7 @@ ch.TenantId as "TenantId",
 	,GoodData_Attr(ch.PostStatus) as PostStatus
 	,GoodData_Attr(ch.BankId) as BankId
 	,GoodData_Attr(au.Name) as ChangedByUserName
+	,GoodData_Attr(ch.DrillInID) as DrillInID
 from stg_csv_CheckHistory_merge ch
 join stg_csv_User_merge au
 	on ch.ChangedByUserId = au.UserId and ch.TenantId = au.TenantId where ch.CheckHistoryId < 1000000000
@@ -32,6 +33,7 @@ cht.TenantId as "TenantId",
 	,GoodData_Attr(cht.PostStatus) as PostStatus
 	,GoodData_Attr(cht.BankId) as BankId
 	,GoodData_Attr(cht.ChangedByUserName) as ChangedByUserName
+	,GoodData_Attr(cht.DrillInID) as DrillInID
 from 
 (select distinct ch.TenantId as "TenantId",
 	 GoodData_Attr(ch.CheckHistoryId) as CheckHistoryId
@@ -45,6 +47,7 @@ from
 	,GoodData_Attr(chd.PostStatus) as PostStatus
 	,GoodData_Attr(chd.BankId) as BankId
 	,GoodData_Attr('User unknown') as ChangedByUserName
+	,GoodData_Attr(ch.DrillInID) as DrillInID
 	from
 stg_csv_CheckHistory_merge ch
 join stg_csv_CheckHistory_merge chd on ch.CheckDbId = chd.CheckDbId and ch.TenantId = chd.TenantId

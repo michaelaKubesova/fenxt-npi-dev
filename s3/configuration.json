@@ -48,8 +48,10 @@
 		"990EZ2015":{"global":{"custom":{"hub":["EIN","a_tax_prd"],"is_deleted":"deleted"}}},
 		"990NTEE":{"global":{"custom":{"hub":["EIN"],"is_deleted":"deleted"}}},
 		"ProjectBalance":{"global":{"custom":{"hub":["TenantId","ProjectBalanceId"]}}},
-		"ARClient":{"global":{"custom":{"hub":["TenantId","ARClientId"]}}},
-		"ARCharge":{"global":{"custom":{"hub":["TenantId","ARChargeId"]}}}
+		"ARClient":{"global":{"custom":{"hub":["TenantId","ARClientId"],"is_deleted":"deleted"}}},
+		"ARCharge":{"global":{"custom":{"hub":["TenantId","ARChargeId"],"is_deleted":"deleted"}}},
+		"ARClientAmount":{"global":{"custom":{"hub":["TenantId","ClientId"]}}}
+		
 		
     },
     "downloaders":{
@@ -105,7 +107,8 @@
 			"990NTEE",
 			"ProjectBalance",
 			"ARClient",
-			"ARCharge"
+			"ARCharge",
+			"ARClientAmount"
           ]
       }
     },
