@@ -13,8 +13,8 @@ UNSEGMENTED ALL NODES;
 
   
 
-drop table if exists dm_InvoiceDistribution;
-CREATE TABLE dm_InvoiceDistribution
+drop table if exists out_InvoiceDistribution;
+CREATE TABLE out_InvoiceDistribution
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -27,8 +27,8 @@ CREATE TABLE dm_InvoiceDistribution
 SEGMENTED BY hash(TenantId) ALL NODES
 PARTITION BY (_sys_transform_id);
 
-drop table if exists dm_Ratios;
-CREATE TABLE dm_Ratios
+drop table if exists out_Ratios;
+CREATE TABLE out_Ratios
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -47,8 +47,8 @@ CREATE TABLE dm_Ratios
 SEGMENTED BY hash(TenantId) ALL NODES
 PARTITION BY (_sys_transform_id);
 
-drop table if exists dm_Invoices_fact;
-CREATE TABLE dm_Invoices_fact
+drop table if exists out_Invoices_fact;
+CREATE TABLE out_Invoices_fact
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -71,8 +71,8 @@ CREATE TABLE dm_Invoices_fact
 SEGMENTED BY hash(TenantId) ALL NODES
 PARTITION BY (_sys_transform_id);
 
-drop TABLE if exists dm_Vendors;
-CREATE TABLE dm_Vendors
+drop TABLE if exists out_Vendors;
+CREATE TABLE out_Vendors
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -92,8 +92,8 @@ CREATE TABLE dm_Vendors
 SEGMENTED BY hash(TenantId) ALL NODES
 PARTITION BY (_sys_transform_id);
 
-drop table if exists dm_Invoices_attr;
-CREATE TABLE dm_Invoices_attr
+drop table if exists out_Invoices_attr;
+CREATE TABLE out_Invoices_attr
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -110,8 +110,8 @@ CREATE TABLE dm_Invoices_attr
 SEGMENTED BY hash(TenantId) ALL NODES
 PARTITION BY (_sys_transform_id);
 
-drop table if exists dm_Users;
-CREATE TABLE dm_Users
+drop table if exists out_Users;
+CREATE TABLE out_Users
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -129,8 +129,8 @@ SEGMENTED BY hash(TenantId) ALL NODES
 PARTITION BY (_sys_transform_id);
 
 
-drop table if exists dm_FiscalPeriods;
-CREATE TABLE dm_FiscalPeriods
+drop table if exists out_FiscalPeriods;
+CREATE TABLE out_FiscalPeriods
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -155,8 +155,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop table if exists dm_Projects;
-CREATE TABLE dm_Projects
+drop table if exists out_Projects;
+CREATE TABLE out_Projects
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -180,8 +180,8 @@ SEGMENTED BY hash(TenantId) ALL NODES
 PARTITION BY (_sys_transform_id);
 
 
-drop table if exists dm_CreditMemos_fact;
-CREATE TABLE dm_CreditMemos_fact
+drop table if exists out_CreditMemos_fact;
+CREATE TABLE out_CreditMemos_fact
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -203,8 +203,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop table if exists dm_Transactions_fact;
-CREATE TABLE dm_Transactions_fact
+drop table if exists out_Transactions_fact;
+CREATE TABLE out_Transactions_fact
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -225,8 +225,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop table if exists dm_Banks;
-CREATE TABLE dm_Banks
+drop table if exists out_Banks;
+CREATE TABLE out_Banks
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -257,8 +257,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop table if exists dm_AccountBudgets_fact;
-CREATE TABLE dm_AccountBudgets_fact
+drop table if exists out_AccountBudgets_fact;
+CREATE TABLE out_AccountBudgets_fact
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -274,8 +274,8 @@ SEGMENTED BY hash(TenantId) ALL NODES
 PARTITION BY (_sys_transform_id);
 
 
-drop table if exists dm_AccountBudgets_attr;
-CREATE TABLE dm_AccountBudgets_attr
+drop table if exists out_AccountBudgets_attr;
+CREATE TABLE out_AccountBudgets_attr
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -290,8 +290,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop table if exists dm_Transactions_attr;
-CREATE TABLE dm_Transactions_attr
+drop table if exists out_Transactions_attr;
+CREATE TABLE out_Transactions_attr
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -326,8 +326,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop TABLE if exists dm_Grants;
-CREATE TABLE dm_Grants
+drop TABLE if exists out_Grants;
+CREATE TABLE out_Grants
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -351,8 +351,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
- drop table if exists dm_Accounts;
-CREATE TABLE dm_Accounts
+ drop table if exists out_Accounts;
+CREATE TABLE out_Accounts
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -383,8 +383,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop table if exists dm_ProjectBudgets;
-CREATE TABLE dm_ProjectBudgets
+drop table if exists out_ProjectBudgets;
+CREATE TABLE out_ProjectBudgets
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -403,8 +403,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop table if exists dm_CreditMemos_attr;
-CREATE TABLE dm_CreditMemos_attr
+drop table if exists out_CreditMemos_attr;
+CREATE TABLE out_CreditMemos_attr
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -426,8 +426,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop table if exists dm_GLBatches;
-CREATE TABLE dm_GLBatches
+drop table if exists out_GLBatches;
+CREATE TABLE out_GLBatches
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -452,8 +452,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop table if exists dm_AccountUserSecurity;
-CREATE TABLE dm_AccountUserSecurity
+drop table if exists out_AccountUserSecurity;
+CREATE TABLE out_AccountUserSecurity
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -467,8 +467,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop TABLE if exists dm_ProjectUserSecurity;
-CREATE TABLE dm_ProjectUserSecurity
+drop TABLE if exists out_ProjectUserSecurity;
+CREATE TABLE out_ProjectUserSecurity
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -482,8 +482,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop table if exists dm_GLBatches_fact;
-CREATE TABLE dm_GLBatches_fact
+drop table if exists out_GLBatches_fact;
+CREATE TABLE out_GLBatches_fact
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -503,8 +503,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop table if exists dm_BudgetScenario;
-CREATE TABLE dm_BudgetScenario
+drop table if exists out_BudgetScenario;
+CREATE TABLE out_BudgetScenario
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -517,8 +517,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop table if exists dm_TransactionScenario;
-CREATE TABLE dm_TransactionScenario
+drop table if exists out_TransactionScenario;
+CREATE TABLE out_TransactionScenario
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -535,8 +535,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop TABLE if exists dm_PostStatus;
-CREATE TABLE dm_PostStatus
+drop TABLE if exists out_PostStatus;
+CREATE TABLE out_PostStatus
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -550,8 +550,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop table if exists dm_TransactionProjectScenario;
-CREATE TABLE dm_TransactionProjectScenario
+drop table if exists out_TransactionProjectScenario;
+CREATE TABLE out_TransactionProjectScenario
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -568,8 +568,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop TABLE if exists dm_ClientTranslation;
-CREATE TABLE dm_ClientTranslation
+drop TABLE if exists out_ClientTranslation;
+CREATE TABLE out_ClientTranslation
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -588,8 +588,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop table if exists dm_Tenants;
-CREATE TABLE dm_Tenants
+drop table if exists out_Tenants;
+CREATE TABLE out_Tenants
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -619,8 +619,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop table if exists dm_ProjectHistory;
-CREATE TABLE dm_ProjectHistory
+drop table if exists out_ProjectHistory;
+CREATE TABLE out_ProjectHistory
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -639,8 +639,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop table if exists dm_VendorHistory;
-CREATE TABLE dm_VendorHistory
+drop table if exists out_VendorHistory;
+CREATE TABLE out_VendorHistory
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -659,8 +659,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop TABLE if exists dm_AccountHistory;
-CREATE TABLE dm_AccountHistory
+drop TABLE if exists out_AccountHistory;
+CREATE TABLE out_AccountHistory
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -679,8 +679,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop TABLE if exists dm_BankUserSecurity;
-CREATE TABLE dm_BankUserSecurity
+drop TABLE if exists out_BankUserSecurity;
+CREATE TABLE out_BankUserSecurity
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -695,8 +695,8 @@ PARTITION BY (_sys_transform_id);
 
 
 
-drop table if exists dm_BankReconciliationHistory;
-CREATE TABLE dm_BankReconciliationHistory
+drop table if exists out_BankReconciliationHistory;
+CREATE TABLE out_BankReconciliationHistory
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
@@ -712,8 +712,8 @@ SEGMENTED BY hash(TenantId) ALL NODES
 PARTITION BY (_sys_transform_id);
 
 
-drop table if exists dm_ProjectBalance;
-CREATE TABLE dm_ProjectBalance
+drop table if exists out_ProjectBalance;
+CREATE TABLE out_ProjectBalance
 (
 	_sys_transform_id int NOT NULL encoding rle,
 	TenantId varchar(255) encoding rle,
@@ -870,8 +870,8 @@ AS
 UNSEGMENTED ALL NODES;
 
 
-drop table if exists dm_ARClients;
-CREATE TABLE dm_ARClients
+drop table if exists out_ARClients;
+CREATE TABLE out_ARClients
 (
 	_sys_transform_id int NOT NULL encoding rle,
 	TenantId varchar(255) encoding rle,
@@ -889,8 +889,8 @@ SEGMENTED BY hash(TenantId) ALL NODES
 PARTITION BY (_sys_transform_id);
 
 
-drop table if exists dm_ARCharges;
-CREATE TABLE dm_ARCharges
+drop table if exists out_ARCharges;
+CREATE TABLE out_ARCharges
 (
 	_sys_transform_id int NOT NULL encoding rle,
 	TenantId varchar(255) encoding rle,
@@ -913,8 +913,8 @@ CREATE TABLE dm_ARCharges
 SEGMENTED BY hash(TenantId) ALL NODES
 PARTITION BY (_sys_transform_id);
 
-drop table if exists dm_CheckHistory;
-CREATE TABLE dm_CheckHistory
+drop table if exists out_CheckHistory;
+CREATE TABLE out_CheckHistory
 (
    _sys_transform_id integer NOT NULL encoding rle,
    TenantId varchar(255) encoding rle,
