@@ -9,7 +9,6 @@ select
  "GrantName"
 from dm_ClientTranslation
 where TenantId = '${TenantId}'
-and _sys_transform_id = ${DM_CLIENTTRANSLATION_TRANSFORM_ID}
 union all
 select
  	'TransactionCode1' TransactionCode1Name
@@ -21,5 +20,4 @@ select
 	,'Fund' FundName
 	,'Grant' GrantName
 	where (select count(1) from dm_ClientTranslation 
-			where TenantId = '${TenantId}'
-				and _sys_transform_id = ${DM_CLIENTTRANSLATION_TRANSFORM_ID}) = 0
+			where TenantId = '${TenantId}') = 0

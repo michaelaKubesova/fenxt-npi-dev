@@ -20,7 +20,7 @@ FROM
     dm_FiscalPeriods
 WHERE
     TenantId = '${TenantId}'
-AND _sys_transform_id = ${DM_FISCALPERIODS_TRANSFORM_ID}
+
 UNION ALL
 SELECT
     GoodData_Attr('0') AS "FiscalPeriodId" ,

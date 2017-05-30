@@ -6,7 +6,7 @@ select
  "ProjectId"
 from dm_ProjectUserSecurity
 where TenantId = '${TenantId}'
-and _sys_transform_id = ${DM_PROJECTUSERSECURITY_TRANSFORM_ID}
+
 union all
 select
 	GoodData_Attr(UserId||'#0')  as "ProjectUserSecurityId",

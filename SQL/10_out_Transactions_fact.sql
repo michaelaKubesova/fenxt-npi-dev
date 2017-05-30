@@ -29,8 +29,8 @@ select
 	,GoodData_Attr(st.FiscalPeriodId)  as "FiscalPeriodId"
 	,cast(st.Amount as decimal(15, 2)) as "TransactionAmount"
 	,GoodData_Attr('0') as "BatchId"
-	,cast(null as varchar(255)) as "DateAdded"
-	,cast(null as varchar(255)) as "DateChanged"
+	,null::date as "DateAdded"
+	,null::date as "DateChanged"
 from stg_csv_summarizedtransaction_merge st
 ;
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Transactions_fact',null,now());

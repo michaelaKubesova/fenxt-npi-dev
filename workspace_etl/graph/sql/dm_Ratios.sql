@@ -11,4 +11,4 @@ select
   "FiscalPeriodId"
 from dm_ratios
 where TenantId = '${TenantId}'
-and _sys_transform_id = ${DM_RATIOS_TRANSFORM_ID}
+

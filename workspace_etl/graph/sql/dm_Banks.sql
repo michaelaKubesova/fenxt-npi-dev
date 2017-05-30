@@ -23,7 +23,6 @@ select
  "AccountTypeTranslation"
 from dm_Banks
 where TenantId = '${TenantId}'
-and _sys_transform_id = ${DM_BANKS_TRANSFORM_ID}
 union all
 select  
 GoodData_Attr(-1) as "BankId",

@@ -15,7 +15,7 @@ select
  "Dummy"
 from dm_Grants
 where TenantId = '${TenantId}'
-and _sys_transform_id = ${DM_GRANTS_TRANSFORM_ID}
+
 union all
 select  
 GoodData_Attr(0) as "GrantId" , 
