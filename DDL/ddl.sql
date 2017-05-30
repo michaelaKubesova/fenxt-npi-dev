@@ -11,6 +11,21 @@ CREATE TABLE _sys_transform_id
           id
 UNSEGMENTED ALL NODES;
 
+drop TABLE if exists _sys_load_info;
+CREATE TABLE _sys_load_info
+(
+    project_id varchar(255),
+    gdc_project_id varchar(255)  ENCODING RLE,
+    ts_from timestamptz,
+    ts_to timestamptz,
+    event_ts timestamptz,
+    event_type varchar(255)  ENCODING RLE,
+    entity varchar(255)  ENCODING RLE
+)  ORDER BY event_type,
+            entity,
+            gdc_project_id          
+segmented by hash(event_ts) all nodes;
+
   
 
 drop table if exists out_InvoiceDistribution;
