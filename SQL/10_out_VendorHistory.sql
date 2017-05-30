@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_VendorHistory',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_VendorHistory',now(),null);
 insert /*+ direct */ into out_VendorHistory
 select
 ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -15,6 +15,6 @@ from stg_csv_VendorHistory_merge vh
 join stg_csv_User_merge au
 	on vh.ChangedByUserId = au.UserId and vh.TenantId = au.TenantId
 ;
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_VendorHistory',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_VendorHistory',null,now());
 select analyze_statistics('out_VendorHistory')
 ;

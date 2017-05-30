@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_GLBatches',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_GLBatches',now(),null);
 insert /*+ direct */ into out_GLBatches
 select  
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -28,6 +28,6 @@ left join stg_csv_User_merge apu
   on b.ApprovedById = apu.UserId and b.TenantId = apu.TenantId
 where b.StatusTranslation != 'System Batch'
 ;
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_GLBatches',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_GLBatches',null,now());
 select analyze_statistics('out_GLBatches')
 ;

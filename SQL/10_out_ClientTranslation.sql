@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_ClientTranslation',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_ClientTranslation',now(),null);
 insert /*+ direct */ into out_ClientTranslation
 select 
 ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -14,6 +14,6 @@ TenantId as "TenantId",
 from stg_csv_Tenant_merge   
 ;
 
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_ClientTranslation',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_ClientTranslation',null,now());
 select analyze_statistics('out_ClientTranslation')
 ;

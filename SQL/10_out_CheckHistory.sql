@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_CheckHistory',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_CheckHistory',now(),null);
 insert /*+ direct */ into out_CheckHistory
 select 
 ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -53,6 +53,6 @@ stg_csv_CheckHistory_merge ch
 join stg_csv_CheckHistory_merge chd on ch.CheckDbId = chd.CheckDbId and ch.TenantId = chd.TenantId
  where ch.CheckHistoryId >= 1000000000) cht where VendorName != 'null vendor'
 ;
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_CheckHistory',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_CheckHistory',null,now());
 select analyze_statistics('out_CheckHistory')
 ;

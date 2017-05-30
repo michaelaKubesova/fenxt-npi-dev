@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_BankUserSecurity',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_BankUserSecurity',now(),null);
 insert /*+ direct */ into out_BankUserSecurity
 select distinct 
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -21,6 +21,6 @@ select
 from stg_csv_User_merge u
 ;
 
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_BankUserSecurity',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_BankUserSecurity',null,now());
 select analyze_statistics('out_BankUserSecurity')
 ;

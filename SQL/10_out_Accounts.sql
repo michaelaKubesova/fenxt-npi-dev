@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_Accounts',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Accounts',now(),null);
 insert /*+ direct */ into out_Accounts
 select   
 ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -35,6 +35,6 @@ join stg_csv_accountcode_merge ac
 	on a.AccountCodeId = ac.AccountCodeId and a.TenantId = ac.TenantId
 ;
 
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_Accounts',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Accounts',null,now());
 select analyze_statistics('out_Accounts')
 ;

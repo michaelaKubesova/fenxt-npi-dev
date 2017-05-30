@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_FiscalPeriods',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_FiscalPeriods',now(),null);
 insert /*+ direct */ into out_FiscalPeriods
 select   
 ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -29,6 +29,6 @@ join stg_csv_fiscalyear_merge fy
 	on fp.FiscalYearId = fy.FiscalYearId and fp.TenantId = fy.TenantId
 ;
 
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_FiscalPeriods',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_FiscalPeriods',null,now());
 select analyze_statistics('out_FiscalPeriods')
 ;

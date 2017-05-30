@@ -1,6 +1,6 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_ProjectBudgets',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_ProjectBudgets',now(),null);
 insert /*+ direct */ into out_ProjectBudgets
-select distinct 
+select  
      ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id
     ,pb.TenantId as "TenantId"
 	,cast(pbd.Amount as decimal(15,2)) as "PeriodAmount"
@@ -16,7 +16,7 @@ join stg_csv_AccountBudgetDetail_merge abd
 	on pb.AccountBudgetId = abd.AccountBudgetId and pb.TenantId = abd.TenantId
 join wk_AccountBudgetScenario abs
 	on pb.AccountBudgetId = abs.AccountBudgetId and pb.TenantId = abs.TenantId
-join stg_csv_ProjectBudgetDetail_merge pbd
+join (select TenantId, ProjectBudgetId, FiscalPeriodId, Amount from stg_csv_ProjectBudgetDetail_merge group by TenantId, ProjectBudgetId, FiscalPeriodId, Amount) pbd
 	on pb.ProjectBudgetId = pbd.ProjectBudgetId and pb.TenantId = pbd.TenantId
 ;
 insert /*+ direct */ into out_ProjectBudgets
@@ -35,6 +35,6 @@ from stg_csv_project_merge p
 join (select min(FiscalPeriodId) as "Id", TenantId from stg_csv_FiscalPeriod_merge group by TenantId) FP
 on p.TenantId=fp.TenantId
 ;
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_ProjectBudgets',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_ProjectBudgets',null,now());
 select analyze_statistics('out_ProjectBudgets')
 ;

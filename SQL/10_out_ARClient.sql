@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_ARClients',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_ARClients',now(),null);
 insert /*+ direct */ into out_ARClients
 select   
 ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -17,6 +17,6 @@ left join stg_csv_ARClientAmount_merge A
 
 ;
 
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_ARClients',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_ARClients',null,now());
 select analyze_statistics('out_ARClients')
 ;

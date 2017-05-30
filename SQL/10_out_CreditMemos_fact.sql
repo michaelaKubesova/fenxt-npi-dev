@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_CreditMemos_fact',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_CreditMemos_fact',now(),null);
 insert /*+ direct */ into out_CreditMemos_fact
 select   
 ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -20,6 +20,6 @@ left join stg_csv_fiscalperiod_merge fp
 	and cm.TenantId = fp.TenantId
 ;
 
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_CreditMemos_fact',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_CreditMemos_fact',null,now());
 select analyze_statistics('out_CreditMemos_fact')
 ;

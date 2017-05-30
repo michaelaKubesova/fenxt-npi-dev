@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_Users',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Users',now(),null);
 insert /*+ direct */ into out_Users
 	select
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -12,6 +12,6 @@ insert /*+ direct */ into out_Users
 	,au.ViewOnly as "ViewOnly"
 from stg_csv_User_merge au
 ;
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_Users',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Users',null,now());
 select analyze_statistics('out_Users')
 ;

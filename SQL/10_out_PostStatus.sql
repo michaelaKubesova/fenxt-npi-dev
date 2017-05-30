@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_PostStatus',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_PostStatus',now(),null);
 insert /*+ direct */ into out_PostStatus
 select
  	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -14,6 +14,6 @@ select
 	GoodData_Attr(cm.PostStatusTranslation) as "PostStatus"
 from stg_csv_CreditMemo_merge cm
 ;
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_PostStatus',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_PostStatus',null,now());
 select analyze_statistics('out_PostStatus')
 ;

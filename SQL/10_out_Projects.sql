@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_Projects',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Projects',now(),null);
 insert /*+ direct */ into out_Projects
 	select   
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -30,6 +30,6 @@ left join stg_csv_tableentry_merge typ
 	on p.TypeId = typ.TableEntryId and p.TenantId = typ.TenantId
 ;
 
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_Projects',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Projects',null,now());
 select analyze_statistics('out_Projects')
 ;

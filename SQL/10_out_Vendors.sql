@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_Vendors',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Vendors',now(),null);
 insert /*+ direct */ into out_Vendors
 	select
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -18,6 +18,6 @@ from stg_csv_vendor_merge v
 join stg_csv_User_merge au
 	on v.AddedById = au.UserId and v.TenantId = au.TenantId
 ;
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_Vendors',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Vendors',null,now());
 select analyze_statistics('out_Vendors')
 ;

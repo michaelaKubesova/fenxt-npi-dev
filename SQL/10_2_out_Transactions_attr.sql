@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_Transactions_attr',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Transactions_attr',now(),null);
 insert /*+ direct */ into out_Transactions_attr
 select
 ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -27,7 +27,7 @@ ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
 	,GoodData_Attr(c.Description) as "Class"
 	,GoodData_Attr(t.TransactionId) as "TransactionAttributeId"
 	,GoodData_Attr('false') as "IsBeginningBalance"
-from wk_Transactions_TransactionDistribution_join t
+from out_transactions t
 join stg_csv_user_merge au
 	on t.AddedById = au.UserId and t.TenantId = au.TenantId 
 join stg_csv_user_merge eu
@@ -38,6 +38,7 @@ left join stg_csv_tableentry_merge tc3 on t.TransactionCode3Id = tc3.TableEntryI
 left join stg_csv_tableentry_merge tc4 on t.TransactionCode4Id = tc4.TableEntryId and t.TenantId = tc4.TenantId
 left join stg_csv_tableentry_merge tc5 on t.TransactionCode5Id = tc5.TableEntryId and t.TenantId = tc5.TenantId
 left join stg_csv_tableentry_merge c on t.ClassId = c.TableEntryId and t.TenantId = c.TenantId
+where t._sys_is_deleted = false
 ;
 --union all
 insert /*+ direct */ into out_Transactions_attr
@@ -70,6 +71,6 @@ select
 	,GoodData_Attr('true') as "IsBeginningBalance"
 from stg_csv_summarizedtransaction_merge t
 ;
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_Transactions_attr',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Transactions_attr',null,now());
 select analyze_statistics('out_Transactions_attr')
 ;

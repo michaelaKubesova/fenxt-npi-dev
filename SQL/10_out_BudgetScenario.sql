@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_BudgetScenario',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_BudgetScenario',now(),null);
 insert /*+ direct */ into out_BudgetScenario
 select
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -12,6 +12,6 @@ join stg_csv_TableEntry_merge te
 group by te.Description, ab.TenantId
 
 ;
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_BudgetScenario',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_BudgetScenario',null,now());
 select analyze_statistics('out_BudgetScenario')
 ;

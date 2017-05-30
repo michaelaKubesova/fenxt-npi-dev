@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_Tenants',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Tenants',now(),null);
 insert /*+ direct */ into out_Tenants
 select 
 ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -15,6 +15,6 @@ TenantId as "TenantId",
 	,cast(DataUpdated as datetime) + Interval ' 1 second' * DATEDIFF(second, GETDATE(), GETUTCDATE()) DataUpdated
 from stg_csv_Tenant_merge
 ;
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_Tenants',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Tenants',null,now());
 select analyze_statistics('out_Tenants')
 ;

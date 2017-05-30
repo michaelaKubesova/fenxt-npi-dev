@@ -1,0 +1,9 @@
+/* DEFINE('LAST_TS_DELETE') */
+   SELECT 'Transaction' as key, to_char(MAX(_sys_updated_at),'yyyy-mm-dd hh24:mi:ss.us') as value
+     FROM stg_csv_Transaction_merge
+    WHERE _sys_is_deleted = true
+   union all
+   SELECT 'TransactionDistribution' as key, to_char(MAX(_sys_updated_at),'yyyy-mm-dd hh24:mi:ss.us') as value
+     FROM stg_csv_TransactionDistribution_merge
+    WHERE _sys_is_deleted = true
+;

@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_AccountUserSecurity',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_AccountUserSecurity',now(),null);
 insert /*+ direct */ into out_AccountUserSecurity
 select   
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -18,6 +18,6 @@ select
 	,GoodData_Attr(-1) as "AccountId"
 from stg_csv_User_merge u;
 
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_AccountUserSecurity',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_AccountUserSecurity',null,now());
 select analyze_statistics('out_AccountUserSecurity')
 ;

@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_Invoices_fact',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Invoices_fact',now(),null);
 insert /*+ direct */ into out_Invoices_fact
 	select 
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -21,6 +21,6 @@ from stg_csv_Invoice_merge i
 left join stg_csv_FiscalPeriod_merge fp on i.PostDate >= fp.StartDate and i.POSTDATE <= fp.EndDate and i.TenantId = fp.TenantId
 
 ;
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_Invoices_fact',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Invoices_fact',null,now());
 select analyze_statistics('out_Invoices_fact')
 ;

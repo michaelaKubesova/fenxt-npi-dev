@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_BankReconciliationHistory',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_BankReconciliationHistory',now(),null);
 insert /*+ direct */ into out_BankReconciliationHistory
 select
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -14,6 +14,6 @@ left join stg_csv_User_merge u on
 	b.addedByUserId = u.UserId and b.TenantId = u.TenantId
 ;
 
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_BankReconciliationHistory',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_BankReconciliationHistory',null,now());
 select analyze_statistics('out_BankReconciliationHistory')
 ;

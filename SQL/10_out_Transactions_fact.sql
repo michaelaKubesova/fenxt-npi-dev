@@ -1,4 +1,4 @@
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_Transactions_fact',now(),null);
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Transactions_fact',now(),null);
 insert /*+ direct */ into out_Transactions_fact
 select
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -13,7 +13,8 @@ select
 	,GoodData_Attr(nvl(t.BatchId,'0')) as "BatchId"
 	,t.DateAdded as "DateAdded"
 	,t.DateChanged as "DateChanged"
-from wk_Transactions_TransactionDistribution_join t
+from out_transactions t
+where _sys_is_deleted = false
 
 union all
 
@@ -32,6 +33,6 @@ select
 	,cast(null as varchar(255)) as "DateChanged"
 from stg_csv_summarizedtransaction_merge st
 ;
-INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'out_Transactions_fact',null,now());
+INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Transactions_fact',null,now());
 select analyze_statistics('out_Transactions_fact')
 ;
