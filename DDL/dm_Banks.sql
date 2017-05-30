@@ -1,0 +1,25 @@
+ create or replace view dm_Banks as select 
+_sys_transform_id,
+TenantId,
+BankId,
+DateAdded,
+DateChanged,
+AddedByUserName,
+AddedByUserNameLabel,
+ChangedByUserNameLabel,
+BankDateId,
+Dummy,
+IsReconciled,
+DateLastReconciled,
+LastReconciledByUserName,
+LastReconciledByUserNameLabel,
+ReconciledBalance,
+Name,
+AccountId,
+Description,
+AccountNumber,
+RoutingNumber,
+AccountType,
+AccountTypeTranslation
+from out_Banks 
+ where _sys_transform_id = (select max(id) from _sys_transform_id where ts_end is not null and entity = 'dm_Banks');
