@@ -2,33 +2,27 @@
 select
  "GrantId",
  "UserId",
+ "Description",
+ "Type",
+ "Status",
  "GrantAmount",
  "DateAdded",
- "DateChanged",
- "AddedByUserId",
- "AddedByUserName",
- "AddedByUserNameLabel",
- "ChangedByUserId",
- "ChangedByUserName",
- "ChangedByUserNameLabel",
- "GrantDateId",
- "Dummy"
+ "StartDate",
+ "EndDate"
 from dm_Grants
 where TenantId = '${TenantId}'
 
 union all
+
 select  
 GoodData_Attr(0) as "GrantId" , 
 GoodData_Attr('0') as "UserId" , 
+'' as "Description",
+'' as "Type",
+'' as "Status",
 null as "GrantAmount" , 
 null as "DateAdded" , 
-null as "DateChanged",
-GoodData_Attr('') as "AddedByUserId",
-GoodData_Attr('') as "AddedByUserName",
-GoodData_Attr('') as "AddedByUserNameLabel",
-GoodData_Attr('') as "ChangedByUserId",
-GoodData_Attr('') as "ChangedByUserName",
-GoodData_Attr('') as "ChangedByUserNameLabel",
-GoodData_Attr(0) as "GrantDateId",
-GoodData_Attr(1) as "Dummy"
+null as "StartDate",
+null as "EndDate"
+
 ;
