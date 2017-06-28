@@ -385,6 +385,7 @@ CREATE TABLE out_Accounts
     ChangedByUserName varchar(255),
     ChangedByUserNameLabel varchar(255),
     AccountDateId varchar(255),
+	IsContra varchar(255),
     Dummy varchar(255)
 )  ORDER BY TenantId,
           _sys_transform_id
