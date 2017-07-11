@@ -1,8 +1,17 @@
- create or replace view dm_AccountUserSecurity as select 
-_sys_transform_id,
-TenantId,
-AccountUserSecurityId,
-UserId,
-AccountId
-from out_AccountUserSecurity 
- where _sys_transform_id = (select max(id) from _sys_transform_id where ts_end is not null and entity = 'dm_AccountUserSecurity');
+create or replace view dm_AccountUserSecurity
+AS
+select  t.TenantId as "TenantId",
+	 GoodData_Attr(UsersId||'#'||AccountId)  as "AccountUserSecurityId"
+	,GoodData_Attr(UsersId)  as "UserId"
+	,GoodData_Attr(AccountId) as "AccountId"
+from stg_csv_AccountUserSecurity_merge t
+where Deleted = false
+
+union all
+
+select u.TenantId as "TenantId",
+	 GoodData_Attr(UserId||'#'||-1)  as "AccountUserSecurityId"
+	,GoodData_Attr(UserId)  as "UserId"
+	,GoodData_Attr(-1) as "AccountId"
+from stg_csv_User_merge u
+where  _sys_is_deleted = false;
