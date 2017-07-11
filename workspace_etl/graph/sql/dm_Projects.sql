@@ -17,7 +17,7 @@ select
  "Dummy"
 from dm_Projects
 where TenantId = '${TenantId}'
-and _sys_transform_id = ${DM_PROJECTS_TRANSFORM_ID}
+
 union all
 select  
 GoodData_Attr(-1) as "ProjectId" ,

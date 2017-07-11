@@ -348,17 +348,13 @@ CREATE TABLE out_Grants
     TenantId varchar(255) encoding rle,
     GrantId varchar(255),
     UserId varchar(255),
-    GrantAmount varchar(255),
+	Description varchar(255),
+	Type varchar(255),
+	Status varchar(255),
+	GrantAmount varchar(255),
     DateAdded varchar(255),
-    DateChanged varchar(255),
-    AddedByUserId varchar(255),
-    AddedByUserName varchar(255),
-    AddedByUserNameLabel varchar(255),
-    ChangedByUserId varchar(255),
-    ChangedByUserName varchar(255),
-    ChangedByUserNameLabel varchar(255),
-    GrantDateId varchar(255),
-    Dummy varchar(255)
+	StartDate varchar(255),
+	EndDate varchar(255)
 )  ORDER BY TenantId,
           _sys_transform_id
 SEGMENTED BY hash(TenantId) ALL NODES
@@ -389,6 +385,7 @@ CREATE TABLE out_Accounts
     ChangedByUserName varchar(255),
     ChangedByUserNameLabel varchar(255),
     AccountDateId varchar(255),
+	IsContra varchar(255),
     Dummy varchar(255)
 )  ORDER BY TenantId,
           _sys_transform_id

@@ -22,7 +22,7 @@ select
  "ChangedByUserNameLabel",
  "AccountDateId",
  "Dummy",
- AccountDescription as "AccountDescriptionUniqueLabel"
+ AccountDescription as "AccountDescriptionUniqueLabel",
+ "IsContra"
 from dm_Accounts
 where TenantId = '${TenantId}'
-and _sys_transform_id = ${DM_ACCOUNTS_TRANSFORM_ID}

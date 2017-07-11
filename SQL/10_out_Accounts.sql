@@ -21,6 +21,7 @@ a.TenantId as "TenantId",
 	,GoodData_Attr(a.LastChangedByUserId) as "ChangedByUserName"
 	,GoodData_Attr(eu.Name) as "ChangedByUserNameLabel"
 	,GoodData_Attr(a.AccountId) as "AccountDateId"
+	,a.IsContraAccount as "IsContra"
 	,GoodData_Attr(1) as "Dummy"
 from stg_csv_account_merge a
 join stg_csv_user_merge au
