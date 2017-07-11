@@ -13,8 +13,8 @@ g.TenantId as "TenantId",
 	GoodData_date(g.StartDate)  as "StartDate",
 	GoodData_date(g.EndDate)  as "EndDate"
 from stg_csv_grant_merge g
-join stg_csv_TableEntry_merge TE on g.TypeId = te.TableEntryId and g.TenantId = TE.Tenantid
-join stg_csv_TableEntry_merge TES on g.StatusId = TES.TableEntryId and g.TenantId = TES.Tenantid
+join stg_csv_TableEntry_merge TE on g.TypeId = te.TableEntryId and g.TenantId = TE.Tenantid and TE._sys_is_deleted = false
+join stg_csv_TableEntry_merge TES on g.StatusId = TES.TableEntryId and g.TenantId = TES.Tenantid and TES._sys_is_deleted = false
 ;
 
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Grants',null,now());

@@ -19,15 +19,15 @@ p.TenantId as "TenantId",
 	,GoodData_Attr(1) as "Dummy"
 from stg_csv_project_merge p
 join stg_csv_user_merge au
-	on p.AddedById = au.UserId and p.TenantId = au.TenantId
+	on p.AddedById = au.UserId and p.TenantId = au.TenantId and au._sys_is_deleted = false
 left join stg_csv_tableentry_merge div
-	on p.DivisionId = div.TableEntryId and p.TenantId = div.TenantId
+	on p.DivisionId = div.TableEntryId and p.TenantId = div.TenantId  and div._sys_is_deleted = false
 left join stg_csv_tableentry_merge loc
-	on p.LocationId = loc.TableEntryId and p.TenantId = loc.TenantId
+	on p.LocationId = loc.TableEntryId and p.TenantId = loc.TenantId  and loc._sys_is_deleted = false
 left join stg_csv_tableentry_merge dep
-	on p.DepartmentId = dep.TableEntryId and p.TenantId = dep.TenantId
+	on p.DepartmentId = dep.TableEntryId and p.TenantId = dep.TenantId and dep._sys_is_deleted = false
 left join stg_csv_tableentry_merge typ
-	on p.TypeId = typ.TableEntryId and p.TenantId = typ.TenantId
+	on p.TypeId = typ.TableEntryId and p.TenantId = typ.TenantId  and typ._sys_is_deleted = false
 ;
 
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Projects',null,now());

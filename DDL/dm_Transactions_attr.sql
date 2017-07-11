@@ -1,5 +1,6 @@
- create or replace view dm_Transactions_attr as select 
-_sys_transform_id,
+create or replace view  dm_Transactions_attr 
+as 
+select 
 TenantId,
 PostStatusTranslation,
 PostDate,
@@ -25,5 +26,5 @@ LastChangedByUserName,
 Class,
 TransactionAttributeId,
 IsBeginningBalance
-from out_Transactions_attr 
- where _sys_transform_id = (select max(id) from _sys_transform_id where ts_end is not null and entity = 'dm_Transactions_attr');
+from tmp_out_transactions_attr 
+where _sys_is_deleted=false;

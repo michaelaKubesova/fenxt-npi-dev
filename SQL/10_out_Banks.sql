@@ -25,11 +25,11 @@ b.TenantId as "TenantId",
 	,GoodData_Attr(b.AccountTypeTranslation) as "AccountTypeTranslation"
 from stg_csv_bank_merge b
 join stg_csv_user_merge au
-	on b.AddedById = au.UserId and b.TenantId = au.TenantId
+	on b.AddedById = au.UserId and b.TenantId = au.TenantId and au._sys_is_deleted = false
 join stg_csv_user_merge eu
-	on b.LastChangedById = eu.UserId and b.TenantId = eu.TenantId
+	on b.LastChangedById = eu.UserId and b.TenantId = eu.TenantId and eu._sys_is_deleted = false
 left join stg_csv_user_merge lu
-	on b.LastReconciledById = lu.UserId and b.TenantId = lu.TenantId 
+	on b.LastReconciledById = lu.UserId and b.TenantId = lu.TenantId  and lu._sys_is_deleted = false
 ;
 
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Banks',null,now());

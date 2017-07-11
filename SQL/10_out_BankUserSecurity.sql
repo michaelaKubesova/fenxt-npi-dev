@@ -19,6 +19,7 @@ select
 	,GoodData_Attr(UserId)  as "UserId"
 	,GoodData_Attr(-1) as "BankId"
 from stg_csv_User_merge u
+where u._sys_is_deleted = false
 ;
 
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_BankUserSecurity',null,now());

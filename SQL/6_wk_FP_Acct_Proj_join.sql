@@ -11,7 +11,7 @@ abd.FiscalPeriodId
 	join stg_csv_budgetscenario_merge bs
 		on bs.BudgetScenarioId = ab.BudgetScenarioId and bs.TenantId = ab.TenantId
 	join stg_csv_tableentry_merge te
-		on bs.ScenarioId = te.TableEntryId and te.CodeTableId = 124 and te.TenantId = ab.TenantId
+		on bs.ScenarioId = te.TableEntryId and te.CodeTableId = 124 and te.TenantId = ab.TenantId and te._sys_is_deleted = false
 	join stg_csv_ProjectBudget_merge pb
 		on pb.AccountBudgetId = ab.AccountBudgetId and pb.TenantId = ab.TenantId
 	join stg_csv_ProjectBudgetDetail_merge pbd
