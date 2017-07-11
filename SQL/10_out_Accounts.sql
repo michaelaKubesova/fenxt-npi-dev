@@ -25,13 +25,13 @@ a.TenantId as "TenantId",
 	,GoodData_Attr(1) as "Dummy"
 from stg_csv_account_merge a
 join stg_csv_user_merge au
-	on a.AddedByUserId = au.UserId and a.TenantId = au.TenantId
+	on a.AddedByUserId = au.UserId and a.TenantId = au.TenantId and au._sys_is_deleted = false
 join stg_csv_user_merge eu
-	on a.LastChangedByUserId = eu.UserId and a.TenantId = eu.TenantId
+	on a.LastChangedByUserId = eu.UserId and a.TenantId = eu.TenantId and eu._sys_is_deleted = false
 join stg_csv_fund_merge f
 	on a.FundId = f.FundId and a.TenantId = f.TenantId
 join stg_csv_tableentry_merge class
-	on a.ClassId = class.TableEntryId and a.TenantId = class.TenantId
+	on a.ClassId = class.TableEntryId and a.TenantId = class.TenantId  and class._sys_is_deleted = false
 join stg_csv_accountcode_merge ac
 	on a.AccountCodeId = ac.AccountCodeId and a.TenantId = ac.TenantId
 ;

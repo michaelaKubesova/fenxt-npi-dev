@@ -14,7 +14,7 @@ join stg_csv_accountbudget_merge ab
 join stg_csv_budgetscenario_merge bs
 	on bs.BudgetScenarioId = ab.BudgetScenarioId and bs.TenantId = abd.TenantId
 join stg_csv_tableentry_merge te
-	on bs.ScenarioId = te.TableEntryId and te.CodeTableId = 124 and te.TenantId = abd.TenantId
+	on bs.ScenarioId = te.TableEntryId and te.CodeTableId = 124 and te.TenantId = abd.TenantId  and te._sys_is_deleted = false
 union all
 select
     ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,

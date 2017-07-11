@@ -16,7 +16,7 @@ insert /*+ direct */ into out_Vendors
 	,GoodData_Attr(1) as "Dummy"
 from stg_csv_vendor_merge v
 join stg_csv_User_merge au
-	on v.AddedById = au.UserId and v.TenantId = au.TenantId
+	on v.AddedById = au.UserId and v.TenantId = au.TenantId and au._sys_is_deleted = false
 ;
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Vendors',null,now());
 select analyze_statistics('out_Vendors')

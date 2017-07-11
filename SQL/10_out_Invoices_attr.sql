@@ -12,7 +12,7 @@ insert /*+ direct */ into out_Invoices_attr
 	,GoodData_Attr(i.InvoiceId) as "InvoiceAttributeId"
 from stg_csv_invoice_merge i
 join stg_csv_user_merge au
-	on i.AddedById = au.UserId and i.TenantId = au.TenantId
+	on i.AddedById = au.UserId and i.TenantId = au.TenantId and au._sys_is_deleted = false
 ;
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_Invoices_attr',null,now());
 select analyze_statistics('out_Invoices_attr')

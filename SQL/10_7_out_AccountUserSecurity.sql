@@ -16,7 +16,8 @@ select
 	 GoodData_Attr(UserId||'#'||-1)  as "AccountUserSecurityId"
 	,GoodData_Attr(UserId)  as "UserId"
 	,GoodData_Attr(-1) as "AccountId"
-from stg_csv_User_merge u;
+from stg_csv_User_merge u
+where  _sys_is_deleted = false;
 
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_AccountUserSecurity',null,now());
 select analyze_statistics('out_AccountUserSecurity')

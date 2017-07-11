@@ -4,4 +4,10 @@
    union all
    SELECT 'TransactionDistribution' as key, to_char(MAX(_sys_updated_at),'yyyy-mm-dd hh24:mi:ss.us') as value
      FROM stg_csv_TransactionDistribution_merge
+   union all
+   SELECT 'TableEntry' as key, to_char(MAX(_sys_updated_at),'yyyy-mm-dd hh24:mi:ss.us') as value
+     FROM stg_csv_tableentry_merge
+     union all
+   SELECT 'User' as key, to_char(MAX(_sys_updated_at),'yyyy-mm-dd hh24:mi:ss.us') as value
+     FROM stg_csv_user_merge
 ;

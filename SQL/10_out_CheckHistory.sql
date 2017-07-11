@@ -17,7 +17,8 @@ ch.TenantId as "TenantId",
 	,GoodData_Attr(ch.DrillInID) as DrillInID
 from stg_csv_CheckHistory_merge ch
 join stg_csv_User_merge au
-	on ch.ChangedByUserId = au.UserId and ch.TenantId = au.TenantId where ch.CheckHistoryId < 1000000000
+	on ch.ChangedByUserId = au.UserId and ch.TenantId = au.TenantId  and au._sys_is_deleted = false
+where ch.CheckHistoryId < 1000000000
 union all
 select 
 ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,

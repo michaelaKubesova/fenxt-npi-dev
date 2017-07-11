@@ -5,19 +5,16 @@ select
     ,pb.TenantId as "TenantId"
 	,cast(pbd.Amount as decimal(15,2)) as "PeriodAmount"
 	,GoodData_Attr(pb.ProjectBudgetId||'-'||pbd.FiscalPeriodId) as "ProjectBudgetId"
-	,GoodData_Attr(abd.AccountBudgetDetailId) as "AccountBudgetAttrId"
+	,GoodData_Attr(pb.AccountBudgetAttrId) as "AccountBudgetAttrId"
 	,GoodData_Attr(pb.ProjectId)  as "ProjectId"
 	,GoodData_Attr(pb.AccountId)  as "AccountId"
-	,cast(pb.Amount as decimal(15,2)) as "ProjectBudgetAmount"
+	,cast(pb.ProjectBudgetAmount as decimal(15,2)) as "ProjectBudgetAmount"
 	,GoodData_Attr(pbd.FiscalPeriodId)  as "FiscalPeriodId"
-	,GoodData_Attr(abs.ScenarioId) as "ScenarioId"
-from stg_csv_ProjectBudget_merge pb
-join stg_csv_AccountBudgetDetail_merge abd
-	on pb.AccountBudgetId = abd.AccountBudgetId and pb.TenantId = abd.TenantId
-join wk_AccountBudgetScenario abs
-	on pb.AccountBudgetId = abs.AccountBudgetId and pb.TenantId = abs.TenantId
-join (select TenantId, ProjectBudgetId, FiscalPeriodId, Amount from stg_csv_ProjectBudgetDetail_merge group by TenantId, ProjectBudgetId, FiscalPeriodId, Amount) pbd
-	on pb.ProjectBudgetId = pbd.ProjectBudgetId and pb.TenantId = pbd.TenantId
+	,GoodData_Attr(pb.ScenarioId) as "ScenarioId"
+from tmp_ProjectBudgets pb
+join tmp_ProjectBudgetDetail pbd
+  on pb.ProjectBudgetId = pbd.ProjectBudgetId 
+ and pb.TenantId = pbd.TenantId
 ;
 insert /*+ direct */ into out_ProjectBudgets
 select
