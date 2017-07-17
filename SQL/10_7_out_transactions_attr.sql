@@ -7,9 +7,9 @@ values (null,nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr_tmp_u
 insert into _sys_load_info (project_id,ts_from, ts_to,event_ts,event_type,gdc_project_id, entity) 
 values (null,nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr_tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TMP_TS['tmp_tableentry']}','yyyy-mm-dd hh24:mi:ss.us'),now(),'tmp_start',null,'out_transactions_attr_tmp_tableentry');
 
-truncate table wrk_tmp_out_transactions_attr;
+truncate table wrk_out_transactions_attr;
 
-insert /*+ direct */ into wrk_tmp_out_transactions_attr
+insert /*+ direct */ into wrk_out_transactions_attr
 select ij.*,
 md5(
 COALESCE((TenantId)::VARCHAR(1000),'') || '|' ||
@@ -97,7 +97,7 @@ left join stg_csv_tableentry_merge c on t.ClassId = c.TableEntryId and t.TenantI
 ) ij;
 
 
-insert /*+ direct */ into wrk_tmp_out_transactions_attr
+insert /*+ direct */ into wrk_out_transactions_attr
 select ij.*,
 md5(
 COALESCE((TenantId)::VARCHAR(1000),'') || '|' ||
@@ -162,17 +162,17 @@ left join stg_csv_tableentry_merge tc4 on t.TransactionCode4 = tc4.TableEntryId 
 left join stg_csv_tableentry_merge tc5 on t.TransactionCode5 = tc5.TableEntryId and t.TenantId = tc5.TenantId and tc5._sys_is_deleted = false
 ) ij;
 
-select analyze_statistics('wrk_tmp_out_transactions_attr');
+select analyze_statistics('wrk_out_transactions_attr');
 
-truncate table wrk_tmp_out_transactions_attr_diff;
+truncate table wrk_out_transactions_attr_diff;
 
-insert into wrk_tmp_out_transactions_attr_diff
+insert into wrk_out_transactions_attr_diff
 select a.*
-FROM "wrk_tmp_out_transactions_attr" a
+FROM "wrk_out_transactions_attr" a
 LEFT JOIN (
     SELECT aa."tenantid",aa."TransactionAttrDistributionId",aa._sys_hash
-    FROM "wrk_tmp_out_transactions_attr" aa
-    JOIN "tmp_out_transactions_attr" bb
+    FROM "wrk_out_transactions_attr" aa
+    JOIN "out_transactions_attr" bb
     ON
         bb."tenantid" = aa."tenantid" AND bb."TransactionAttrDistributionId" = aa."TransactionAttrDistributionId"
             AND
@@ -182,10 +182,10 @@ LEFT JOIN (
 ) b ON a._sys_hash = b._sys_hash AND a."tenantid" = b."tenantid" AND a."TransactionAttrDistributionId" = b."TransactionAttrDistributionId"
 WHERE b."_sys_hash" IS NULL;
 
-select analyze_statistics('wrk_tmp_out_transactions_attr_diff');
+select analyze_statistics('wrk_out_transactions_attr_diff');
 
-MERGE /* +direct */ INTO tmp_out_transactions_attr o
-USING wrk_tmp_out_transactions_attr_diff temp
+MERGE /* +direct */ INTO out_transactions_attr o
+USING wrk_out_transactions_attr_diff temp
 ON (
     o."TenantId" = temp."TenantId" AND o."TransactionAttrDistributionId" = temp."TransactionAttrDistributionId"
 )

@@ -11,6 +11,7 @@ select
 	,GoodData_Attr(nvl(t.BatchId,'0')) as "BatchId"
 	,t.DateAdded as "DateAdded"
 	,t.DateChanged as "DateChanged"
+	,_sys_updated_at
 from out_transactions t
 where _sys_is_deleted = false
 union all
@@ -26,6 +27,7 @@ select
 	,GoodData_Attr('0') as "BatchId"
 	,null::date as "DateAdded"
 	,null::date as "DateChanged"
+	,_sys_updated_at
 from stg_csv_summarizedtransaction_merge st
 where _sys_is_deleted = false
 ;
