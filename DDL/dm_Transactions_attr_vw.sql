@@ -25,6 +25,7 @@ AddedByUserName,
 LastChangedByUserName,
 Class,
 TransactionAttributeId,
-IsBeginningBalance
-from tmp_out_transactions_attr 
+IsBeginningBalance,
+_sys_updated_at
+from out_transactions_attr 
 where _sys_is_deleted=false;

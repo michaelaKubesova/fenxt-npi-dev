@@ -1,32 +1,4 @@
-drop TABLE if exists _sys_transform_id;
-CREATE TABLE _sys_transform_id
-(
-    id int,
-    entity varchar(100) encoding rle,
-    ts_start timestamptz,
-    ts_end timestamptz
-) ORDER BY entity,
-          ts_start,
-          ts_end,
-          id
-UNSEGMENTED ALL NODES;
 
-drop TABLE if exists _sys_load_info;
-CREATE TABLE _sys_load_info
-(
-    project_id varchar(255),
-    gdc_project_id varchar(255)  ENCODING RLE,
-    ts_from timestamptz,
-    ts_to timestamptz,
-    event_ts timestamptz,
-    event_type varchar(255)  ENCODING RLE,
-    entity varchar(255)  ENCODING RLE
-)  ORDER BY event_type,
-            entity,
-            gdc_project_id          
-segmented by hash(event_ts) all nodes;
-
-  
 
 drop table if exists out_InvoiceDistribution;
 CREATE TABLE out_InvoiceDistribution
@@ -217,29 +189,6 @@ SEGMENTED BY hash(TenantId) ALL NODES
 PARTITION BY (_sys_transform_id);
 
 
-
-drop table if exists out_Transactions_fact;
-CREATE TABLE out_Transactions_fact
-(
-    _sys_transform_id int NOT NULL encoding rle,
-    TenantId varchar(255) encoding rle,
-    TransactionDistributionId varchar(255),
-    TransactionAttrDistributionId varchar(255),
-    AccountId varchar(255),
-    ProjectId varchar(255),
-    GrantId varchar(255),
-    FiscalPeriodId varchar(255),
-    TransactionAmount varchar(255),
-    BatchId varchar(255),
-    DateAdded varchar(255),
-    DateChanged varchar(255)
-)  ORDER BY TenantId,
-          _sys_transform_id
-SEGMENTED BY hash(TenantId) ALL NODES
-PARTITION BY (_sys_transform_id);
-
-
-
 drop table if exists out_Banks;
 CREATE TABLE out_Banks
 (
@@ -302,43 +251,6 @@ CREATE TABLE out_AccountBudgets_attr
           _sys_transform_id
 SEGMENTED BY hash(TenantId) ALL NODES
 PARTITION BY (_sys_transform_id);
-
-
-
-drop table if exists out_Transactions_attr;
-CREATE TABLE out_Transactions_attr
-(
-    _sys_transform_id int NOT NULL encoding rle,
-    TenantId varchar(255) encoding rle,
-    PostStatusTranslation varchar(255),
-    PostDate varchar(255),
-    TransactionTypeTranslation varchar(255),
-    EncumbranceStatusTranslation varchar(255),
-    TransactionCode1 varchar(255),
-    TransactionCode1IsActive varchar(10),
-    TransactionCode2 varchar(255),
-    TransactionCode2IsActive varchar(10),
-    TransactionCode3 varchar(255),
-    TransactionCode3IsActive varchar(10),
-    TransactionCode4 varchar(255),
-    TransactionCode4IsActive varchar(10),
-    TransactionCode5 varchar(255),
-    TransactionCode5IsActive varchar(10),
-    DateAdded varchar(255),
-    DateChanged varchar(255),
-    TransactionAttrDistributionId varchar(255),
-    TransactionId varchar(255),
-    AddedByUserNameId varchar(255),
-    AddedByUserName varchar(255),
-    LastChangedByUserName varchar(255),
-    Class varchar(255),
-    TransactionAttributeId varchar(255),
-	IsBeginningBalance varchar(10)
-)  ORDER BY TenantId,
-          _sys_transform_id
-SEGMENTED BY hash(TenantId) ALL NODES
-PARTITION BY (_sys_transform_id);
-
 
 
 drop TABLE if exists out_Grants;
@@ -520,7 +432,8 @@ CREATE TABLE out_BudgetScenario
 (
     _sys_transform_id int NOT NULL encoding rle,
     TenantId varchar(255) encoding rle,
-    ScenarioId varchar(255)
+    ScenarioId varchar(255),
+    ScenarioDesc varchar(255)
 )  ORDER BY TenantId,
           _sys_transform_id,
           ScenarioId
@@ -741,101 +654,6 @@ CREATE TABLE out_ProjectBalance
 			_sys_transform_id
 SEGMENTED BY hash(TenantId) ALL NODES
 PARTITION BY (_sys_transform_id);
-
-
-
-drop table if exists wk_Transactions_TransactionDistribution_Join cascade;
-CREATE TABLE wk_Transactions_TransactionDistribution_Join
-(
-    TenantId varchar(255) encoding rle,
-    TransactionTypeTranslation varchar(255),
-    EncumbranceStatusTranslation varchar(255),
-    AddedById int,
-    DateAdded varchar(255),
-    LastChangedById int,
-    DateChanged varchar(255),
-    BatchId int,
-    PostStatusTranslation varchar(255),
-    AccountId int  encoding rle,
-    PostDate varchar(255),
-    FiscalPeriodId int encoding rle,
-    GrantId int,
-    TranDistributionId int,
-    TransactionId int encoding rle,
-    Projectid int  encoding rle,
-    ClassId int,
-    TDAmount numeric,
-    TransactionCode1Id int,
-    TransactionCode2Id int,
-    TransactionCode3Id int,
-    TransactionCode4Id int,
-    TransactionCode5Id int
-)  ORDER BY TenantId,
-          AccountId,
-          Projectid,
-          FiscalPeriodId
-SEGMENTED BY hash(TenantId) ALL NODES;
-
-CREATE PROJECTION wk_Transactions_TransactionDistribution_Join_agg
-(
- TenantId ENCODING RLE,
- AccountId ENCODING RLE,
- FiscalPeriodId ENCODING RLE,
- TranDistributionId
-)
-AS
- SELECT TenantId,
-        AccountId,
-        FiscalPeriodId,
-        TranDistributionId
- FROM wk_Transactions_TransactionDistribution_Join
- ORDER BY TenantId, AccountId, FiscalPeriodId, TranDistributionId
-SEGMENTED BY hash(TenantId, AccountId, FiscalPeriodId, TranDistributionId) ALL NODES;
-
-CREATE PROJECTION wk_Transactions_TransactionDistribution_Join_attr
-(
- TenantId ENCODING RLE,
- TransactionTypeTranslation,
- EncumbranceStatusTranslation,
- AddedById ENCODING RLE,
- DateAdded,
- LastChangedById ENCODING RLE,
- DateChanged,
- PostStatusTranslation,
- PostDate,
- TransactionId,
- TranDistributionId,
- ClassId ENCODING RLE,
- TransactionCode1Id ENCODING RLE,
- TransactionCode2Id ENCODING RLE,
- TransactionCode3Id ENCODING RLE,
- TransactionCode4Id ENCODING RLE,
- TransactionCode5Id ENCODING RLE
-)
-AS
- SELECT TenantId,
-        TransactionTypeTranslation,
-        EncumbranceStatusTranslation,
-        AddedById,
-        DateAdded,
-        LastChangedById,
-        DateChanged,
-        PostStatusTranslation,
-        PostDate,
-        TransactionId,
-        TranDistributionId,
-        ClassId,
-        TransactionCode1Id,
-        TransactionCode2Id,
-        TransactionCode3Id,
-        TransactionCode4Id,
-        TransactionCode5Id
- FROM wk_Transactions_TransactionDistribution_Join
- ORDER BY TenantId,AddedById,LastChangedById,
-          TransactionCode1Id,TransactionCode2Id,TransactionCode3Id,TransactionCode4Id,TransactionCode5Id,ClassId
-SEGMENTED BY hash(TenantId) ALL NODES;
-
-
 
 drop TABLE if exists wk_FiscalPeriod_Scenario_Join;
 CREATE TABLE wk_FiscalPeriod_Scenario_Join

@@ -1,33 +1,71 @@
-<?xml version="1.0" encoding="UTF-8"?><Graph author="tomas" created="Mon Aug 08 14:13:48 CEST 2016" guiVersion="3.4.4.P" id="1470919378512" licenseType="Commercial" modified="Fri Apr 14 19:02:35 EDT 2017" modifiedBy="alex.shchetkov" name="main" revision="1.29" showComponentDetails="true">
+<?xml version="1.0" encoding="UTF-8"?><Graph author="tomas" created="Mon Aug 08 14:13:48 CEST 2016" guiVersion="3.4.4.P" id="1470919378512" licenseType="Commercial" modified="Sat Jul 15 21:02:12 CEST 2017" modifiedBy="vasek" name="main" revision="1.39" showComponentDetails="true">
 <Global>
-<Metadata id="Metadata36" previewAttachmentCharset="ISO-8859-1">
-<Record fieldDelimiter="," name="GD_dataset_user" previewAttachmentCharset="ISO-8859-1" recordDelimiter="\n\\|\r\n" recordSize="-1" type="delimited">
-<Field delimiter="\n\\|\r\n" eofAsDelimiter="false" name="param" nullable="true" shift="0" size="0" type="string"/>
+<Metadata id="Metadata1" previewAttachmentCharset="ISO-8859-1">
+<Record fieldDelimiter="," name="param" previewAttachmentCharset="ISO-8859-1" recordDelimiter="\n\\|\r\n" recordSize="-1" type="delimited">
+<Field eofAsDelimiter="false" name="param" nullable="true" shift="0" size="0" type="string"/>
 </Record>
 </Metadata>
 <Connection database="DSS" dbURL="jdbc:gdc:datawarehouse://secure.gooddata.com/gdc/datawarehouse/instances/${ADS_INSTANCE}" id="JDBC0" jdbcSpecific="DSS" name="BBFE" password="${ADS_PASSWORD}" type="JDBC" user="${ADS_USER}"/>
 <Property fileURL="workspace.prm" id="GraphParameter0"/>
 <Dictionary/>
 </Global>
-<Phase number="1">
-<Node enabled="enabled" fileURL="sql_params.prm" guiName="CSV Writer" guiX="353" guiY="192" id="CSV_WRITER" makeDirs="true" type="DATA_WRITER"/>
-<Node dbConnection="JDBC0" enabled="enabled" guiName="TRANSFORM_ID PARAMS" guiX="-57" guiY="192" id="TRANSFORM_ID_PARAMS" printStatements="true" type="DB_INPUT_TABLE">
-<attr name="sqlQuery"><![CDATA[
-select concat(concat(concat(entity, '_TRANSFORM_ID'),'='),id) 
- from 
-(select UPPER(entity) entity,max(id) id 
-from _sys_transform_id 
-where ts_end is not null group by entity) t 
-
-union all 
-
-select concat('CTVersion=',ifnull((select ChangeTrackingVersion from stg_csv_Tenant_merge where TenantId = '${TenantId}'),'0'))  
-
-]]></attr>
+<Phase number="0">
+<Node dbConnection="JDBC0" enabled="enabled" guiName="Delete timeframe" guiX="53" guiY="217" id="DELETE_TIMEFRAME" printStatements="true" type="DB_INPUT_TABLE">
+<attr name="sqlQuery"><![CDATA[select entity||'_TS_FROM='||case when '${LOAD_MODE}' = 'FULL_LOAD' then '2017-01-01 00:00:00'
+                        else to_char(fr,'yyyy-mm-dd hh24:mi:ss.us')
+                    end  as param
+  from ( 
+     select  en.entity, nvl(max(TS_TO),to_timestamptz('2017-01-01','yyyy-mm-dd'))  fr
+           from _sys_gd_load_info gli 
+     right join (select 'transaction_attr' as entity union all 
+                 select 'transaction_fact') en 
+            on gli.entity=en.entity
+            and gdc_project_id = '${GDC_PROJECT_ID}'
+            and event_type = 'delete_end'
+      group by en.entity
+       ) aa
+union all
+select 'transaction_attr_TS_TO='||to_char(nvl(max(_sys_updated_at),'2017-01-01'),'yyyy-mm-dd hh24:mi:ss.us') as param
+from dm_transactions_attr_delete where TenantId = '${TenantId}'
+union all
+select 'transaction_fact_TS_TO='||to_char(nvl(max(_sys_updated_at),'2017-01-01'),'yyyy-mm-dd hh24:mi:ss.us') as param
+from dm_transactions_fact_delete where TenantId = '${TenantId}'
+;]]></attr>
 </Node>
-<Edge debugMode="true" fromNode="TRANSFORM_ID_PARAMS:0" guiBendpoints="" guiRouter="Manhattan" id="Edge3" inPort="Port 0 (in)" metadata="Metadata36" outPort="Port 0 (out)" toNode="CSV_WRITER:0"/>
+<Node append="false" enabled="enabled" fileURL="delete_params.prm" guiName="Delete timeframe" guiX="463" guiY="217" id="DELETE_TIMEFRAME1" makeDirs="true" type="DATA_WRITER"/>
+<Node dbConnection="JDBC0" enabled="enabled" guiName="Incremental timeframe" guiX="53" guiY="130" id="INCREMENTAL_TIMEFRAME" printStatements="true" type="DB_INPUT_TABLE">
+<attr name="sqlQuery"><![CDATA[select entity||'_TS_FROM='||case when '${LOAD_MODE}' = 'FULL_LOAD' then '2017-01-01 00:00:00'
+                        else to_char(fr,'yyyy-mm-dd hh24:mi:ss.us')
+                    end  as param
+  from ( 
+     select  en.entity, nvl(max(TS_TO),to_timestamptz('2017-01-01','yyyy-mm-dd'))  fr
+           from _sys_gd_load_info gli 
+     right join (select 'transaction_attr' as entity union all 
+                 select 'transaction_fact') en 
+            on gli.entity=en.entity
+            and gdc_project_id = '${GDC_PROJECT_ID}'
+            and event_type = 'inc_end'
+      group by en.entity
+       ) aa
+union all
+select 'transaction_attr_TS_TO='||to_char(nvl(max(_sys_updated_at),'2017-01-01'),'yyyy-mm-dd hh24:mi:ss.us') as param
+from dm_transactions_attr where TenantId = '${TenantId}'
+union all
+select 'transaction_fact_TS_TO='||to_char(nvl(max(_sys_updated_at),'2017-01-01'),'yyyy-mm-dd hh24:mi:ss.us') as param
+from dm_Transactions_fact where TenantId = '${TenantId}'
+;]]></attr>
+</Node>
+<Node append="false" enabled="enabled" fileURL="inc_params.prm" guiName="Incremental timeframe" guiX="463" guiY="130" id="INCREMENTAL_TIMEFRAME1" makeDirs="true" type="DATA_WRITER"/>
+<Edge debugMode="true" fromNode="DELETE_TIMEFRAME:0" guiBendpoints="" guiRouter="Manhattan" id="Edge2" inPort="Port 0 (in)" metadata="Metadata1" outPort="Port 0 (out)" toNode="DELETE_TIMEFRAME1:0"/>
+<Edge debugMode="true" fromNode="INCREMENTAL_TIMEFRAME:0" guiBendpoints="" guiRouter="Manhattan" id="Edge1" inPort="Port 0 (in)" metadata="Metadata1" outPort="Port 0 (out)" toNode="INCREMENTAL_TIMEFRAME1:0"/>
 </Phase>
 <Phase number="10">
-<Node enabled="enabled" graphName="${GRAPH_DIR}/DATAMARTS_LOAD.grf" guiName="Full Load" guiX="0" guiY="433" id="FULL_LOAD" paramsToPass="ADS_INSTANCE;ADS_PASSWORD;ADS_USER;TenantId" type="RUN_GRAPH"/>
+<Node enabled="enabled" graphName="${GRAPH_DIR}/project_delete.grf" guiName="Deletes" guiX="92" guiY="366" id="DELETES" paramsToPass="ADS_INSTANCE;ADS_PASSWORD;ADS_USER;TenantId;LOAD_MODE;TS_FROM;TS_TO" type="RUN_GRAPH"/>
+</Phase>
+<Phase number="20">
+<Node enabled="enabled" graphName="${GRAPH_DIR}/project_load_inc.grf" guiName="Increments" guiX="291" guiY="366" id="INCREMENTS" paramsToPass="ADS_INSTANCE;ADS_PASSWORD;ADS_USER;TenantId;LOAD_MODE;TS_FROM;TS_TO" type="RUN_GRAPH"/>
+</Phase>
+<Phase number="30">
+<Node enabled="enabled" graphName="${GRAPH_DIR}/project_load_full.grf" guiName="Full Load" guiX="502" guiY="366" id="FULL_LOAD" paramsToPass="ADS_INSTANCE;ADS_PASSWORD;ADS_USER;TenantId" type="RUN_GRAPH"/>
 </Phase>
 </Graph>
