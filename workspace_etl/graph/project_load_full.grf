@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><Graph author="vasek" created="Sat Feb 06 18:03:46 CET 2016" guiVersion="3.4.4.P" id="1456868507661" licenseType="Commercial" modified="Sun Jul 16 21:37:42 CEST 2017" modifiedBy="vasek" name="DATAMARTS_LOAD_template" revision="1.642" showComponentDetails="true">
+<?xml version="1.0" encoding="UTF-8"?><Graph author="vasek" created="Sat Feb 06 18:03:46 CET 2016" guiVersion="3.4.4.P" id="1456868507661" licenseType="Commercial" modified="Wed Jul 19 17:23:01 EDT 2017" modifiedBy="alex.shchetkov" name="DATAMARTS_LOAD_template" revision="1.645" showComponentDetails="true">
 <Global>
 <Metadata id="23" previewAttachmentCharset="ISO-8859-1">
 <Record fieldDelimiter=";" name="AccountBudgets_Attr" previewAttachmentCharset="ISO-8859-1" recordDelimiter="\n" recordSize="-1" type="delimited">
@@ -698,8 +698,8 @@
 </Metadata>
 <Connection database="AZURE" dbURL="jdbc:sqlserver://fenxtchangetracking.database.windows.net:1433;database=GoodDataChangeTracking;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;" id="JDBC1" jdbcSpecific="AZURE" name="AzureConnection" password="@!#Xs132465798" type="JDBC" user="alex.shchetkov"/>
 <Connection database="DSS" dbURL="jdbc:gdc:datawarehouse://secure.gooddata.com/gdc/datawarehouse/instances/${ADS_INSTANCE}" id="JDBC0" jdbcSpecific="DSS" name="BBFE" password="${ADS_PASSWORD}" type="JDBC" user="${ADS_USER}"/>
-<Property fileURL="sql_params.prm" id="GraphParameter0"/>
-<Property fileURL="workspace.prm" id="GraphParameter32"/>
+<Property fileURL="workspace_etl/inc_params.prm" id="GraphParameter0"/>
+<Property fileURL="workspace.prm" id="GraphParameter1"/>
 <Dictionary/>
 </Global>
 <Phase number="1">
@@ -844,16 +844,16 @@
 function integer transform() {
 
 $out.0.maql=''+
-'ALTER ATTRIBUTE {attr.transactions_attr.transactioncode1} VISUAL(TITLE "'+$in.0.TransactionCode1Name+'", DESCRIPTION "");'+
-'ALTER ATTRIBUTE {attr.transactions_attr.transactioncode2} VISUAL(TITLE "'+$in.0.TransactionCode2Name+'", DESCRIPTION "");'+
-'ALTER ATTRIBUTE {attr.transactions_attr.transactioncode3} VISUAL(TITLE "'+$in.0.TransactionCode3Name+'", DESCRIPTION "");'+
-'ALTER ATTRIBUTE {attr.transactions_attr.transactioncode4} VISUAL(TITLE "'+$in.0.TransactionCode4Name+'", DESCRIPTION "");'+
-'ALTER ATTRIBUTE {attr.transactions_attr.transactioncode5} VISUAL(TITLE "'+$in.0.TransactionCode5Name+'", DESCRIPTION "");'+
-'ALTER ATTRIBUTE {attr.transactions_attr.transactions1isactive} VISUAL(TITLE "'+$in.0.TransactionCode1Name+' status", DESCRIPTION "");'+
-'ALTER ATTRIBUTE {attr.transactions_attr.transactions2isactive} VISUAL(TITLE "'+$in.0.TransactionCode2Name+' status", DESCRIPTION "");'+
-'ALTER ATTRIBUTE {attr.transactions_attr.transactions3isactive} VISUAL(TITLE "'+$in.0.TransactionCode3Name+' status", DESCRIPTION "");'+
-'ALTER ATTRIBUTE {attr.transactions_attr.transactions4isactive} VISUAL(TITLE "'+$in.0.TransactionCode4Name+' status", DESCRIPTION "");'+
-'ALTER ATTRIBUTE {attr.transactions_attr.transactions5isactive} VISUAL(TITLE "'+$in.0.TransactionCode5Name+' status", DESCRIPTION "");'+
+'ALTER ATTRIBUTE {attr.transactions_attr.transactioncode1} VISUAL(TITLE "'+$in.0.TransactionCode1Name+'", DESCRIPTION "Further categorization of a transaction, such as Educational Activity");'+
+'ALTER ATTRIBUTE {attr.transactions_attr.transactioncode2} VISUAL(TITLE "'+$in.0.TransactionCode2Name+'", DESCRIPTION "Further categorization of a transaction, such as Educational Activity");'+
+'ALTER ATTRIBUTE {attr.transactions_attr.transactioncode3} VISUAL(TITLE "'+$in.0.TransactionCode3Name+'", DESCRIPTION "Further categorization of a transaction, such as Educational Activity");'+
+'ALTER ATTRIBUTE {attr.transactions_attr.transactioncode4} VISUAL(TITLE "'+$in.0.TransactionCode4Name+'", DESCRIPTION "Further categorization of a transaction, such as Educational Activity");'+
+'ALTER ATTRIBUTE {attr.transactions_attr.transactioncode5} VISUAL(TITLE "'+$in.0.TransactionCode5Name+'", DESCRIPTION "Further categorization of a transaction, such as Educational Activity");'+
+'ALTER ATTRIBUTE {attr.transactions_attr.transactions1isactive} VISUAL(TITLE "'+$in.0.TransactionCode1Name+' status", DESCRIPTION "State of the transaction code, such as Active or Inactive");'+
+'ALTER ATTRIBUTE {attr.transactions_attr.transactions2isactive} VISUAL(TITLE "'+$in.0.TransactionCode2Name+' status", DESCRIPTION "State of the transaction code, such as Active or Inactive");'+
+'ALTER ATTRIBUTE {attr.transactions_attr.transactions3isactive} VISUAL(TITLE "'+$in.0.TransactionCode3Name+' status", DESCRIPTION "State of the transaction code, such as Active or Inactive");'+
+'ALTER ATTRIBUTE {attr.transactions_attr.transactions4isactive} VISUAL(TITLE "'+$in.0.TransactionCode4Name+' status", DESCRIPTION "State of the transaction code, such as Active or Inactive");'+
+'ALTER ATTRIBUTE {attr.transactions_attr.transactions5isactive} VISUAL(TITLE "'+$in.0.TransactionCode5Name+' status", DESCRIPTION "State of the transaction code, such as Active or Inactive");'+
 'ALTER ATTRIBUTE {attr.projects.description} VISUAL(TITLE "'+$in.0.ProjectName+' description", DESCRIPTION "");'+
 'ALTER ATTRIBUTE {attr.project_date.projectdateid} VISUAL(TITLE "'+$in.0.ProjectName+' Date : ID", DESCRIPTION "");'+
 'ALTER ATTRIBUTE {attr.projects.projecttype} VISUAL(TITLE "'+$in.0.ProjectName+' type", DESCRIPTION "");'+

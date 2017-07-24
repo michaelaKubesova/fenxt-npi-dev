@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><Graph author="michaelphillips" created="Tue Mar 15 10:59:31 PDT 2016" guiVersion="3.4.4.P" id="1458080400496" licenseType="Commercial" modified="Mon Jul 17 09:32:54 CEST 2017" modifiedBy="vasek" name="uat_gd" revision="1.366" showComponentDetails="true">
+<?xml version="1.0" encoding="UTF-8"?><Graph author="michaelphillips" created="Tue Mar 15 10:59:31 PDT 2016" guiVersion="3.4.4.P" id="1458080400496" licenseType="Commercial" modified="Wed Jul 19 17:21:43 EDT 2017" modifiedBy="alex.shchetkov" name="uat_gd" revision="1.367" showComponentDetails="true">
 <Global>
 <Metadata id="Metadata7" previewAttachmentCharset="ISO-8859-1">
 <Record fieldDelimiter="|" name="log" previewAttachmentCharset="ISO-8859-1" recordDelimiter="\n" type="delimited">
@@ -78,7 +78,7 @@
 </Record>
 </Metadata>
 <Connection database="DSS" dbURL="jdbc:gdc:datawarehouse://secure.gooddata.com/gdc/datawarehouse/instances/${ADS_INSTANCE}" id="JDBC0" jdbcSpecific="DSS" name="BBFE" password="${ADS_PASSWORD}" type="JDBC" user="${ADS_USER}"/>
-<Property fileURL="inc_params.prm" id="GraphParameter14"/>
+<Property fileURL="workspace_etl/inc_params.prm" id="GraphParameter14"/>
 <Property fileURL="workspace.prm" id="GraphParameter0"/>
 <Dictionary/>
 </Global>
