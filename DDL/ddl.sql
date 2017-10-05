@@ -732,7 +732,7 @@ CREATE TABLE out_ARCharges
 	ARChargePaymentStatus varchar(255),
 	ARChargeItemDescription varchar(255),
 	ARChargeAmount numeric,
-	ARChargeBalance numeric,
+	ARChargeBalance numeric, 
 	ARClientId int,
 	datechanged varchar(255),
 	dateadded varchar(255),

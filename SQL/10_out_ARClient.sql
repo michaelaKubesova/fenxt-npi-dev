@@ -8,8 +8,8 @@ ARClientType ,
 ARClientDisplayName ,
 ARClientCFDANumber ,
 AddedByUserId,
-dateadded,
-datechanged,
+GoodData_Date(dateadded),
+GoodData_Date(datechanged),
 A.Amount
 from stg_csv_ARClient_merge C 
 left join stg_csv_ARClientAmount_merge A

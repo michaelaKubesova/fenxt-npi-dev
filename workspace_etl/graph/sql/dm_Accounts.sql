@@ -1,4 +1,3 @@
-
 select
  "AccountId",
  "AccountNumber",
@@ -23,6 +22,16 @@ select
  "AccountDateId",
  "Dummy",
  AccountDescription as "AccountDescriptionUniqueLabel",
- "IsContra"
-from dm_Accounts
+ "IsContra",
+ (select concat(concat(AccountSegmentValue, ' - '), Description) from stg_csv_AccountSegmentValue_merge asv where TenantId = '${TenantId}' and a.AccountId = asv.AccountId and SegmentId = 1)"Account segment 1",
+ (select concat(concat(AccountSegmentValue, ' - '), Description) from stg_csv_AccountSegmentValue_merge asv where TenantId = '${TenantId}' and a.AccountId = asv.AccountId and SegmentId = 2)"Account segment 2",
+ (select concat(concat(AccountSegmentValue, ' - '), Description) from stg_csv_AccountSegmentValue_merge asv where TenantId = '${TenantId}' and a.AccountId = asv.AccountId and SegmentId = 3)"Account segment 3",
+ (select concat(concat(AccountSegmentValue, ' - '), Description) from stg_csv_AccountSegmentValue_merge asv where TenantId = '${TenantId}' and a.AccountId = asv.AccountId and SegmentId = 4)"Account segment 4",
+ (select concat(concat(AccountSegmentValue, ' - '), Description) from stg_csv_AccountSegmentValue_merge asv where TenantId = '${TenantId}' and a.AccountId = asv.AccountId and SegmentId = 5)"Account segment 5",
+ (select concat(concat(AccountSegmentValue, ' - '), Description) from stg_csv_AccountSegmentValue_merge asv where TenantId = '${TenantId}' and a.AccountId = asv.AccountId and SegmentId = 6)"Account segment 6",
+ (select concat(concat(AccountSegmentValue, ' - '), Description) from stg_csv_AccountSegmentValue_merge asv where TenantId = '${TenantId}' and a.AccountId = asv.AccountId and SegmentId = 7)"Account segment 7",
+ (select concat(concat(AccountSegmentValue, ' - '), Description) from stg_csv_AccountSegmentValue_merge asv where TenantId = '${TenantId}' and a.AccountId = asv.AccountId and SegmentId = 8)"Account segment 8",
+ (select concat(concat(AccountSegmentValue, ' - '), Description) from stg_csv_AccountSegmentValue_merge asv where TenantId = '${TenantId}' and a.AccountId = asv.AccountId and SegmentId = 9)"Account segment 9",
+ (select concat(concat(AccountSegmentValue, ' - '), Description) from stg_csv_AccountSegmentValue_merge asv where TenantId = '${TenantId}' and a.AccountId = asv.AccountId and SegmentId = 10)"Account segment 10"
+from dm_Accounts a
 where TenantId = '${TenantId}'

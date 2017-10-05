@@ -13,10 +13,10 @@ ARChargeItemDescription,
 ARChargeAmount,
 ARChargeBalance, 
 ARClientId,
-datechanged,
-dateadded,
-postdate,
-duedate
+GoodData_Date(datechanged),
+GoodData_Date(dateadded),
+GoodData_Date(postdate),
+GoodData_Date(duedate)
 from stg_csv_ARCharge_merge
 ;
 

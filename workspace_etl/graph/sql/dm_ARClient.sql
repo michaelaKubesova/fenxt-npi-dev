@@ -5,8 +5,8 @@ select
  "ARClientDisplayName",
  "ARClientCFDANumber",
  au.Name,
- "dateadded",
- "datechanged",
+ Gooddata_Date(dateadded::date),
+ Gooddata_Date(datechanged::date),
  "Amount"
 from dm_ARClients ar
 join stg_csv_user_merge au
