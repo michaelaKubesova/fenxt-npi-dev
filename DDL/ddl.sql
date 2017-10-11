@@ -91,7 +91,7 @@ CREATE TABLE out_Invoices_attr
     AddedByUserName varchar(255),
     AddedByUserNameLabel varchar(255),
     InvoiceHyperlink varchar(255),
-    InvoiceAttributeId varchar(255)
+	InvoicePaymentMethod varchar(255)
 )  ORDER BY TenantId,
           _sys_transform_id
 SEGMENTED BY hash(TenantId) ALL NODES
@@ -134,7 +134,8 @@ CREATE TABLE out_FiscalPeriods
     FiscalYearEnd varchar(255),
     FiscalDate varchar(255),
     FiscalYearStartDate varchar(255),
-    FiscalYearEndDate varchar(255)
+    FiscalYearEndDate varchar(255),
+	FiscalYearStatus varchar(255)
 )  ORDER BY TenantId,
           _sys_transform_id
 SEGMENTED BY hash(TenantId) ALL NODES

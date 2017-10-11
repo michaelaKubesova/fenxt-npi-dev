@@ -17,6 +17,7 @@ fp.TenantId as "TenantId",
 	,GoodData_date(fp.StartDate)  as "FiscalDate"
 	,GoodData_date(summary.StartDate) as "FiscalYearStartDate"
 	,GoodData_date(summary.EndDate) as "FiscalYearEndDate"
+	,GoodData_Attr(fy.Status) as "FiscalYearStatus"
 from stg_csv_fiscalperiod_merge fp
 join (select 
 		 FiscalYearId

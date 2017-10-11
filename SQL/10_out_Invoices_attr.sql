@@ -9,7 +9,12 @@ insert /*+ direct */ into out_Invoices_attr
 	,GoodData_Attr(i.StatusTranslation) as "StatusTranslation"
 	,GoodData_Attr(i.AddedById) as "AddedByUserName"
 	,GoodData_Attr(au.Name) as "AddedByUserNameLabel"
-	,GoodData_Attr(i.InvoiceId) as "InvoiceAttributeId"
+	,GoodData_Attr('{"state":"payables.invoice.detail","id":'||InvoiceId||'}') "InvoiceNumberHyperlink"
+	,GoodData_Attr(case when i.PaymentMethod= 1 then 'Check'
+		            when i.PaymentMethod= 2 then 'EFT'
+		            when i.PaymentMethod= 3 then 'Bank Draft'
+					when i.PaymentMethod= 4 then 'Credit Card'
+	             end) as "InvoicePaymentMethod"
 from stg_csv_invoice_merge i
 join stg_csv_user_merge au
 	on i.AddedById = au.UserId and i.TenantId = au.TenantId and au._sys_is_deleted = false
