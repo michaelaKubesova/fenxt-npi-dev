@@ -50,7 +50,10 @@
 		"ProjectBalance":{"global":{"custom":{"hub":["TenantId","ProjectBalanceId"]}}},
 		"ARClient":{"global":{"custom":{"hub":["TenantId","ARClientId"],"is_deleted":"deleted"}}},
 		"ARCharge":{"global":{"custom":{"hub":["TenantId","ARChargeId"],"is_deleted":"deleted"}}},
-		"ARClientAmount":{"global":{"custom":{"hub":["TenantId","ClientId"]}}}
+		"ARClientAmount":{"global":{"custom":{"hub":["TenantId","ClientId"]}}},
+		"CCTransaction":{"global":{"custom":{"hub":["TenantId","CreditCardTransactionId"],"is_deleted":"deleted"}}},
+		"CCAccount":{"global":{"custom":{"hub":["TenantId","YodleeAccountIdId"],"is_deleted":"deleted"}}},
+		"BankSubsidiaryCards":{"global":{"custom":{"hub":["TenantId","BankSubsidiaryCardsId"],"is_deleted":"deleted"}}}
 		
 		
     },
@@ -108,7 +111,10 @@
 			"ProjectBalance",
 			"ARClient",
 			"ARCharge",
-			"ARClientAmount"
+			"ARClientAmount",
+			"CCTransaction",
+			"CCAccount",
+			"BankSubsidiaryCards"
           ]
       }
     },
