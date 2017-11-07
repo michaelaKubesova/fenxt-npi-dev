@@ -9,8 +9,8 @@ select
 	,GoodData_Attr(t.FiscalPeriodId)  as "FiscalPeriodId"
 	,cast(t.TDAmount as decimal(15, 2)) as "TransactionAmount"
 	,GoodData_Attr(nvl(t.BatchId,'0')) as "BatchId"
-	,t.DateAdded as "DateAdded"
-	,t.DateChanged as "DateChanged"
+	,GoodData_Date(t.DateAdded) as "DateAdded"
+	,GoodData_Date(t.DateChanged) as "DateChanged"
 	,_sys_updated_at
 from out_transactions t
 where _sys_is_deleted = false
@@ -31,3 +31,20 @@ select
 from stg_csv_summarizedtransaction_merge st
 where _sys_is_deleted = false
 ;
+
+
+
+CREATE or replace VIEW dm_Transactions_fact_delete 
+AS
+SELECT out_Transactions.TranDistributionId,
+out_Transactions.TenantId,
+out_Transactions._sys_updated_at
+FROM out_Transactions
+ WHERE (out_Transactions._sys_is_deleted = true)
+  UNION ALL 
+   SELECT (1000000000000 + st.SummaryId) 
+  AS TranDistributionId,
+  st.TenantId,
+  st._sys_updated_at
+  FROM stg_csv_SummarizedTransaction_merge st
+   WHERE (st._sys_is_deleted = true);
