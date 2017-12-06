@@ -780,7 +780,7 @@ CREATE TABLE out_CCTransaction
    MerchantName varchar(255),
    CategoryName varchar(255),
    Comment varchar(255),
-   Amount numeric,
+   Amount varchar(255),
    PostDate varchar(255),
    BankSubsidiaryCardsId varchar(255),
    InvoiceId varchar(255),

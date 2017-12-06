@@ -145,7 +145,15 @@
           "access_key": "AKIAJMDBPRRAOIRRVWGQ",
           "bucket": "gdc-ms-cust"
           }
-      }
+      },
+    "computed_fields":[
+      {
+        "name":"_sys_updated_at",
+        "type":"date-true",
+        "function":"custom_function",
+        "definition":"now()",
+        "table_type":["stg"]
+      }]
     },
     "csv":{
       "type":"s3",
