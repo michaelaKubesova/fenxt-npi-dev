@@ -11,6 +11,6 @@ union all
 select
 	GoodData_Attr(UserId||'#0')  as "ProjectUserSecurityId",
 	GoodData_Attr(UserId)  as "UserId",
-	GoodData_Attr('0') as "ProjectId"
+	GoodData_Attr('-2') as "ProjectId"
 from stg_csv_User_merge u
 where TenantId = '${TenantId}'

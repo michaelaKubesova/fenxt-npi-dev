@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><Graph author="michaelphillips" created="Tue Mar 15 10:59:31 PDT 2016" guiVersion="3.4.4.P" id="1458080400496" licenseType="Commercial" modified="Sun Jul 16 10:10:01 CEST 2017" modifiedBy="vasek" name="uat_gd" revision="1.344" showComponentDetails="true">
+<?xml version="1.0" encoding="UTF-8"?><Graph author="michaelphillips" created="Tue Mar 15 10:59:31 PDT 2016" guiVersion="3.4.4.P" id="1458080400496" licenseType="Commercial" modified="Wed Jul 19 17:08:38 EDT 2017" modifiedBy="alex.shchetkov" name="uat_gd" revision="1.346" showComponentDetails="true">
 <Global>
 <Metadata id="Metadata1" previewAttachmentCharset="ISO-8859-1">
 <Record fieldDelimiter="," name="GD_dataset_constituents" previewAttachmentCharset="ISO-8859-1" recordDelimiter="\n\\|\r\n" recordSize="-1" type="delimited">
@@ -121,8 +121,8 @@
 </Record>
 </Metadata>
 <Connection database="DSS" dbURL="jdbc:gdc:datawarehouse://secure.gooddata.com/gdc/datawarehouse/instances/${ADS_INSTANCE}" id="JDBC0" jdbcSpecific="DSS" name="BBFE" password="${ADS_PASSWORD}" type="JDBC" user="${ADS_USER}"/>
-<Property fileURL="delete_params.prm" id="GraphParameter0"/>
-<Property fileURL="workspace.prm" id="GraphParameter1"/>
+<Property fileURL="workspace_etl/delete_params.prm" id="GraphParameter14"/>
+<Property fileURL="workspace.prm" id="GraphParameter0"/>
 <Dictionary>
 <Entry contentType="contentType" id="DictionaryEntry0" input="true" name="TS_START" output="true" type="string"/>
 </Dictionary>

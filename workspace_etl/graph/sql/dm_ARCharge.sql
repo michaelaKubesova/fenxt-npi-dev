@@ -10,11 +10,9 @@ select
  "ARChargeAmount",
  "ARChargeBalance",
  "ARClientId",
- "datechanged",
- "dateadded",
- "postdate",
- case when cast(duedate as datetime) < '1900/01/01' then '1900-01-01 00:00:00'
- else duedate
- end
+ Gooddata_Date(datechanged::date),
+ Gooddata_Date(dateadded::date),
+ Gooddata_Date(postdate::date),
+ Gooddata_Date(duedate::date)
 from dm_ARCharges
 where TenantId = '${TenantId}'

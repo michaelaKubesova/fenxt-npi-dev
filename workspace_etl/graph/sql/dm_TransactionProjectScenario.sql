@@ -8,5 +8,3 @@ select
  "AccountId"
 from dm_TransactionProjectScenario
 where TenantId = '${TenantId}'
-
-

@@ -6,6 +6,7 @@ select
  "StatusTranslation",
  "AddedByUserName",
  "AddedByUserNameLabel",
- GoodData_Attr('{"state":"payables.invoice.detail","id":'||InvoiceId||'}') "InvoiceNumberHyperlink"
+ "InvoiceHyperlink",
+ "InvoicePaymentMethod"
 from dm_Invoices_attr
 where TenantId = '${TenantId}'

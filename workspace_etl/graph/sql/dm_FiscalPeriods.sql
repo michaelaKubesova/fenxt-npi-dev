@@ -14,7 +14,8 @@ SELECT
     "FiscalYearEnd" AS FiscalYearEnd_Datedim,
     "FiscalDate",
 	'' as FiscalPeriodStartString,
-	'' as FiscalPeriodEndString
+	'' as FiscalPeriodEndString,
+	"FiscalYearStatus"
 
 FROM
     dm_FiscalPeriods
@@ -38,4 +39,5 @@ SELECT
     GoodData_Attr('')  AS "FiscalYearEnd_Datedim" ,
     NULL               AS "FiscalDate",
 	GoodData_Attr('')  as FiscalPeriodStartString,
-	GoodData_Attr('')  as FiscalPeriodEndString
+	GoodData_Attr('')  as FiscalPeriodEndString,
+	GoodData_Attr('')  as "FiscalYearStatus"
