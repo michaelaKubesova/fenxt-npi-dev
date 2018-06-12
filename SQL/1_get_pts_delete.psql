@@ -1,7 +1,7 @@
 /*DEFINE ('PREV_TS_DELETE')*/
-    SELECT 
-        entity as key, to_char(MAX(ts_to),'yyyy-mm-dd hh24:mi:ss.us') as value
+    SELECT
+        tgt_entity||'#'||src_entity as key, to_char(MAX(ts_to),'yyyy-mm-dd hh24:mi:ss.us') as value
     FROM
         _sys_load_info
-    WHERE event_type =  'wrk_finish_delete' 
-    group by entity;
+    WHERE event_type =  'wrk_finish_delete'
+    group by tgt_entity, src_entity;

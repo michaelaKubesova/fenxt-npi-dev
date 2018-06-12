@@ -1,6 +1,6 @@
 ##Project path
 #Sat Jul 15 20:56:32 CEST 2017
-PROJECT=./workspace_etl
+PROJECT= .
 
 
 #Sat Jul 15 20:56:32 CEST 2017
@@ -17,4 +17,4 @@ META_DIR=${PROJECT}/meta
 
 ADS_INSTANCE=cd8c99dd0dc75c6e82a0eb55842060bf
 ADS_USER=vaclav.rek+bb_fe_dev@gooddata.com
-ADS_PASSWORD=bb_fe_dev_admin
+ADS_PASSWORD=

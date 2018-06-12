@@ -741,7 +741,7 @@
 </Metadata>
 <Connection database="AZURE" dbURL="jdbc:sqlserver://fenxtchangetracking.database.windows.net:1433;database=GoodDataChangeTracking;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;" id="JDBC1" jdbcSpecific="AZURE" name="AzureConnection" password="@!#Xs132465798" type="JDBC" user="alex.shchetkov"/>
 <Connection database="DSS" dbURL="jdbc:gdc:datawarehouse://secure.gooddata.com/gdc/datawarehouse/instances/${ADS_INSTANCE}" id="JDBC0" jdbcSpecific="DSS" name="BBFE" password="${ADS_PASSWORD}" type="JDBC" user="${ADS_USER}"/>
-<Property fileURL="workspace_etl/inc_params.prm" id="GraphParameter0"/>
+<Property fileURL="inc_params.prm" id="GraphParameter0"/>
 <Property fileURL="workspace.prm" id="GraphParameter5"/>
 <Dictionary/>
 </Global>

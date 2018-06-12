@@ -13,6 +13,7 @@ join stg_csv_BBTransactionDistribution_merge TD
 where D.ParentObjectType = 268
 	and D.SystemMask = 4
 
+/* -- this part is redundant, the data is already included in the 1st statement
 union all
 select
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -27,6 +28,7 @@ join stg_csv_BBTransactionDistribution_merge TD
 where D.ParentObjectType = 268
 	and D.SystemMask = 4
 	and TD.ProjectId is NULL
+	*/
 ;
 
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_InvoiceDistribution',null,now());

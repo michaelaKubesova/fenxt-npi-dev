@@ -1,13 +1,17 @@
 /* DEFINE('LAST_TS') */
-   SELECT 'Transaction' as key, to_char(MAX(_sys_updated_at),'yyyy-mm-dd hh24:mi:ss.us') as value
+   SELECT 'stg_csv_transaction_merge' as key, to_char(MAX(_sys_updated_at),'yyyy-mm-dd hh24:mi:ss.us') as value
      FROM stg_csv_transaction_merge
+     WHERE _sys_is_deleted = false
    union all
-   SELECT 'TransactionDistribution' as key, to_char(MAX(_sys_updated_at),'yyyy-mm-dd hh24:mi:ss.us') as value
+   SELECT 'stg_csv_transactiondistribution_merge' as key, to_char(MAX(_sys_updated_at),'yyyy-mm-dd hh24:mi:ss.us') as value
      FROM stg_csv_TransactionDistribution_merge
+     WHERE _sys_is_deleted = false
    union all
-   SELECT 'TableEntry' as key, to_char(MAX(_sys_updated_at),'yyyy-mm-dd hh24:mi:ss.us') as value
+   SELECT 'stg_csv_tableentry_merge' as key, to_char(MAX(_sys_updated_at),'yyyy-mm-dd hh24:mi:ss.us') as value
      FROM stg_csv_tableentry_merge
+     WHERE _sys_is_deleted = false
      union all
-   SELECT 'User' as key, to_char(MAX(_sys_updated_at),'yyyy-mm-dd hh24:mi:ss.us') as value
+   SELECT 'stg_csv_user_merge' as key, to_char(MAX(_sys_updated_at),'yyyy-mm-dd hh24:mi:ss.us') as value
      FROM stg_csv_user_merge
+     WHERE _sys_is_deleted = false
 ;

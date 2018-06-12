@@ -121,7 +121,7 @@
 </Record>
 </Metadata>
 <Connection database="DSS" dbURL="jdbc:gdc:datawarehouse://secure.gooddata.com/gdc/datawarehouse/instances/${ADS_INSTANCE}" id="JDBC0" jdbcSpecific="DSS" name="BBFE" password="${ADS_PASSWORD}" type="JDBC" user="${ADS_USER}"/>
-<Property fileURL="workspace_etl/delete_params.prm" id="GraphParameter14"/>
+<Property fileURL="delete_params.prm" id="GraphParameter14"/>
 <Property fileURL="workspace.prm" id="GraphParameter0"/>
 <Dictionary>
 <Entry contentType="contentType" id="DictionaryEntry0" input="true" name="TS_START" output="true" type="string"/>

@@ -1,8 +1,8 @@
-insert into _sys_load_info (project_id,ts_from, ts_to,event_ts,event_type,gdc_project_id, entity) 
-values (null,nvl(to_timestamp(nullif('${PREV_TS['dm_transactions_Transaction']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TS['Transaction']}','yyyy-mm-dd hh24:mi:ss.us'),now(),'wrk_start',null,'dm_transactions_Transaction');
+insert into _sys_load_info (tgt_entity,src_entity,event_type,event_ts,ts_from,ts_to)
+values ('out_transactions','stg_csv_transaction_merge','wrk_start',now(),nvl(to_timestamp(nullif('${PREV_TS['out_transactions#stg_csv_transaction_merge']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TS['stg_csv_transaction_merge']}','yyyy-mm-dd hh24:mi:ss.us'));
 
-insert into _sys_load_info (project_id,ts_from, ts_to,event_ts,event_type,gdc_project_id, entity) 
-values (null,nvl(to_timestamp(nullif('${PREV_TS['dm_transactions_TransactionDistribution']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TS['TransactionDistribution']}','yyyy-mm-dd hh24:mi:ss.us'),now(),'wrk_start',null,'dm_transactions_TransactionDistribution');
+insert into _sys_load_info (tgt_entity,src_entity,event_type,event_ts,ts_from,ts_to)
+values ('out_transactions','stg_csv_transactiondistribution_merge','wrk_start',now(),nvl(to_timestamp(nullif('${PREV_TS['out_transactions#stg_csv_transactiondistribution_merge']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TS['stg_csv_transactiondistribution_merge']}','yyyy-mm-dd hh24:mi:ss.us'));
 
 truncate table wrk_transactions;
 
@@ -60,8 +60,15 @@ select
 from stg_csv_transaction_merge t
 join stg_csv_transactiondistribution_merge td
     on td.TransactionId = t.TransactionId and t.TenantId = td.TenantId and t._sys_is_deleted = false and td._sys_is_deleted = false
-where (td._sys_updated_at > nvl(to_timestamp(nullif('${PREV_TS['dm_transactions_TransactionDistribution']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and td._sys_updated_at <= to_timestamp('${LAST_TS['TransactionDistribution']}','yyyy-mm-dd hh24:mi:ss.us'))
-       or (t._sys_updated_at > nvl(to_timestamp(nullif('${PREV_TS['dm_transactions_Transaction']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and t._sys_updated_at <= to_timestamp('${LAST_TS['Transaction']}','yyyy-mm-dd hh24:mi:ss.us'))
+where   (t.TenantId  ,t.TransactionId) in
+( select t.TenantId  ,t.TransactionId from stg_csv_transaction_merge t
+   where (t._sys_updated_at > nvl(to_timestamp(nullif('${PREV_TS['out_transactions#stg_csv_transaction_merge']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01')
+          and t._sys_updated_at <= to_timestamp('${LAST_TS['stg_csv_transaction_merge']}','yyyy-mm-dd hh24:mi:ss.us'))
+union all
+  select td.TenantId  ,td.TransactionId from stg_csv_transactiondistribution_merge td 
+   where (td._sys_updated_at > nvl(to_timestamp(nullif('${PREV_TS['out_transactions#stg_csv_transactiondistribution_merge']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01')
+          and td._sys_updated_at <= to_timestamp('${LAST_TS['stg_csv_transactiondistribution_merge']}','yyyy-mm-dd hh24:mi:ss.us'))
+)
 ) ij;
 
 select analyze_statistics('wrk_transactions');
@@ -176,8 +183,8 @@ WHEN NOT MATCHED THEN INSERT
         now()
     );
 
-insert into _sys_load_info (project_id,ts_from, ts_to,event_ts,event_type,gdc_project_id, entity) 
-values (null,nvl(to_timestamp(nullif('${PREV_TS['dm_transactions_Transaction']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TS['Transaction']}','yyyy-mm-dd hh24:mi:ss.us'),now(),'wrk_finish',null,'dm_transactions_Transaction');
+insert into _sys_load_info (tgt_entity,src_entity,event_type,event_ts,ts_from,ts_to)
+values ('out_transactions','stg_csv_transaction_merge','wrk_finish',now(),nvl(to_timestamp(nullif('${PREV_TS['out_transactions#stg_csv_transaction_merge']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TS['stg_csv_transaction_merge']}','yyyy-mm-dd hh24:mi:ss.us'));
 
-insert into _sys_load_info (project_id,ts_from, ts_to,event_ts,event_type,gdc_project_id, entity) 
-values (null,nvl(to_timestamp(nullif('${PREV_TS['dm_transactions_TransactionDistribution']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TS['TransactionDistribution']}','yyyy-mm-dd hh24:mi:ss.us'),now(),'wrk_finish',null,'dm_transactions_TransactionDistribution');
+insert into _sys_load_info (tgt_entity,src_entity,event_type,event_ts,ts_from,ts_to)
+values ('out_transactions','stg_csv_transactiondistribution_merge','wrk_finish',now(),nvl(to_timestamp(nullif('${PREV_TS['out_transactions#stg_csv_transactiondistribution_merge']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TS['stg_csv_transactiondistribution_merge']}','yyyy-mm-dd hh24:mi:ss.us'));

@@ -3,7 +3,7 @@ insert /*+ direct */ into out_TransactionProjectScenario
 	select
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
 	t.TenantId as "TenantId",
-	 GoodData_Attr(t.TranDistributionId||'#'||pb.ScenarioId) as "TransactionScenarioId"
+	 null--GoodData_Attr(t.TranDistributionId||'#'||pb.ScenarioId) as "TransactionScenarioId"
 	,GoodData_Attr(pb.ProjectId) as "ProjectId"
 	,GoodData_Attr(t.TranDistributionId) as "TransactionAttrDistributionId"
 	,GoodData_Attr(pb.scenarioid) as "ScenarioId"
@@ -19,7 +19,7 @@ insert /*+ direct */ into out_TransactionProjectScenario
 select 
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
 	t.TenantId as "TenantId",
-	 GoodData_Attr((1000000000000 + t.SummaryId)||'#'||pb.ScenarioId) as "TransactionScenarioId"
+	 null--GoodData_Attr((1000000000000 + t.SummaryId)||'#'||pb.ScenarioId) as "TransactionScenarioId"
 	,GoodData_Attr(pb.ProjectId) as "ProjectId"
 	,GoodData_Attr((1000000000000 + t.SummaryId)) as "TransactionAttrDistributionId"
 	,GoodData_Attr(pb.scenarioid) as "ScenarioId"
@@ -33,7 +33,7 @@ insert /*+ direct */ into out_TransactionProjectScenario
 select 
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
 	t.TenantId as "TenantId",
-	 GoodData_Attr((1000000000000 + t.SummaryId)||'#<No budget>') as "TransactionScenarioId"
+	 null--GoodData_Attr((1000000000000 + t.SummaryId)||'#<No budget>') as "TransactionScenarioId"
 	,GoodData_Attr(NVL(t.ProjectId,'-2')) as "ProjectId"
 	,GoodData_Attr((1000000000000 + t.SummaryId)) as "TransactionAttrDistributionId"
 	,GoodData_Attr('<No budget>') as "ScenarioId"
@@ -46,7 +46,7 @@ insert /*+ direct */ into out_TransactionProjectScenario
 select 
      ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
      t.TenantId as "TenantId",
-	 GoodData_Attr(t.TranDistributionId||'#<No budget>') as "TransactionScenarioId"
+	 null--GoodData_Attr(t.TranDistributionId||'#<No budget>') as "TransactionScenarioId"
 	,GoodData_Attr(NVL(t.ProjectId,'-2')) as "ProjectId"
 	,GoodData_Attr(t.TranDistributionId) as "TransactionAttrDistributionId"
 	,GoodData_Attr('<No budget>') as "ScenarioId"

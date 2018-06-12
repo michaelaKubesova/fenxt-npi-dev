@@ -8,7 +8,7 @@ insert /*+ direct */ into out_Invoices_fact
 	,Gooddata_Attr(fp.FiscalPeriodId)  as "FiscalPeriodId"
 	,Gooddata_Attr(i.InvoiceId)  as "InvoiceAttrId"
 	,cast(i.Amount as decimal(15,2)) as "InvoiceAmount"
-	,cast(i.Balance as decimal(15,2)) as "InvoiceBalance"
+	,cast((case when i.Status = 5 then 0 else i.Balance end) as decimal(15,2)) as "InvoiceBalance"
 	,cast(i.TaxAmount as decimal(15,2)) as "InvoiceTaxAmount"
 	,cast(i.DiscountAmount as decimal(15,2)) as "InvoiceDiscountAmount"
 	,Gooddata_date(i.DateAdded) as "DateAdded"
