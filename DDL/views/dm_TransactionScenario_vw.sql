@@ -1,7 +1,7 @@
  create or replace view dm_TransactionScenario as select 
 _sys_transform_id,
 TenantId,
-TransactionScenarioId,
+TransactionDistributionId || '#' || ScenarioId AS TransactionScenarioId,
 TransactionDistributionId,
 ScenarioId,
 FiscalPeriodId,

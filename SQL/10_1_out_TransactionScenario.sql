@@ -3,7 +3,7 @@ insert /*+ direct */ into out_TransactionScenario
 select 
      ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id
     ,t.TenantId as "TenantId"
-	,GoodData_Attr(t.TranDistributionId||'#'||isnull(abs.ScenarioId, '<No budget>')) as "TransactionScenarioId"
+	,null--GoodData_Attr(t.TranDistributionId||'#'||isnull(abs.ScenarioId, '<No budget>')) as "TransactionScenarioId"
 	,GoodData_Attr(t.TranDistributionId) as "TransactionDistributionId"
 	,GoodData_Attr(isnull(abs.ScenarioId, '<No budget>')) as "ScenarioId"
 	,GoodData_Attr(t.FiscalPeriodId) as "FiscalPeriodId"
@@ -21,7 +21,7 @@ insert /*+ direct */ into out_TransactionScenario
 select 
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id
 	,t.TenantId as "TenantId"
-	,GoodData_Attr(1000000000000 + t.SummaryId||'#'||isnull(abs.ScenarioId, '<No budget>')) as "TransactionScenarioId"
+	,null--GoodData_Attr(1000000000000 + t.SummaryId||'#'||isnull(abs.ScenarioId, '<No budget>')) as "TransactionScenarioId"
 	,GoodData_Attr(1000000000000 + t.SummaryId) as "TransactionDistributionId"
 	,GoodData_Attr(isnull(abs.ScenarioId, '<No budget>')) as "ScenarioId"
 	,GoodData_Attr(t.FiscalPeriodId) as "FiscalPeriodId"

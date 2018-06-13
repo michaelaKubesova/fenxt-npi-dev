@@ -9,5 +9,5 @@
      FROM tmp_user
    union all
    SELECT 'tmp_transaction_scenario' as key, to_char(MAX(_sys_updated_at),'yyyy-mm-dd hh24:mi:ss.us') as value
-     FROM tmp_user
+     FROM tmp_transaction_scenario
 ;

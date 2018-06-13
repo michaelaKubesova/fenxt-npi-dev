@@ -36,6 +36,7 @@ where _sys_is_deleted = false
 
 CREATE or replace VIEW dm_Transactions_fact_delete 
 AS
+/* -- commented out by Alex
 SELECT out_Transactions.TranDistributionId,
 out_Transactions.TenantId,
 out_Transactions._sys_updated_at
@@ -48,3 +49,9 @@ FROM out_Transactions
   st._sys_updated_at
   FROM stg_csv_SummarizedTransaction_merge st
    WHERE (st._sys_is_deleted = true);
+*/
+ SELECT out_transactions.TranDistributionId,
+        out_transactions.TenantId,
+        out_transactions._sys_updated_at
+ FROM out_transactions
+ WHERE false;

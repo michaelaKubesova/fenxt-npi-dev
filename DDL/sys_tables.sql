@@ -14,18 +14,16 @@ UNSEGMENTED ALL NODES;
 drop TABLE if exists _sys_load_info;
 CREATE TABLE _sys_load_info
 (
-    project_id varchar(255),
-    gdc_project_id varchar(255)  ENCODING RLE,
-    ts_from timestamptz,
-    ts_to timestamptz,
+    tgt_entity varchar(255) ENCODING RLE,
+    src_entity varchar(255) ENCODING RLE,
+    event_type varchar(255) ENCODING RLE,
     event_ts timestamptz,
-    event_type varchar(255)  ENCODING RLE,
-    entity varchar(255)  ENCODING RLE
-)  ORDER BY event_type,
-            entity,
-            gdc_project_id          
-segmented by hash(event_ts) all nodes;
-
+    ts_from timestamptz,
+    ts_to timestamptz
+) ORDER BY event_type,
+          tgt_entity,
+          src_entity
+SEGMENTED BY hash(tgt_entity, event_ts) ALL NODES;
 
 drop table if exists _sys_gd_load_info;
 CREATE TABLE _sys_gd_load_info

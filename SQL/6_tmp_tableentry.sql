@@ -1,5 +1,5 @@
-insert into _sys_load_info (project_id,ts_from, ts_to,event_ts,event_type,gdc_project_id, entity) 
-values (null,nvl(to_timestamp(nullif('${PREV_TS['tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TS['TableEntry']}','yyyy-mm-dd hh24:mi:ss.us'),now(),'tmp_finish',null,'tmp_tableentry');
+insert into _sys_load_info (tgt_entity,src_entity,event_type,event_ts,ts_from,ts_to)
+values ('tmp_tableentry','stg_csv_tableentry_merge','wrk_start',now(),nvl(to_timestamp(nullif('${PREV_TS['tmp_tableentry#stg_csv_tableentry_merge']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TS['stg_csv_tableentry_merge']}','yyyy-mm-dd hh24:mi:ss.us'));
 
 truncate table wrk_tmp_tableentry;
 
@@ -17,7 +17,7 @@ select
 ,t.IsActive
 ,t.Description
 from stg_csv_tableentry_merge t
-where t._sys_updated_at > nvl(to_timestamp(nullif('${PREV_TS['tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and t._sys_updated_at <= to_timestamp('${LAST_TS['TableEntry']}','yyyy-mm-dd hh24:mi:ss.us')
+where t._sys_updated_at > nvl(to_timestamp(nullif('${PREV_TS['tmp_tableentry#stg_csv_tableentry_merge']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and t._sys_updated_at <= to_timestamp('${LAST_TS['stg_csv_tableentry_merge']}','yyyy-mm-dd hh24:mi:ss.us')
 ) ij;
 
 select analyze_statistics('wrk_tmp_tableentry');
@@ -73,5 +73,5 @@ WHEN NOT MATCHED THEN INSERT
         now()
     );
 
-insert into _sys_load_info (project_id,ts_from, ts_to,event_ts,event_type,gdc_project_id, entity) 
-values (null,nvl(to_timestamp(nullif('${PREV_TS['tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TS['TableEntry']}','yyyy-mm-dd hh24:mi:ss.us'),now(),'tmp_finish',null,'tmp_tableentry');
+insert into _sys_load_info (tgt_entity,src_entity,event_type,event_ts,ts_from,ts_to)
+values ('tmp_tableentry','stg_csv_tableentry_merge','wrk_finish',now(),nvl(to_timestamp(nullif('${PREV_TS['tmp_tableentry#stg_csv_tableentry_merge']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TS['stg_csv_tableentry_merge']}','yyyy-mm-dd hh24:mi:ss.us'));

@@ -1,11 +1,11 @@
-insert into _sys_load_info (project_id,ts_from, ts_to,event_ts,event_type,gdc_project_id, entity) 
-values (null,nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr_transactions']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TMP_TS['out_transactions']}','yyyy-mm-dd hh24:mi:ss.us'),now(),'tmp_start',null,'out_transactions_attr_transactions');
+insert into _sys_load_info (tgt_entity,src_entity,event_type,event_ts,ts_from,ts_to)
+values ('out_transactions_attr','out_transactions','tmp_start',now(),nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr#out_transactions']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TMP_TS['out_transactions']}','yyyy-mm-dd hh24:mi:ss.us'));
 
-insert into _sys_load_info (project_id,ts_from, ts_to,event_ts,event_type,gdc_project_id, entity) 
-values (null,nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr_tmp_user']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TMP_TS['tmp_user']}','yyyy-mm-dd hh24:mi:ss.us'),now(),'tmp_start',null,'out_transactions_attr_tmp_user');
+insert into _sys_load_info (tgt_entity,src_entity,event_type,event_ts,ts_from,ts_to)
+values ('out_transactions_attr','tmp_user','tmp_start',now(),nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr#tmp_user']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TMP_TS['tmp_user']}','yyyy-mm-dd hh24:mi:ss.us'));
 
-insert into _sys_load_info (project_id,ts_from, ts_to,event_ts,event_type,gdc_project_id, entity) 
-values (null,nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr_tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TMP_TS['tmp_tableentry']}','yyyy-mm-dd hh24:mi:ss.us'),now(),'tmp_start',null,'out_transactions_attr_tmp_tableentry');
+insert into _sys_load_info (tgt_entity,src_entity,event_type,event_ts,ts_from,ts_to)
+values ('out_transactions_attr','tmp_tableentry','tmp_start',now(),nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr#tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TMP_TS['tmp_tableentry']}','yyyy-mm-dd hh24:mi:ss.us'));
 
 truncate table wrk_out_transactions_attr;
 
@@ -69,18 +69,18 @@ select
 from ( 
   select * 
     from out_transactions 
-   where (_sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr_transactions']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['out_transactions']}','yyyy-mm-dd hh24:mi:ss.us'))
-         OR (TenantId, TranDistributionId) in 
+   where (TenantId, TranDistributionId) in 
             (select ids.* 
                from (
-                select TenantId, TranDistributionId from out_transactions where (TenantId,classid) in (select TenantId, TableEntryId from tmp_tableentry where _sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr_tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['tmp_tableentry']}','yyyy-mm-dd hh24:mi:ss.us'))
-                union all select TenantId, TranDistributionId from out_transactions where (TenantId,TransactionCode1Id) in (select TenantId, TableEntryId from tmp_tableentry where _sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr_tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['tmp_tableentry']}','yyyy-mm-dd hh24:mi:ss.us'))
-                union all select TenantId, TranDistributionId from out_transactions where (TenantId,TransactionCode2Id) in (select TenantId, TableEntryId from tmp_tableentry where _sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr_tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['tmp_tableentry']}','yyyy-mm-dd hh24:mi:ss.us'))
-                union all select TenantId, TranDistributionId from out_transactions where (TenantId,TransactionCode3Id) in (select TenantId, TableEntryId from tmp_tableentry where _sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr_tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['tmp_tableentry']}','yyyy-mm-dd hh24:mi:ss.us'))
-                union all select TenantId, TranDistributionId from out_transactions where (TenantId,TransactionCode4Id) in (select TenantId, TableEntryId from tmp_tableentry where _sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr_tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['tmp_tableentry']}','yyyy-mm-dd hh24:mi:ss.us'))
-                union all select TenantId, TranDistributionId from out_transactions where (TenantId,TransactionCode5Id) in (select TenantId, TableEntryId from tmp_tableentry where _sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr_tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['tmp_tableentry']}','yyyy-mm-dd hh24:mi:ss.us'))
-                union all select TenantId, TranDistributionId from out_transactions where (TenantId,AddedById) in (select TenantId, UserId from tmp_user where _sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr_tmp_user']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['tmp_user']}','yyyy-mm-dd hh24:mi:ss.us'))
-                union all select TenantId, TranDistributionId from out_transactions where (TenantId,LastChangedById) in (select TenantId, UserId from tmp_user where _sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr_tmp_user']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['tmp_user']}','yyyy-mm-dd hh24:mi:ss.us'))
+                select TenantId, TranDistributionId from out_transactions where (TenantId,classid) in (select TenantId, TableEntryId from tmp_tableentry where _sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr#tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['tmp_tableentry']}','yyyy-mm-dd hh24:mi:ss.us'))
+                union all select TenantId, TranDistributionId from out_transactions where (TenantId,TransactionCode1Id) in (select TenantId, TableEntryId from tmp_tableentry where _sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr#tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['tmp_tableentry']}','yyyy-mm-dd hh24:mi:ss.us'))
+                union all select TenantId, TranDistributionId from out_transactions where (TenantId,TransactionCode2Id) in (select TenantId, TableEntryId from tmp_tableentry where _sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr#tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['tmp_tableentry']}','yyyy-mm-dd hh24:mi:ss.us'))
+                union all select TenantId, TranDistributionId from out_transactions where (TenantId,TransactionCode3Id) in (select TenantId, TableEntryId from tmp_tableentry where _sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr#tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['tmp_tableentry']}','yyyy-mm-dd hh24:mi:ss.us'))
+                union all select TenantId, TranDistributionId from out_transactions where (TenantId,TransactionCode4Id) in (select TenantId, TableEntryId from tmp_tableentry where _sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr#tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['tmp_tableentry']}','yyyy-mm-dd hh24:mi:ss.us'))
+                union all select TenantId, TranDistributionId from out_transactions where (TenantId,TransactionCode5Id) in (select TenantId, TableEntryId from tmp_tableentry where _sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr#tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['tmp_tableentry']}','yyyy-mm-dd hh24:mi:ss.us'))
+                union all select TenantId, TranDistributionId from out_transactions where (TenantId,AddedById) in (select TenantId, UserId from tmp_user where _sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr#tmp_user']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['tmp_user']}','yyyy-mm-dd hh24:mi:ss.us'))
+                union all select TenantId, TranDistributionId from out_transactions where (TenantId,LastChangedById) in (select TenantId, UserId from tmp_user where _sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr#tmp_user']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['tmp_user']}','yyyy-mm-dd hh24:mi:ss.us'))
+                union all select TenantId, TranDistributionId from out_transactions where (_sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr#out_transactions']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['out_transactions']}','yyyy-mm-dd hh24:mi:ss.us'))
                 ) ids 
             )  
   ) t
@@ -280,11 +280,11 @@ WHEN NOT MATCHED THEN INSERT
         now()
     );
 
-insert into _sys_load_info (project_id,ts_from, ts_to,event_ts,event_type,gdc_project_id, entity) 
-values (null,nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr_transactions']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TMP_TS['out_transactions']}','yyyy-mm-dd hh24:mi:ss.us'),now(),'tmp_finish',null,'out_transactions_attr_transactions');
+insert into _sys_load_info (tgt_entity,src_entity,event_type,event_ts,ts_from,ts_to)
+values ('out_transactions_attr','out_transactions','tmp_finish',now(),nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr#out_transactions']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TMP_TS['out_transactions']}','yyyy-mm-dd hh24:mi:ss.us'));
 
-insert into _sys_load_info (project_id,ts_from, ts_to,event_ts,event_type,gdc_project_id, entity) 
-values (null,nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr_tmp_user']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TMP_TS['tmp_user']}','yyyy-mm-dd hh24:mi:ss.us'),now(),'tmp_finish',null,'out_transactions_attr_tmp_user');
+insert into _sys_load_info (tgt_entity,src_entity,event_type,event_ts,ts_from,ts_to)
+values ('out_transactions_attr','tmp_user','tmp_finish',now(),nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr#tmp_user']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TMP_TS['tmp_user']}','yyyy-mm-dd hh24:mi:ss.us'));
 
-insert into _sys_load_info (project_id,ts_from, ts_to,event_ts,event_type,gdc_project_id, entity) 
-values (null,nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr_tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TMP_TS['tmp_tableentry']}','yyyy-mm-dd hh24:mi:ss.us'),now(),'tmp_finish',null,'out_transactions_attr_tmp_tableentry');
+insert into _sys_load_info (tgt_entity,src_entity,event_type,event_ts,ts_from,ts_to)
+values ('out_transactions_attr','tmp_tableentry','tmp_finish',now(),nvl(to_timestamp(nullif('${PREV_TMP_TS['out_transactions_attr#tmp_tableentry']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01'),to_timestamp('${LAST_TMP_TS['tmp_tableentry']}','yyyy-mm-dd hh24:mi:ss.us'));
