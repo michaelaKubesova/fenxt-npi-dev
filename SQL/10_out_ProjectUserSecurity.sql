@@ -9,7 +9,7 @@ select
 from stg_csv_ProjectUserSecurity_merge t
 where Deleted = false
 
-/*union all
+union all
 
 select
 	${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
@@ -17,7 +17,7 @@ select
 	 GoodData_Attr(UserId||'#'||-1)  as "ProjectUserSecurityId"
 	,GoodData_Attr(UserId)  as "UserId"
 	,GoodData_Attr(-1) as "ProjectId"
-from stg_csv_User_merge u;*/
+from stg_csv_User_merge u;
 ;
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_ProjectUserSecurity',null,now());
 select analyze_statistics('out_ProjectUserSecurity')
