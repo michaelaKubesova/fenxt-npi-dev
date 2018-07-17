@@ -18,6 +18,7 @@ GoodData_Date(dateadded),
 GoodData_Date(postdate),
 GoodData_Date(duedate)
 from stg_csv_ARCharge_merge
+where _sys_is_deleted = false
 ;
 
 INSERT INTO _sys_transform_id (id,entity,ts_start,ts_end) VALUES (${TRANSFORM_ID['TRANSFORM_ID']},'dm_ARCharges',null,now());
