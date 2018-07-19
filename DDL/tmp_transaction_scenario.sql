@@ -1,3 +1,4 @@
+drop table if exists wrk_tmp_transaction_scenario;
 CREATE TABLE wrk_tmp_transaction_scenario
 (
     AccountId int ENCODING RLE,
@@ -13,6 +14,7 @@ CREATE TABLE wrk_tmp_transaction_scenario
           _sys_is_deleted
 SEGMENTED BY hash(tenantid) ALL NODES;
 
+drop table if exists wrk_tmp_transaction_scenario_diff;
 CREATE TABLE wrk_tmp_transaction_scenario_diff
 (
     AccountId int ENCODING RLE,
@@ -29,6 +31,7 @@ CREATE TABLE wrk_tmp_transaction_scenario_diff
 SEGMENTED BY hash(tenantid) ALL NODES;
 
 
+drop table if exists tmp_transaction_scenario;
 CREATE TABLE tmp_transaction_scenario
 (
     AccountId int NOT NULL ENCODING RLE,
