@@ -14,8 +14,8 @@ select analyze_statistics('wrk_tmp_transaction_scenario');
 
 truncate table wrk_tmp_transaction_scenario_diff;
 
-insert /*+ direct*/ into wrk_tmp_transaction_scenario_diff
-select  distinct a.tenantid,a.AccountId,a.FiscalPeriodId,a.ScenarioId
+insert /*+ direct*/ into wrk_tmp_transaction_scenario_diff (AccountId,ScenarioId,FiscalPeriodId,tenantid)
+select distinct a.AccountId,a.ScenarioId,a.FiscalPeriodId,a.tenantid
 FROM "wrk_tmp_transaction_scenario" a
 LEFT JOIN (
     SELECT aa."tenantid",aa."AccountId",aa."FiscalPeriodId",aa."ScenarioId"
