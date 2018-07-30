@@ -44,10 +44,10 @@ on  T.AccountId = abs.AccountId
    and abs.FiscalPeriodId = T.FiscalPeriodId
    and abs.tenantid = t.tenantid
    and abs._sys_is_deleted = false
-where   (t.tenantid, t.TranDistributionId) in
-( select tenantid, 1000000000000 + SummaryId from stg_csv_SummarizedTransaction_merge where (_sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_TransactionScenario#stg_csv_SummarizedTransaction_merge']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['stg_csv_SummarizedTransaction_merge']}','yyyy-mm-dd hh24:mi:ss.us'))
+where   (t.tenantid, t.SummaryId) in
+( select tenantid, SummaryId from stg_csv_SummarizedTransaction_merge where (_sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_TransactionScenario#stg_csv_SummarizedTransaction_merge']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['stg_csv_SummarizedTransaction_merge']}','yyyy-mm-dd hh24:mi:ss.us'))
     union all
-  select tenantid, TranDistributionId from out_transactions where (tenantid,AccountId,FiscalPeriodId) in (select tenantid, AccountId, FiscalPeriodId from tmp_transaction_scenario where _sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_TransactionScenario#tmp_transaction_scenario']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['tmp_transaction_scenario']}','yyyy-mm-dd hh24:mi:ss.us'))
+  select tenantid, SummaryId from stg_csv_SummarizedTransaction_merge where (tenantid,AccountId,FiscalPeriodId) in (select tenantid, AccountId, FiscalPeriodId from tmp_transaction_scenario where _sys_updated_at > nvl(to_timestamp(nullif('${PREV_TMP_TS['out_TransactionScenario#tmp_transaction_scenario']}',''),'yyyy-mm-dd hh24:mi:ss.us'),'2000-01-01') and _sys_updated_at <= to_timestamp('${LAST_TMP_TS['tmp_transaction_scenario']}','yyyy-mm-dd hh24:mi:ss.us'))
 )
 ;
 
