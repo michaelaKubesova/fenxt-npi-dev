@@ -110,6 +110,14 @@ WHEN NOT MATCHED THEN INSERT
         now()
     );
 
+update out_TransactionScenario t
+   set _sys_is_deleted = true, _sys_updated_at = now()
+ where exists  
+      (select 1 from wrk_out_TransactionScenario w where w._sys_is_deleted = false and w.tenantid=t.tenantid and w.TransactionDistributionId=t.TransactionDistributionId)
+   and not exists
+      (select 1 from wrk_out_TransactionScenario w where w._sys_is_deleted = false and w.tenantid=t.tenantid and w.TransactionDistributionId=t.TransactionDistributionId and w.ScenarioId=t.ScenarioId)
+;
+
 select analyze_statistics('out_TransactionScenario')
 ;
 
