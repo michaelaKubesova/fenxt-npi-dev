@@ -5,7 +5,8 @@ select
   ,ab.AccountId
   ,ab.AccountBudgetId
   ,te.CodeTableId
-  ,te.Description as "ScenarioId"
+  --,te.Description as "ScenarioId"
+  ,isnull(to_char(BS.ScenarioId), '<No budget>') as "ScenarioId"
 from stg_csv_AccountBudget_merge ab
 join stg_csv_BudgetScenario_merge bs
 	on ab.BudgetScenarioId = bs.BudgetScenarioId and ab.TenantId = bs.TenantId
