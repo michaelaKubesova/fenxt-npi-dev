@@ -3,7 +3,7 @@ insert /*+ direct */ into out_AccountBudgets_fact
 select   
 ${TRANSFORM_ID['TRANSFORM_ID']} as _sys_transform_id,
 abd.TenantId as "TenantId",
-	 cast(abd.Amount as int) as "AccountBudgetAmount"
+	 cast(abd.Amount as decimal(15,2)) as "AccountBudgetAmount"
 	,GoodData_Attr(ab.AccountId)  as "AccountId"
 	,GoodData_Attr(abd.FiscalPeriodId) as "FiscalPeriodId"
 	,GoodData_Attr(abd.AccountBudgetDetailId) as "AccountBudgetFactId"
